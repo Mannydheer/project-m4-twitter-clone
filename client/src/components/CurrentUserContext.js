@@ -7,37 +7,54 @@ export const CurrentUserContext = createContext();
 const InitialState = {
     currentUser: null,
     isLoaded: false,
-    status: null,
+    status: 'loading',
+
 
 }
 
 const reducer = (state, action) => {
-    // switch (key) {
-    //     case value:
+    switch (action.type) {
+        case 'update-user-info': {
 
-    //         break;
+            //return the updated state. 
+            return {
+                ...state,
+                isLoaded: true,
+                status: 200,
+                currentUser: action.profile
 
-    //     default:
-    //         break;
-    // }
+            }
+        }
+
+        //add error
+        default:
+    }
 }
-
 
 const CurrentUserProvider = ({ children }) => {
 
     const [state, dispatch] = React.useReducer(reducer, InitialState)
+    console.log(state)
 
 
+    //dispatcher Functions.
     const updateProfileUser = (userInfo) => {
         dispatch({
             type: 'update-user-info',
-            ...userInfo,
+            ...userInfo, // double check copy here. 
         })
 
     }
+    // const updateLike = (likes) => {
+    //     console.log(likes, 'INSIDE UPDATE LIKE')
+    //     dispatch({
+    //         type: 'update-likes',
+    //         isClicked: likes
+    //     })
+    // }
 
+    //on Component Mount
     useEffect(() => {
-
         const getUserData = async () => {
             let userResponse = await fetch('/api/me/profile',
                 {
@@ -47,41 +64,15 @@ const CurrentUserProvider = ({ children }) => {
                         'Content-type': 'application/json',
                     },
                 })
+            //if status is a success.
+            if (userResponse.status === 200) {
+                let info = await userResponse.json();
+                updateProfileUser(info)
+            }
 
-            let info = await userResponse.json();
-            console.log(info)
         }
-
-        // const getUserData = () => {
-        //     fetch('api/me/profile', {
-        //         method: "get",
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-type': 'application/json',
-        //         },
-        //     })
-        //         .then(data => {
-        //             return (data.json())
-        //         })
-        //         .then(userInfo => {
-        //             console.log(userInfo)
-        //         })
-
-        // }
-
         //perform fetch function above. 
         getUserData();
-
-        // fetch('http://localhost:31415/api/me/profile', {
-        //     method: "get",
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-type': 'application/json'
-        //     },
-        // })
-
-
-
         //on component MOUNT only. One render. 
     }, [])
 
@@ -100,7 +91,9 @@ const CurrentUserProvider = ({ children }) => {
 
 
     return (
-        <CurrentUserContext.Provider>
+        <CurrentUserContext.Provider value={{
+            state,
+        }}>
             {children}
 
         </CurrentUserContext.Provider>

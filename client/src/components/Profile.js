@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { CurrentUserContext } from './CurrentUserContext';
 
 const Profile = () => {
 
-    return (
+    const { state } = React.useContext(CurrentUserContext)
+
+    //can display all user info from state.
+
+    return (<React.Fragment>
+
         <div>
-            Profile
+            Name: {state.currentUser.displayName}
         </div>
+    </React.Fragment>
     )
 
 
