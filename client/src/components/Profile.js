@@ -5,6 +5,7 @@ import { CurrentUserContext } from './CurrentUserContext';
 const Profile = () => {
 
     const { state } = React.useContext(CurrentUserContext)
+    console.log(state, 'INSIDE PROFILE')
 
     //can display all user info from state.
 

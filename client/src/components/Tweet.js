@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { CurrentUserContext } from './CurrentUserContext';
 import { Link, useHistory } from 'react-router-dom'
+import Liker from './Liker';
 
 
 const Tweet = ({ allTweets, tweetId }) => {
@@ -9,29 +10,33 @@ const Tweet = ({ allTweets, tweetId }) => {
     let retweetName = allTweets[tweetId].retweetFrom;
     let history = useHistory();
 
+    const [likeBool, setLikeBool] = useState(false);
+
+    // const [likerColor, setLikerColor] = useState(false)
+    // const backgroundColor = likerColor ? 'green' : 'red';
 
 
-    // const handleClickedProfile = async (e) => {
-    //     e.preventDefault();
-    //     console.log('FUCK YOU')
-
-    //     const getUserProfile = await fetch(`/api/${allTweets[tweetId].author.handle}/profile`);
-    //     const returnedProfile = await getUserProfile.json();
-    //     console.log(returnedProfile)
-
-    // }
-
+    // ------------------------------------
     const handler = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        console.log(allTweets)
-
         history.push(`/user/${allTweets[tweetId].author.handle}`)
+    }
+    // -------------------------------------
 
+    const handleLiking = (event) => {
+        //double check these two. Stop reloading.. and onclick on PARENT. 
+        event.stopPropagation();
+        event.preventDefault();
+        //just to trigger useEffect on clicking like
+        setLikeBool(true)
     }
 
-    console.log(allTweets)
+    // console.log(likeBool, 'LIKEBOOl')
 
+    // -------------------------------------
+
+    // -------------------------------------
 
     return (
         <React.Fragment>
@@ -43,12 +48,13 @@ const Tweet = ({ allTweets, tweetId }) => {
                 <div>Tweet: {allTweets[tweetId].status}</div>
                 <ImageAuthor src={allTweets[tweetId].author.avatarSrc} alt='author'>
                 </ImageAuthor>
-
                 {retweetName !== undefined ? <img src={allTweets[tweetId].retweetFrom.avatarSrc} alt='retweeter'></img>
                     : <span></span>}
-
-
+                {/* like and retweeting.  */}
+                <button onClick={handleLiking}> <span >Like</span></button>
+                {likeBool && <Liker likeBool={likeBool} tweetId={tweetId} allTweets={allTweets} setLikeBool={setLikeBool}></Liker>}
             </StyledTweetDiv>
+
         </React.Fragment>
 
 

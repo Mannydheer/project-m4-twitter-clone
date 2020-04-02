@@ -17,6 +17,8 @@ import { user } from 'react-icons-kit/fa/user';
 import { bell } from 'react-icons-kit/iconic/bell'
 import { bookmark } from 'react-icons-kit/fa/bookmark'
 import { CurrentUserContext } from './components/CurrentUserContext';
+import Followers from './components/Followers';
+import Following from './components/Following';
 
 function App() {
 
@@ -33,6 +35,7 @@ function App() {
         <div><NavLink to='/profileId'><Icon icon={user}></Icon>Profile</NavLink></div>
         <div><NavLink to='/notifications'><Icon icon={bell}></Icon>Notifications</NavLink></div>
         <div><NavLink to='/bookmarks'><Icon icon={bookmark}></Icon>Bookmarks</NavLink></div>
+
         {/* </NavigationLink> */}
       </nav>
       {/* Keep in place Switch will place in order.  */}
@@ -55,6 +58,12 @@ function App() {
         </Route>
         <Route exact path='/user/:selectedUser'>
           <UserProfiles></UserProfiles>
+        </Route>
+        <Route exact path='/:user/followers'>
+          <Followers></Followers>
+        </Route>
+        <Route exact path='/:user/following'>
+          <Following></Following>
         </Route>
 
       </Switch>

@@ -25,6 +25,18 @@ const reducer = (state, action) => {
 
             }
         }
+        case 'update-likes': {
+            console.log(action, 'ACTION')
+            if (action.liked) {
+                state.currentUser.numLikes += 1;
+            }
+            // else if (action.liked === false) {
+            //     state.currentUser.numLikes -= 1;
+            // }
+            return {
+                ...state,
+            }
+        }
 
         //add error
         default:
@@ -34,9 +46,8 @@ const reducer = (state, action) => {
 const CurrentUserProvider = ({ children }) => {
 
     const [state, dispatch] = React.useReducer(reducer, InitialState)
-    console.log(state)
 
-
+    console.log(state, 'STATE')
     //dispatcher Functions.
     const updateProfileUser = (userInfo) => {
         dispatch({
@@ -45,13 +56,14 @@ const CurrentUserProvider = ({ children }) => {
         })
 
     }
-    // const updateLike = (likes) => {
-    //     console.log(likes, 'INSIDE UPDATE LIKE')
-    //     dispatch({
-    //         type: 'update-likes',
-    //         isClicked: likes
-    //     })
-    // }
+    const updateLikes = (liked) => {
+        dispatch({
+            type: 'update-likes',
+            ...liked
+        })
+
+    }
+
 
     //on Component Mount
     useEffect(() => {
@@ -93,6 +105,8 @@ const CurrentUserProvider = ({ children }) => {
     return (
         <CurrentUserContext.Provider value={{
             state,
+            updateLikes
+
         }}>
             {children}
 

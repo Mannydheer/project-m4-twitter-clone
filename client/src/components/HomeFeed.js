@@ -3,6 +3,7 @@ import Tweet from './Tweet';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from './CurrentUserContext';
+import TweetText from './TweetText';
 
 
 
@@ -14,6 +15,7 @@ const HomeFeed = () => {
     // holds ids for tweets.
     const [tweetIds, setTweetIds] = useState(null)
     const [allTweets, setAllTweets] = useState(null)
+
     //
     // const { updateLike } = React.useContext(CurrentUserContext)
     // const [likeBool, setLikebool] = React.useState(true);
@@ -30,15 +32,18 @@ const HomeFeed = () => {
         getAllTweets();
     }, [])
 
+    //handle POST tweets. 
+    //form... on submit of the form.. triggers function 
 
 
-    // const handleLikes = () => {
-    //     setLikebool(!likeBool)
-    //     updateLike(likeBool)
 
-    // }
+
+    console.log(allTweets)
+
     return (
         <div>
+            <TweetText></TweetText>
+
             {tweetIds !== null && allTweets !== null &&
                 tweetIds.map((tweetId) => {
                     return (
@@ -46,8 +51,8 @@ const HomeFeed = () => {
                             <Btn type='button' onClick={() => history.push(`/tweet/${tweetId}`)}>
                                 <Tweet keys={tweetId} allTweets={allTweets} tweetId={tweetId} ></Tweet>
                             </Btn>
-                            {/* <button>Retweet</button>
-                            <button onClick={handleLikes}>Like</button> */}
+
+
                         </React.Fragment>
                     )
                 })
