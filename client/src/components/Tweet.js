@@ -7,7 +7,7 @@ import Liker from './Liker';
 
 const Tweet = ({ allTweets, tweetId }) => {
 
-    let retweetName = allTweets[tweetId].retweetFrom;
+    let Image = allTweets[tweetId].media[0]
     let history = useHistory();
 
     const [likeBool, setLikeBool] = useState(false);
@@ -42,17 +42,18 @@ const Tweet = ({ allTweets, tweetId }) => {
         <React.Fragment>
             <StyledTweetDiv>
                 {/* if retweet exists */}
-                {retweetName !== undefined ? <div>Name: {allTweets[tweetId].retweetFrom.displayName}</div> : <span></span>}
-                    Name: <StyledUserDiv onClick={handler}>{allTweets[tweetId].author.displayName}</StyledUserDiv> - @{allTweets[tweetId].author.handle}
-                <span>{allTweets[tweetId].timestamp}</span>
-                <div>Tweet: {allTweets[tweetId].status}</div>
-                <ImageAuthor src={allTweets[tweetId].author.avatarSrc} alt='author'>
-                </ImageAuthor>
-                {retweetName !== undefined ? <img src={allTweets[tweetId].retweetFrom.avatarSrc} alt='retweeter'></img>
-                    : <span></span>}
-                {/* like and retweeting.  */}
-                <button onClick={handleLiking}> <span >Like</span></button>
-                {likeBool && <Liker likeBool={likeBool} tweetId={tweetId} allTweets={allTweets} setLikeBool={setLikeBool}></Liker>}
+                <ImageAuthor src={allTweets[tweetId].author.avatarSrc} alt='author'></ImageAuthor>
+                <div>
+                    {/* {retweetName !== undefined ? <div>Name: {allTweets[tweetId].retweetFrom.displayName}</div> : <span></span>} */}
+                    <StyledUserDiv onClick={handler}>{allTweets[tweetId].author.displayName} @{allTweets[tweetId].author.handle}</StyledUserDiv>
+                    <span>{allTweets[tweetId].timestamp}</span>
+                    <div>{allTweets[tweetId].status}</div>
+                    {Image !== undefined ? <TweetImage src={Image.url} alt='media'></TweetImage>
+                        : <span></span>}
+                    {/* like and retweeting.  */}
+                    <button onClick={handleLiking}> <span >Like</span></button>
+                    {likeBool && <Liker likeBool={likeBool} tweetId={tweetId} allTweets={allTweets} setLikeBool={setLikeBool}></Liker>}
+                </div>
             </StyledTweetDiv>
 
         </React.Fragment>
@@ -66,17 +67,28 @@ const Tweet = ({ allTweets, tweetId }) => {
 export default Tweet;
 
 const StyledTweetDiv = styled.div`
-border: black 1px solid;
+border: whitesmoke 1px solid;
+padding: 10px;
+line-height: 1.5;
+display: flex;
 `
 
 const ImageAuthor = styled.img`
 border-radius: 50%;
 width: 50px,;
 height: 50px;
+padding: 10px;
 `
+const TweetImage = styled.img`
+border-radius: 10%;
+width: 100%;
+height: 400px;
+`
+
 
 const StyledUserDiv = styled.div`
 font-weight: bold;
+
 
 &:hover {
     text-decoration: underline;

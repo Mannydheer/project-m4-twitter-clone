@@ -31,8 +31,6 @@ const UserProfiles = ({ storeFollowers }) => {
         //if its null, then followers was not clicked.Not undefined if I dont click on followers
         handleClickedProfile()
 
-
-
     }, [])
 
 

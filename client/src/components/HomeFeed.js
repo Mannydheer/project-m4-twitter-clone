@@ -16,8 +16,9 @@ const HomeFeed = () => {
     const [tweetIds, setTweetIds] = useState(null)
     const [allTweets, setAllTweets] = useState(null)
 
+
+
     //
-    // const { updateLike } = React.useContext(CurrentUserContext)
     // const [likeBool, setLikebool] = React.useState(true);
 
     //component did mount
@@ -42,7 +43,9 @@ const HomeFeed = () => {
 
     return (
         <div>
+            <StyledHome>Home</StyledHome>
             <TweetText></TweetText>
+
 
             {tweetIds !== null && allTweets !== null &&
                 tweetIds.map((tweetId) => {
@@ -61,8 +64,14 @@ const HomeFeed = () => {
     )
 }
 export default HomeFeed;
-const Btn = styled.button`
+const Btn = styled.div`
 display: block;
-width: 400px;
+width: 80%;
 background-color: transparent;
+cursor: pointer;
 `
+
+const StyledHome = styled.div`
+font-size: 36px;
+`
+

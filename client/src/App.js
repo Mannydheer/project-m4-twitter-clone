@@ -25,48 +25,56 @@ function App() {
   const { state } = React.useContext(CurrentUserContext)
 
   return (
+
     <BrowserRouter>
       <GlobalStyles></GlobalStyles>
 
-      <nav>
-        <img src={CatLogo} alt='Cat Logo'></img>
-        {/* <NavigationLink> */}
-        <div><NavLink to='/'><Icon icon={home}></Icon>Home</NavLink></div>
-        <div><NavLink to='/profileId'><Icon icon={user}></Icon>Profile</NavLink></div>
-        <div><NavLink to='/notifications'><Icon icon={bell}></Icon>Notifications</NavLink></div>
-        <div><NavLink to='/bookmarks'><Icon icon={bookmark}></Icon>Bookmarks</NavLink></div>
+      {state.isLoaded ?
+        <StyledSide>
 
-        {/* </NavigationLink> */}
-      </nav>
-      {/* Keep in place Switch will place in order.  */}
-      <Switch>
-        <Route exact path="/">
-          <HomeFeed></HomeFeed>
-        </Route>
-        <Route exact path='/notifications'>
-          <Notifications></Notifications>
-        </Route>
-        <Route exact path='/bookmarks'>
-          <Bookmarks></Bookmarks>
-        </Route>
-        {/* double check :tweetId and :profileId for colons.  */}
-        <Route path='/tweet/:tweetId'>
-          <TweetDetails></TweetDetails>
-        </Route>
-        <Route exact path='/:profileId'>
-          {state.isLoaded && <Profile></Profile>}
-        </Route>
-        <Route exact path='/user/:selectedUser'>
-          <UserProfiles></UserProfiles>
-        </Route>
-        <Route exact path='/:user/followers'>
-          <Followers></Followers>
-        </Route>
-        <Route exact path='/:user/following'>
-          <Following></Following>
-        </Route>
+          <StyledNav>
+            <img src={CatLogo} alt='Cat Logo'></img>
+            {/* <NavigationLink> */}
+            <NavigationLink to='/'><Icon icon={home}></Icon>Home</NavigationLink>
+            <NavigationLink to='/profileId'><Icon icon={user}></Icon>Profile</NavigationLink>
+            <NavigationLink to='/notifications'><Icon icon={bell}></Icon>Notifications</NavigationLink>
+            <NavigationLink to='/bookmarks'><Icon icon={bookmark}></Icon>Bookmarks</NavigationLink>
 
-      </Switch>
+            {/* </NavigationLink> */}
+          </StyledNav>
+          {/* Keep in place Switch will place in order.  */}
+          <Main>
+            <Switch>
+              <Route exact path="/">
+                <HomeFeed></HomeFeed>
+              </Route>
+              <Route exact path='/notifications'>
+                <Notifications></Notifications>
+              </Route>
+              <Route exact path='/bookmarks'>
+                <Bookmarks></Bookmarks>
+              </Route>
+              {/* double check :tweetId and :profileId for colons.  */}
+              <Route path='/tweet/:tweetId'>
+                <TweetDetails></TweetDetails>
+              </Route>
+              <Route exact path='/:profileId'>
+                {state.isLoaded && <Profile></Profile>}
+              </Route>
+              <Route exact path='/user/:selectedUser'>
+                <UserProfiles></UserProfiles>
+              </Route>
+              <Route exact path='/:user/followers'>
+                <Followers></Followers>
+              </Route>
+              <Route exact path='/:user/following'>
+                <Following></Following>
+              </Route>
+
+            </Switch>
+          </Main>
+        </StyledSide>
+        : <div>LOADING</div>}
 
 
     </BrowserRouter>
@@ -76,10 +84,39 @@ function App() {
 
 export default App;
 
-// const NavigationLink = styled(NavLink)`
-//   /* default styles here */
 
-//   &.active {
-//     color: ${COLORS.primary};
-//   }
-// `;
+const StyledNav = styled.nav`
+padding: 50px;
+display:flex;
+flex-direction: column;
+`
+
+const Main = styled.main`
+width: 60%;
+
+`
+
+const StyledSide = styled.div`
+display: flex;
+
+`
+
+const NavigationLink = styled(NavLink)`
+padding: 20px;
+/* 80% of div */
+width: 60%;
+color: white;
+text-decoration: none;
+display: flex;
+background-color: rgb(21,32,43);
+border-radius: 25px;
+font-size: 20px;
+
+
+&:hover {
+  background-color: purple;
+  transition: 0.5s all;
+}
+
+
+`;

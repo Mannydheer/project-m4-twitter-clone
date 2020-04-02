@@ -53,9 +53,7 @@ const Followers = () => {
 
                 storeFollowers.map(eachUser => {
                     return <div>
-
                         <DisplayFollowers eachUser={eachUser}></DisplayFollowers>
-
                     </div>
                 }
 
