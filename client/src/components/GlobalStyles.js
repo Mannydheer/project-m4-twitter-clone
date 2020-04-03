@@ -13,7 +13,9 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
 }
 
-
+textarea {
+    resize: none;
+}
 
 `;
 

@@ -45,12 +45,13 @@ const HomeFeed = () => {
 export default HomeFeed;
 const Btn = styled.div`
 display: block;
-width: 80%;
+width: 56vw;
 background-color: transparent;
 cursor: pointer;
 `
 
 const StyledHome = styled.div`
 font-size: 36px;
+padding: 10px 10px;
 `
 

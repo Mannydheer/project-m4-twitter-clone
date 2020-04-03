@@ -11,7 +11,7 @@ import GlobalStyles from './components/GlobalStyles';
 import styled from 'styled-components';
 // import { COlORS } from './constants';
 import Icon from 'react-icons-kit';
-import CatLogo from '../src/assets/logo.svg'
+import { ReactComponent as Logo } from './assets/logo.svg'
 import { home } from 'react-icons-kit/icomoon/home';
 import { user } from 'react-icons-kit/fa/user';
 import { bell } from 'react-icons-kit/iconic/bell'
@@ -19,6 +19,7 @@ import { bookmark } from 'react-icons-kit/fa/bookmark'
 import { CurrentUserContext } from './components/CurrentUserContext';
 import Followers from './components/Followers';
 import Following from './components/Following';
+import { COLORS } from './constants';
 
 function App() {
 
@@ -35,13 +36,11 @@ function App() {
           <StyledSide>
 
             <StyledNav>
-              <img src={CatLogo} alt='Cat Logo'></img>
-              {/* <NavigationLink> */}
-              <NavigationLink to='/'><Icon icon={home}></Icon>Home</NavigationLink>
-              <NavigationLink to='/profileId'><Icon icon={user}></Icon>Profile</NavigationLink>
-              <NavigationLink to='/notifications'><Icon icon={bell}></Icon>Notifications</NavigationLink>
-              <NavigationLink to='/bookmarks'><Icon icon={bookmark}></Icon>Bookmarks</NavigationLink>
-
+              <Logo></Logo>
+              <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to='/'><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={home}></Icon><NavText>Home</NavText></NavigationLink></Nav>
+              <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to='/profileId'><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={user}></Icon><NavText>Profile</NavText></NavigationLink></Nav>
+              <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to='/notifications'><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={bell}></Icon><NavText>Notifications</NavText></NavigationLink></Nav>
+              <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to='/bookmarks'><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={bookmark}></Icon><NavText>Bookmarks</NavText></NavigationLink></Nav>
               {/* </NavigationLink> */}
             </StyledNav>
             {/* Keep in place Switch will place in order.  */}
@@ -97,7 +96,6 @@ flex-direction: column;
 `
 
 const Main = styled.main`
-
 `
 
 const StyledSide = styled.div`
@@ -112,20 +110,32 @@ justify-content: center; */
 
 const NavigationLink = styled(NavLink)`
 padding: 20px;
-/* 80% of div */
-/* width: 60%; */
-color: white;
+
+
 text-decoration: none;
 display: flex;
-background-color: rgb(21,32,43);
 border-radius: 25px;
-font-size: 20px;
-
-
 &:hover {
-  background-color: purple;
-  transition: 0.5s all;
+  background-color: rgb(53,161,241);
+    transition: 0.5s all;
+  
 }
-
-
 `;
+
+const NavText = styled.div`
+font-size: 1.4rem;
+background-color: transparent;
+
+
+
+
+`
+
+const Nav = styled.div`
+padding: 10px;
+
+`
+
+
+
+

@@ -201,7 +201,7 @@ const Tweet = ({ allTweets, tweetId }) => {
 export default Tweet;
 
 const StyledTweetDiv = styled.div`
-border: whitesmoke 1px solid;
+border: solid 1px gray;
 padding: 10px;
 line-height: 1.5;
 display: flex;

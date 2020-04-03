@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Tweet from './Tweet';
 import styled from 'styled-components';
 import { CurrentUserContext } from './CurrentUserContext';
+import { COLORS } from '../constants';
+
 
 
 const TweetText = ({ setTweets }) => {
@@ -13,8 +15,10 @@ const TweetText = ({ setTweets }) => {
 
     useEffect(() => {
 
+
         //when postedTweet holds the tweet
         if (postedTweet !== null) {
+
 
             const data = {
                 status: postedTweet
@@ -47,15 +51,10 @@ const TweetText = ({ setTweets }) => {
 
                 }
                 console.log(post)
-
-
-
-
-
-
             }
             postHandler();
         }
+
 
 
         //on change of postedTweet, meaning when there is a submit
@@ -77,21 +76,26 @@ const TweetText = ({ setTweets }) => {
     return (
         <StyledTweeting>
 
-            <StyledProfileImage>
-                <ImageAuthor src={state.currentUser.avatarSrc}></ImageAuthor>
-            </StyledProfileImage>
+
 
 
             <StyledForm class="tweet" name="tweet" onSubmit={handlePostData}>
+                <StyledProfileImage>
+                    <ImageAuthor src={state.currentUser.avatarSrc}></ImageAuthor>
+                </StyledProfileImage>
                 <div class="form-content user">
 
                     <div class='form-item'>
                         <label for="tweetText"></label>
-                        <InputTweet id="TweetText" type="text" value={tweet}
+                        <TextTweet id="TweetText" type="text" value={tweet}
                             onChange={e => setTweet(e.target.value)}
-                            name="givenTweet" placeholder="Whats happening>" required>
+                            name="givenTweet" placeholder="Whats happening..."
+                            maxLength={280} required>
+                        </TextTweet>
+                        <Length>
+                            <div>{280 - tweet.length}</div>
+                        </Length>
 
-                        </InputTweet>
                     </div>
 
                 </div>
@@ -112,28 +116,34 @@ const TweetText = ({ setTweets }) => {
 export default TweetText;
 
 const StyledForm = styled.form`
+border: solid 1px gray;
+border-bottom: none;
+
 `
 const StyledTweeting = styled.div`
-border: solid 1px white;
 display: flex;
-width: 80%;
 `
 
-const InputTweet = styled.input`
+const TextTweet = styled.textarea`
 
-height: 150px;
-width: 80%;
+
+height: 10vh;
+width: 55.9vw;
 border: none;
 outline: none;
+font-size: 1.7rem;
+
+::placeholder {
+    font-size: 1.7rem;
+}
 
 
 `
 
 const ImageAuthor = styled.img`
 border-radius: 50%;
-width: 50px,;
-height: 50px;
-padding: 10px;
+width: 100px,;
+height: 100px;
 `
 
 const StyledProfileImage = styled.div`
@@ -147,7 +157,9 @@ const Btn = styled.button`
 font-size: 24px;
 border-radius: 25px;
 padding: 10px;
-background-color: purple;
+margin: 10px;
+background-color: rgb(53,161,241);
+color: white;
 
 
 &:hover {
@@ -156,5 +168,12 @@ background-color: purple;
     cursor: pointer;
 
 }
+`
+
+const Length = styled.div`
+display: flex;
+justify-content: flex-end;
+padding: 20px;
+opacity: 0.5;
 `
 
