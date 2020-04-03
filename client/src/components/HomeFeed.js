@@ -12,50 +12,29 @@ const HomeFeed = () => {
 
     //history
     let history = useHistory();
-    // holds ids for tweets.
-    const [tweetIds, setTweetIds] = useState(null)
-    const [allTweets, setAllTweets] = useState(null)
-
-
-
-    //
-    // const [likeBool, setLikebool] = React.useState(true);
+    const [tweets, setTweets] = useState(null);
 
     //component did mount
-
     useEffect(() => {
         const getAllTweets = async () => {
             let fetchTweets = await fetch('api/me/home-feed')
             let allTweets = await fetchTweets.json()
-            setTweetIds(allTweets.tweetIds)
-            setAllTweets(allTweets.tweetsById)
+            setTweets(allTweets)
         }
         getAllTweets();
     }, [])
-
-    //handle POST tweets. 
-    //form... on submit of the form.. triggers function 
-
-
-
-
-    console.log(allTweets)
-
     return (
         <div>
             <StyledHome>Home</StyledHome>
-            <TweetText></TweetText>
-
-
-            {tweetIds !== null && allTweets !== null &&
-                tweetIds.map((tweetId) => {
+            <TweetText setTweets={setTweets}></TweetText>
+            {/* {tweetIds !== null && allTweets !== null && */}
+            {tweets !== null &&
+                tweets.tweetIds.map((tweetId) => {
                     return (
                         <React.Fragment>
                             <Btn type='button' onClick={() => history.push(`/tweet/${tweetId}`)}>
-                                <Tweet keys={tweetId} allTweets={allTweets} tweetId={tweetId} ></Tweet>
+                                <Tweet keys={tweetId} allTweets={tweets.tweetsById} tweetId={tweetId} ></Tweet>
                             </Btn>
-
-
                         </React.Fragment>
                     )
                 })

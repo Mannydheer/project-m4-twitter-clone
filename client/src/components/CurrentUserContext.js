@@ -8,10 +8,7 @@ const InitialState = {
     currentUser: null,
     isLoaded: false,
     status: 'loading',
-
-
 }
-
 const reducer = (state, action) => {
     switch (action.type) {
         case 'update-user-info': {
@@ -22,27 +19,34 @@ const reducer = (state, action) => {
                 isLoaded: true,
                 status: 200,
                 currentUser: action.profile
-
             }
         }
         case 'update-likes': {
-            console.log(action, 'ACTION')
             if (action.liked) {
                 state.currentUser.numLikes += 1;
             }
-            // else if (action.liked === false) {
-            //     state.currentUser.numLikes -= 1;
-            // }
+            else if (action.liked === false) {
+                state.currentUser.numLikes -= 1;
+            }
             return {
                 ...state,
             }
         }
-
-        //add error
+        case 'update-follow': {
+            console.log(action, 'INSIDE UPDAT FOLOW')
+            if (action.follow) {
+                state.currentUser.numFollowers += 1;
+            }
+            else if (action.follow === false) {
+                state.currentUser.numFollowers -= 1;
+            }
+            return {
+                ...state,
+            }
+        }
         default:
     }
 }
-
 const CurrentUserProvider = ({ children }) => {
 
     const [state, dispatch] = React.useReducer(reducer, InitialState)
@@ -54,17 +58,19 @@ const CurrentUserProvider = ({ children }) => {
             type: 'update-user-info',
             ...userInfo, // double check copy here. 
         })
-
     }
     const updateLikes = (liked) => {
         dispatch({
             type: 'update-likes',
             ...liked
         })
-
     }
-
-
+    const updateFollow = (follow) => {
+        dispatch({
+            type: 'update-follow',
+            ...follow
+        })
+    }
     //on Component Mount
     useEffect(() => {
         const getUserData = async () => {
@@ -105,7 +111,8 @@ const CurrentUserProvider = ({ children }) => {
     return (
         <CurrentUserContext.Provider value={{
             state,
-            updateLikes
+            updateLikes,
+            updateFollow
 
         }}>
             {children}

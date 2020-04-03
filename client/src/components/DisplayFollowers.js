@@ -1,18 +1,65 @@
 import React, { useState } from 'react';
 import HandleFollow from './HandleFollow';
+import { CurrentUserContext } from './CurrentUserContext';
+import styled from 'styled-components';
+
+
 
 
 const DisplayFollowers = ({ eachUser }) => {
-
-
+    //each user has all the followers/following users
+    const { updateFollow } = React.useContext(CurrentUserContext)
     const [followUnfollow, setFollowUnfollow] = useState(false)
 
+
+    // console.log(eachUser)
 
 
 
     const handleFollowerPut = () => {
-        setFollowUnfollow(true)
+        handleUpdateFollow();
     }
+
+    const handleUpdateFollow = async () => {
+
+        //fetch to check for follows.
+        let followResponse = await fetch(`/api/${eachUser.handle}/follow`, {
+            method: 'PUT',
+        })
+
+        if (followResponse.status === 200) {
+            console.log('follow success')
+            //change users key to FOLLOWING
+            eachUser.isBeingFollowedByYou = true;
+            updateFollow({
+                //following
+                follow: true
+            })
+        }
+
+        //if you are already following
+        if (followResponse.status === 409) {
+            let unfollowResponse = await fetch(`/api/${eachUser.handle}/unfollow`, {
+                method: 'PUT',
+            })
+            console.log('unfollow success')
+            //change users key to UNFOLLOW
+            eachUser.isBeingFollowedByYou = false;
+            updateFollow({
+                //unfollowing
+                follow: false
+            })
+
+        }
+
+
+
+    }
+
+
+
+
+
 
 
     return (
@@ -25,13 +72,9 @@ const DisplayFollowers = ({ eachUser }) => {
             <div>@{eachUser.handle}</div>
             <div>Bio: {eachUser.bio}</div>
             {/* add logic follow button */}
-            <button onClick={handleFollowerPut}>
-                Follow/unfollow
-        </button>
-            {/* //if true it will trigger HandleFollow which will do the fetch*/}
-            {followUnfollow && <div>
-                <HandleFollow setFollowUnfollow={setFollowUnfollow} handle={eachUser.handle}></HandleFollow>
-            </div>}
+            {eachUser.isBeingFollowedByYou ? <Btn style={{ backgroundColor: 'green' }} onClick={handleFollowerPut}>Following</Btn> :
+                <Btn style={{ backgroundColor: 'purple' }} onClick={handleFollowerPut}>Follow</Btn>}
+
         </React.Fragment>
 
     )
@@ -40,3 +83,10 @@ const DisplayFollowers = ({ eachUser }) => {
 
 
 export default DisplayFollowers;
+
+const Btn = styled.button`
+font-size: 24px;
+padding: 10px;
+cursor: pointer;
+
+` 

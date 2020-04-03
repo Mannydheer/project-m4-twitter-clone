@@ -1,41 +1,22 @@
-import React, { useEffect } from 'react';
-
-
-const HandleFollow = ({ setFollowUnfollow, handle }) => {
+// import React, { useEffect } from 'react';
 
 
 
-    useEffect(() => {
-
-        const updateFollowers = async () => {
+// const HandleFollow = ({ setFollowUnfollow, handle }) => {
 
 
-            //fetch to check for follows.
-
-            let followResponse = await fetch(`/api/${handle}/follow`, {
-                method: 'PUT',
-            })
-            console.log(followResponse)
-            //if you are already following
-            if (followResponse.status === 409) {
-                let unfollowResponse = await fetch(`/api/${handle}/unfollow`, {
-                    method: 'PUT',
-                })
-                console.log(unfollowResponse)
-            }
-            setFollowUnfollow(false)
-        }
-
-        updateFollowers();
-    }, [])
-    return (
-        <div>
-            HandleFollow
-        </div>
-    )
 
 
-}
 
 
-export default HandleFollow
+//     return (
+//         <div>
+//             HandleFollow
+//         </div>
+//     )
+
+
+// }
+
+
+// export default HandleFollow

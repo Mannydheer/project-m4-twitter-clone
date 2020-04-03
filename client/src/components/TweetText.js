@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { CurrentUserContext } from './CurrentUserContext';
 
 
-const TweetText = () => {
+const TweetText = ({ setTweets }) => {
 
     const [tweet, setTweet] = useState('')
     const [postedTweet, setPostedTweet] = useState(null)
@@ -30,7 +30,27 @@ const TweetText = () => {
                 })
 
                 let post = await response.json();
+
+                if (post) {
+                    try {
+                        let fetchTweets = await fetch('api/me/home-feed')
+                        let allTweets = await fetchTweets.json()
+                        console.log(allTweets, 'TWEETS AFTER POST')
+                        setTweets(allTweets)
+                        // setTweetIds(allTweets.tweetIds)
+                        // setAllTweets(allTweets.tweetsById)
+
+                    }
+                    catch (err) {
+                        throw Error('ERROR WHEN POSTING')
+                    }
+
+                }
                 console.log(post)
+
+
+
+
 
 
             }
@@ -94,15 +114,15 @@ export default TweetText;
 const StyledForm = styled.form`
 `
 const StyledTweeting = styled.div`
-border: 1px white solid;
+border: solid 1px white;
 display: flex;
 width: 80%;
 `
 
 const InputTweet = styled.input`
 
-height: 200px;
-width: 650px;
+height: 150px;
+width: 80%;
 border: none;
 outline: none;
 

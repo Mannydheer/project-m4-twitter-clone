@@ -29,55 +29,60 @@ function App() {
     <BrowserRouter>
       <GlobalStyles></GlobalStyles>
 
+
       {state.isLoaded ?
-        <StyledSide>
+        <StyledBody>
+          <StyledSide>
 
-          <StyledNav>
-            <img src={CatLogo} alt='Cat Logo'></img>
-            {/* <NavigationLink> */}
-            <NavigationLink to='/'><Icon icon={home}></Icon>Home</NavigationLink>
-            <NavigationLink to='/profileId'><Icon icon={user}></Icon>Profile</NavigationLink>
-            <NavigationLink to='/notifications'><Icon icon={bell}></Icon>Notifications</NavigationLink>
-            <NavigationLink to='/bookmarks'><Icon icon={bookmark}></Icon>Bookmarks</NavigationLink>
+            <StyledNav>
+              <img src={CatLogo} alt='Cat Logo'></img>
+              {/* <NavigationLink> */}
+              <NavigationLink to='/'><Icon icon={home}></Icon>Home</NavigationLink>
+              <NavigationLink to='/profileId'><Icon icon={user}></Icon>Profile</NavigationLink>
+              <NavigationLink to='/notifications'><Icon icon={bell}></Icon>Notifications</NavigationLink>
+              <NavigationLink to='/bookmarks'><Icon icon={bookmark}></Icon>Bookmarks</NavigationLink>
 
-            {/* </NavigationLink> */}
-          </StyledNav>
-          {/* Keep in place Switch will place in order.  */}
-          <Main>
-            <Switch>
-              <Route exact path="/">
-                <HomeFeed></HomeFeed>
-              </Route>
-              <Route exact path='/notifications'>
-                <Notifications></Notifications>
-              </Route>
-              <Route exact path='/bookmarks'>
-                <Bookmarks></Bookmarks>
-              </Route>
-              {/* double check :tweetId and :profileId for colons.  */}
-              <Route path='/tweet/:tweetId'>
-                <TweetDetails></TweetDetails>
-              </Route>
-              <Route exact path='/:profileId'>
-                {state.isLoaded && <Profile></Profile>}
-              </Route>
-              <Route exact path='/user/:selectedUser'>
-                <UserProfiles></UserProfiles>
-              </Route>
-              <Route exact path='/:user/followers'>
-                <Followers></Followers>
-              </Route>
-              <Route exact path='/:user/following'>
-                <Following></Following>
-              </Route>
+              {/* </NavigationLink> */}
+            </StyledNav>
+            {/* Keep in place Switch will place in order.  */}
+            <Main>
+              <Switch>
+                <Route exact path="/">
+                  <HomeFeed></HomeFeed>
+                </Route>
+                <Route exact path='/notifications'>
+                  <Notifications></Notifications>
+                </Route>
+                <Route exact path='/bookmarks'>
+                  <Bookmarks></Bookmarks>
+                </Route>
+                {/* double check :tweetId and :profileId for colons.  */}
+                <Route path='/tweet/:tweetId'>
+                  <TweetDetails></TweetDetails>
+                </Route>
+                <Route exact path='/:profileId'>
+                  {state.isLoaded && <Profile></Profile>}
+                </Route>
+                <Route exact path='/user/:selectedUser'>
+                  <UserProfiles></UserProfiles>
+                </Route>
+                <Route exact path='/:user/followers'>
+                  <Followers></Followers>
+                </Route>
+                <Route exact path='/:user/following'>
+                  <Following></Following>
+                </Route>
 
-            </Switch>
-          </Main>
-        </StyledSide>
+              </Switch>
+            </Main>
+          </StyledSide>
+        </StyledBody>
         : <div>LOADING</div>}
 
 
+
     </BrowserRouter>
+
 
   );
 }
@@ -92,7 +97,6 @@ flex-direction: column;
 `
 
 const Main = styled.main`
-width: 60%;
 
 `
 
@@ -100,11 +104,16 @@ const StyledSide = styled.div`
 display: flex;
 
 `
+const StyledBody = styled.div`
+/* display: flex;
+justify-content: center; */
+
+`
 
 const NavigationLink = styled(NavLink)`
 padding: 20px;
 /* 80% of div */
-width: 60%;
+/* width: 60%; */
 color: white;
 text-decoration: none;
 display: flex;
