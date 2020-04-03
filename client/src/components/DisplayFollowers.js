@@ -10,6 +10,9 @@ const DisplayFollowers = ({ eachUser }) => {
     //each user has all the followers/following users
     const { updateFollow } = React.useContext(CurrentUserContext)
     const [followUnfollow, setFollowUnfollow] = useState(false)
+    const [eachUserState, seteachUserState] = useState(eachUser)
+
+
 
 
     // console.log(eachUser)
@@ -19,7 +22,6 @@ const DisplayFollowers = ({ eachUser }) => {
     const handleFollowerPut = () => {
         handleUpdateFollow();
     }
-
     const handleUpdateFollow = async () => {
 
         //fetch to check for follows.
@@ -30,11 +32,14 @@ const DisplayFollowers = ({ eachUser }) => {
         if (followResponse.status === 200) {
             console.log('follow success')
             //change users key to FOLLOWING
-            eachUser.isBeingFollowedByYou = true;
-            updateFollow({
-                //following
-                follow: true
+            seteachUserState({
+                ...eachUser,
+                isBeingFollowedByYou: true
             })
+            // updateFollow({
+            //     //following
+            //     follow: true
+            // })
         }
 
         //if you are already following
@@ -44,11 +49,14 @@ const DisplayFollowers = ({ eachUser }) => {
             })
             console.log('unfollow success')
             //change users key to UNFOLLOW
-            eachUser.isBeingFollowedByYou = false;
-            updateFollow({
-                //unfollowing
-                follow: false
+            seteachUserState({
+                ...eachUser,
+                isBeingFollowedByYou: false
             })
+            // updateFollow({
+            //     //unfollowing
+            //     follow: false
+            // })
 
         }
 
@@ -72,7 +80,7 @@ const DisplayFollowers = ({ eachUser }) => {
             <div>@{eachUser.handle}</div>
             <div>Bio: {eachUser.bio}</div>
             {/* add logic follow button */}
-            {eachUser.isBeingFollowedByYou ? <Btn style={{ backgroundColor: 'green' }} onClick={handleFollowerPut}>Following</Btn> :
+            {eachUserState.isBeingFollowedByYou ? <Btn style={{ backgroundColor: 'green' }} onClick={handleFollowerPut}>Following</Btn> :
                 <Btn style={{ backgroundColor: 'purple' }} onClick={handleFollowerPut}>Follow</Btn>}
 
         </React.Fragment>

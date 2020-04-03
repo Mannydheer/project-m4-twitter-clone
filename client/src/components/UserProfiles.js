@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 
 const UserProfiles = ({ storeFollowers }) => {
@@ -93,3 +94,6 @@ const UserProfiles = ({ storeFollowers }) => {
 }
 
 export default UserProfiles
+
+
+

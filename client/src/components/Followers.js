@@ -17,6 +17,7 @@ const Followers = () => {
     let path = location[1];
     //states for storing followers and render in return
     const [storeFollowers, setStoreFollowers] = useState(null)
+    console.log(storeFollowers, 'STORE FOLLOWERS')
 
 
     //on component mount

@@ -241,7 +241,7 @@ You'll notice that these tweets share some UI elements in common, whereas other 
 
 Twitter does something a little peculiar when it comes to click targets. Notice how the card itself is a link to the "tweet details" page, and yet the user's display name is a link to that user's profile:
 
-![Clicking different things within the tweet card has different results](./assets/screenshots/click-targets.gif)
+![Clicking different things within the tweet card has different results](./assets/screenshots/click-targe="ts.gif)
 
 Making matters more complicated, the entire thing is keyboard-navigable:
 

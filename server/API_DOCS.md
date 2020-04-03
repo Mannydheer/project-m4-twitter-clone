@@ -17,7 +17,7 @@ Run `yarn install` to install dependencies, and then `yarn start` to start the s
 The server runs on port **31415**, so you can access the server at `http://localhost:31415/`. As a test, you can go to `http://localhost:31415/api/me/profile`. You should see a JSON object shown in the browser:
 
 ```json
-{
+{z
   "profile": {
     "handle": "treasurymog",
     "displayName": "Gladstone, Esq.",

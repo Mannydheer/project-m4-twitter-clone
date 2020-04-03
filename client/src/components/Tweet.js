@@ -65,9 +65,7 @@ const Tweet = ({ allTweets, tweetId }) => {
                 if (status.success) {
                     allTweets[tweetId].isRetweeted = true;
                     setRetweeted(!retweet)
-
                 }
-
             }
             catch (error) {
                 throw Error('error retweeting')

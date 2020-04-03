@@ -84,7 +84,6 @@ router.put('/api/tweet/:tweetId/like', (req, res) => {
     return;
   }
 
-  console.log(tweet);
 
   // Disallow "repeat" requests (eg trying to like an already-liked tweet).
   const currentlyLiked = tweet.likedBy.includes(CURRENT_USER_HANDLE);
@@ -104,6 +103,7 @@ router.put('/api/tweet/:tweetId/like', (req, res) => {
       handle => handle !== CURRENT_USER_HANDLE
     );
   }
+  console.log(tweet);
 
   return res.json({ success: true });
 });
