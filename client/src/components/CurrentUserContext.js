@@ -51,7 +51,6 @@ const CurrentUserProvider = ({ children }) => {
 
     const [state, dispatch] = React.useReducer(reducer, InitialState)
 
-    console.log(state, 'STATE')
     //dispatcher Functions.
     const updateProfileUser = (userInfo) => {
         dispatch({

@@ -17,6 +17,8 @@ import { user } from 'react-icons-kit/fa/user';
 import { bell } from 'react-icons-kit/iconic/bell'
 import { bookmark } from 'react-icons-kit/fa/bookmark'
 import { CurrentUserContext } from './components/CurrentUserContext';
+import { TweetHomeContext } from './components/TweetHomeContext';
+
 import Followers from './components/Followers';
 import Following from './components/Following';
 import { COLORS } from './constants';
@@ -24,6 +26,8 @@ import { COLORS } from './constants';
 function App() {
 
   const { state } = React.useContext(CurrentUserContext)
+  const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
+  console.log(state)
 
   return (
 
@@ -38,7 +42,7 @@ function App() {
             <StyledNav>
               <Logo></Logo>
               <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to='/'><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={home}></Icon><NavText>Home</NavText></NavigationLink></Nav>
-              <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to='/profileId'><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={user}></Icon><NavText>Profile</NavText></NavigationLink></Nav>
+              <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to={`/user/${state.currentUser.handle}`}><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={user}></Icon><NavText>Profile</NavText></NavigationLink></Nav>
               <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to='/notifications'><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={bell}></Icon><NavText>Notifications</NavText></NavigationLink></Nav>
               <Nav><NavigationLink activeStyle={{ textDecoration: 'underline', color: 'purple' }} to='/bookmarks'><Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={bookmark}></Icon><NavText>Bookmarks</NavText></NavigationLink></Nav>
               {/* </NavigationLink> */}
@@ -59,9 +63,6 @@ function App() {
                 <Route path='/tweet/:tweetId'>
                   <TweetDetails></TweetDetails>
                 </Route>
-                <Route exact path='/:profileId'>
-                  {state.isLoaded && <Profile></Profile>}
-                </Route>
                 <Route exact path='/user/:selectedUser'>
                   <UserProfiles></UserProfiles>
                 </Route>
@@ -76,11 +77,12 @@ function App() {
             </Main>
           </StyledSide>
         </StyledBody>
-        : <div>LOADING</div>}
+        : <div>LOADING</div>
+      }
 
 
 
-    </BrowserRouter>
+    </BrowserRouter >
 
 
   );

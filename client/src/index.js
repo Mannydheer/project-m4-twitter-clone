@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import CurrentUserProvider from './components/CurrentUserContext';
+import TweetHomeProvider from './components/TweetHomeContext';
 //context
 
 
 ReactDOM.render(
   <React.StrictMode>
     <CurrentUserProvider>
-      <App />
+      <TweetHomeProvider>
+        <App />
+      </TweetHomeProvider>
     </CurrentUserProvider>
 
   </React.StrictMode>,

@@ -12,23 +12,16 @@ const DisplayFollowers = ({ eachUser }) => {
     const [followUnfollow, setFollowUnfollow] = useState(false)
     const [eachUserState, seteachUserState] = useState(eachUser)
 
-
-
-
-    // console.log(eachUser)
-
-
+    console.log(eachUser, 'EACH USER')
 
     const handleFollowerPut = () => {
         handleUpdateFollow();
     }
     const handleUpdateFollow = async () => {
-
         //fetch to check for follows.
         let followResponse = await fetch(`/api/${eachUser.handle}/follow`, {
             method: 'PUT',
         })
-
         if (followResponse.status === 200) {
             console.log('follow success')
             //change users key to FOLLOWING
@@ -36,12 +29,7 @@ const DisplayFollowers = ({ eachUser }) => {
                 ...eachUser,
                 isBeingFollowedByYou: true
             })
-            // updateFollow({
-            //     //following
-            //     follow: true
-            // })
         }
-
         //if you are already following
         if (followResponse.status === 409) {
             let unfollowResponse = await fetch(`/api/${eachUser.handle}/unfollow`, {
@@ -53,22 +41,8 @@ const DisplayFollowers = ({ eachUser }) => {
                 ...eachUser,
                 isBeingFollowedByYou: false
             })
-            // updateFollow({
-            //     //unfollowing
-            //     follow: false
-            // })
-
         }
-
-
-
     }
-
-
-
-
-
-
 
     return (
 

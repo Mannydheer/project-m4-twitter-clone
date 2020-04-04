@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Tweet from './Tweet';
 import styled from 'styled-components';
 import { CurrentUserContext } from './CurrentUserContext';
+import { TweetHomeContext } from './TweetHomeContext';
 import { COLORS } from '../constants';
 
 
@@ -11,46 +12,47 @@ const TweetText = ({ setTweets }) => {
     const [tweet, setTweet] = useState('')
     const [postedTweet, setPostedTweet] = useState(null)
     const { state } = React.useContext(CurrentUserContext)
-
+    const { handlePost } = React.useContext(TweetHomeContext)
 
     useEffect(() => {
-
-
         //when postedTweet holds the tweet
         if (postedTweet !== null) {
-
-
             const data = {
                 status: postedTweet
             }
             const postHandler = async () => {
-                let response = await fetch(`/api/tweet`, {
-                    method: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
 
-                let post = await response.json();
+                //do a post to the database
+                try {
+                    let response = await fetch(`/api/tweet`, {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    let post = await response.json();
+                    //only refetch if post has something... if post is successful. and response is 200
+                    if (response.status === 200 && post) {
+                        //get all the feed again after the post and send it back to the context to update and state and re-render the feed. 
+                        try {
+                            let fetchTweets = await fetch('api/me/home-feed')
+                            let allTweets = await fetchTweets.json()
+                            console.log(allTweets, 'TWEETS AFTER POST')
+                            handlePost(allTweets)
 
-                if (post) {
-                    try {
-                        let fetchTweets = await fetch('api/me/home-feed')
-                        let allTweets = await fetchTweets.json()
-                        console.log(allTweets, 'TWEETS AFTER POST')
-                        setTweets(allTweets)
-                        // setTweetIds(allTweets.tweetIds)
-                        // setAllTweets(allTweets.tweetsById)
-
+                        }
+                        catch (err) {
+                            throw Error('ERROR WHEN POSTING')
+                        }
                     }
-                    catch (err) {
-                        throw Error('ERROR WHEN POSTING')
-                    }
-
                 }
-                console.log(post)
+                //if the whole post fails. 
+                catch (error) {
+                    throw Error('POST UNSUCCESSFUL')
+                }
+
             }
             postHandler();
         }
@@ -59,9 +61,6 @@ const TweetText = ({ setTweets }) => {
 
         //on change of postedTweet, meaning when there is a submit
     }, [postedTweet])
-
-
-
 
 
     const handlePostData = (event) => {

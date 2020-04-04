@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { CurrentUserContext } from './CurrentUserContext';
 import { Link, useHistory } from 'react-router-dom'
+import { TweetHomeContext } from './TweetHomeContext';
+
+import TweetActionIcon from './TweetActionIcon';
+import Heart from './Heart';
+
+
 
 
 const Tweet = ({ allTweets, tweetId }) => {
@@ -9,10 +15,13 @@ const Tweet = ({ allTweets, tweetId }) => {
     let Image = allTweets[tweetId].media[0]
     let history = useHistory();
 
-    console.log(allTweets)
 
     const { updateLikes } = React.useContext(CurrentUserContext)
     const [retweet, setRetweeted] = useState(false);
+
+    const { tweetHomeFeedState, handleUserLikes, handleUserRetweets } = React.useContext(TweetHomeContext)
+
+
 
 
     //it will refresh this specific tweet... double check.
@@ -63,8 +72,12 @@ const Tweet = ({ allTweets, tweetId }) => {
 
                 //must change the value in the front end. 
                 if (status.success) {
-                    allTweets[tweetId].isRetweeted = true;
-                    setRetweeted(!retweet)
+                    handleUserRetweets({
+                        id: tweetId,
+                        retweeted: true,
+                    })
+                    // allTweets[tweetId].isRetweeted = true;
+                    // setRetweeted(!retweet)
                 }
             }
             catch (error) {
@@ -90,8 +103,12 @@ const Tweet = ({ allTweets, tweetId }) => {
                 let status = await response.json();
                 console.log(status, 'remove RETWEET')
                 if (status.success) {
-                    allTweets[tweetId].isRetweeted = false;
-                    setRetweeted(!retweet)
+                    handleUserRetweets({
+                        id: tweetId,
+                        retweeted: false,
+                    })
+                    // allTweets[tweetId].isRetweeted = false;
+                    // setRetweeted(!retweet)
                 }
 
             }
@@ -122,12 +139,16 @@ const Tweet = ({ allTweets, tweetId }) => {
                 let status = await response.json();
                 //must change the value in the front end. 
                 if (status.success) {
-                    allTweets[tweetId].isLiked = true;
-                    allTweets[tweetId].numLikes += 1
-                    //context -update state likes.
-                    updateLikes({
-                        liked: true
+                    handleUserLikes({
+                        id: tweetId,
+                        liked: true,
                     })
+                    // allTweets[tweetId].isLiked = true;
+                    // allTweets[tweetId].numLikes += 1
+                    //context -update state likes.
+                    // updateLikes({
+                    //     liked: true
+                    // })
                 }
             }
             catch (error) {
@@ -151,14 +172,16 @@ const Tweet = ({ allTweets, tweetId }) => {
                     })
                 })
                 let status = await response.json();
-
                 if (status.success) {
-                    allTweets[tweetId].isLiked = false;
-                    allTweets[tweetId].numLikes -= 1
-
-                    updateLikes({
-                        liked: false
+                    handleUserLikes({
+                        id: tweetId,
+                        liked: false,
                     })
+                    // allTweets[tweetId].isLiked = false;
+                    // allTweets[tweetId].numLikes -= 1
+                    // updateLikes({
+                    //     liked: false
+                    // })
                 }
             }
             catch (error) {
@@ -181,14 +204,22 @@ const Tweet = ({ allTweets, tweetId }) => {
                     {Image !== undefined ? <TweetImage src={Image.url} alt='media'></TweetImage>
                         : <span></span>}
                     {/* like and retweeting.  */}
-                    {allTweets[tweetId].isLiked ? <Btn style={{ backgroundColor: 'green' }} onClick={handleLiking}> Liked </Btn> : <Btn style={{ backgroundColor: 'purple' }} onClick={handleLiking}>Like</Btn>}
-                    {allTweets[tweetId].isRetweeted ? <Btn style={{ backgroundColor: 'green' }} onClick={handleRetweeting}> Retweeted </Btn> : <Btn style={{ backgroundColor: 'purple' }} onClick={handleRetweeting}>Retweet</Btn>}
+                    <Icons>
+                        <div>
+                            {allTweets[tweetId].isLiked ? <div onClick={handleLiking}><Heart width={30} isToggled={true}></Heart></div> : <div onClick={handleLiking}><Heart width={30}></Heart></div>}
+                        </div>
+                        {allTweets[tweetId].isRetweeted ?
+                            <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'green'} /></div>
+                            :
+                            <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'white'} /></div>}
 
-                    {/* {likeBool && <Liker likeBool={likeBool} tweetId={tweetId} allTweets={allTweets} setLikeBool={setLikeBool}></Liker>} */}
+                    </Icons>
                 </div>
+                {/*  <Heart width={heartSize} isToggled={isLiked} */}
+
             </StyledTweetDiv>
 
-        </React.Fragment>
+        </React.Fragment >
 
 
     )
@@ -204,7 +235,11 @@ padding: 10px;
 line-height: 1.5;
 display: flex;
 `
+const Icons = styled.div`
+display: flex;
+justify-content: space-evenly;
 
+`
 const ImageAuthor = styled.img`
 border-radius: 50%;
 width: 50px,;

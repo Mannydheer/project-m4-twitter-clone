@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from './CurrentUserContext';
 import TweetText from './TweetText';
+import { TweetHomeContext } from './TweetHomeContext';
+
+
 
 
 
@@ -13,27 +16,19 @@ const HomeFeed = () => {
     //history
     let history = useHistory();
     const [tweets, setTweets] = useState(null);
+    const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
 
-    //component did mount
-    useEffect(() => {
-        const getAllTweets = async () => {
-            let fetchTweets = await fetch('api/me/home-feed')
-            let allTweets = await fetchTweets.json()
-            setTweets(allTweets)
-        }
-        getAllTweets();
-    }, [])
     return (
         <div>
             <StyledHome>Home</StyledHome>
             <TweetText setTweets={setTweets}></TweetText>
             {/* {tweetIds !== null && allTweets !== null && */}
-            {tweets !== null &&
-                tweets.tweetIds.map((tweetId) => {
+            {tweetHomeFeedState.homeFeedTweets !== null &&
+                tweetHomeFeedState.homeFeedTweets.tweetIds.map((tweetId) => {
                     return (
                         <React.Fragment>
                             <Btn type='button' onClick={() => history.push(`/tweet/${tweetId}`)}>
-                                <Tweet keys={tweetId} allTweets={tweets.tweetsById} tweetId={tweetId} ></Tweet>
+                                <Tweet keys={tweetId} allTweets={tweetHomeFeedState.homeFeedTweets.tweetsById} tweetId={tweetId} ></Tweet>
                             </Btn>
                         </React.Fragment>
                     )

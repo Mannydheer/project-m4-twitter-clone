@@ -18,10 +18,7 @@ const Followers = () => {
     //states for storing followers and render in return
     const [storeFollowers, setStoreFollowers] = useState(null)
     console.log(storeFollowers, 'STORE FOLLOWERS')
-
-
     //on component mount
-
     useEffect(() => {
         const getFollowers = async () => {
             try {
