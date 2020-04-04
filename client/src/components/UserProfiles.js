@@ -7,20 +7,16 @@ import { COLORS } from '../constants';
 
 
 
-const UserProfiles = ({ storeFollowers }) => {
+const UserProfiles = () => {
+
 
     let location = useLocation().pathname.split('/')
     let path = location[2];
 
-
     const [selectedUser, setSelectedUser] = useState(null);
-    const [userBool, setuserBool] = useState(false);
-
     //state for userTweet/Retweet fetch;
     const [userTweets, setUserTweets] = useState(null);
-
     //handler for userprofile
-
 
     //on mount
     //add ERROR HANDLING
@@ -31,17 +27,17 @@ const UserProfiles = ({ storeFollowers }) => {
             const getUserProfile = await fetch(`/api/${path}/profile`);
             const returnedProfile = await getUserProfile.json();
             setSelectedUser(returnedProfile.profile)
-            setuserBool(true)
             //get all tweets related to profile.
         }
         //function call.
         //if its null, then followers was not clicked.Not undefined if I dont click on followers
         handleClickedProfile()
-
-    }, [])
+    }, [path])
 
 
     useEffect(() => {
+
+
         const getUserTweets = async () => {
             try {
                 const response = await fetch(`/api/${path}/feed`);
@@ -62,7 +58,9 @@ const UserProfiles = ({ storeFollowers }) => {
             }
         }
         getUserTweets();
-    }, [])
+
+
+    }, [path])
 
     //follow unfollow button: MaybeRefactor this to a reuse. 
     console.log(selectedUser)
@@ -71,7 +69,7 @@ const UserProfiles = ({ storeFollowers }) => {
 
 
 
-            {userBool &&
+            {selectedUser !== null && path !== null &&
                 <MainUserProfile>
                     <Profile>
                         {/* follow and unfollow button */}
@@ -136,7 +134,6 @@ line-height: 1.5;
 display: flex;
 `
 const Profile = styled.div`
-height: 70vh;
 
 `
 const TweetImage = styled.img`
@@ -169,7 +166,7 @@ color: black;
 background-color: lightgray;
 border-radius: 10px;
 opacity: 0.5;
-padding: 5px;
+
 `
 
 
@@ -181,18 +178,14 @@ const UserImg = styled.img`
 width: 10vw;
 height: 20vh;
 border-radius: 50%;
-position: relative;
-left: 10px;
-bottom: 100px;
+
 border: solid white 5px;
 
 `
 
 const UserInfo = styled.div`
 padding-left: 10px;
-border-bottom: solid gray 1px;
-position: relative;
-bottom: 50px;
+
 font-size: 1.9em;
 
 a{
@@ -204,8 +197,7 @@ const FlexFollow = styled.div`
 display: flex;
 justify-content: flex-end;
 padding-right: 20px;
-position: relative;
-bottom: 100px;
+
 background-color: transparent;
 
 

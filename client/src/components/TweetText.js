@@ -41,7 +41,6 @@ const TweetText = ({ setTweets }) => {
                             let allTweets = await fetchTweets.json()
                             console.log(allTweets, 'TWEETS AFTER POST')
                             handlePost(allTweets)
-
                         }
                         catch (err) {
                             throw Error('ERROR WHEN POSTING')

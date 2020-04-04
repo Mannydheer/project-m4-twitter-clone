@@ -42,7 +42,6 @@ const Tweet = ({ allTweets, tweetId }) => {
         //just to trigger useEffect on clicking like
         handlePutLike();
     }
-
     const handleRetweeting = (event) => {
         //double check these two. Stop reloading.. and onclick on PARENT. 
         event.stopPropagation();
@@ -50,7 +49,6 @@ const Tweet = ({ allTweets, tweetId }) => {
         //just to trigger useEffect on clicking like
         handlePutRetweet();
     }
-
     const handlePutRetweet = async () => {
         //if false or NOT CURRENTLY LIKED
         if (allTweets[tweetId].isRetweeted === false) {
@@ -110,15 +108,12 @@ const Tweet = ({ allTweets, tweetId }) => {
                     // allTweets[tweetId].isRetweeted = false;
                     // setRetweeted(!retweet)
                 }
-
             }
             catch (error) {
                 throw Error('error liking')
             }
         }
     }
-
-
     // -------------------------------------
     const handlePutLike = async () => {
         //if false or NOT CURRENTLY LIKED
@@ -212,11 +207,9 @@ const Tweet = ({ allTweets, tweetId }) => {
                             <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'green'} /></div>
                             :
                             <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'white'} /></div>}
-
                     </Icons>
                 </div>
                 {/*  <Heart width={heartSize} isToggled={isLiked} */}
-
             </StyledTweetDiv>
 
         </React.Fragment >
@@ -234,6 +227,13 @@ border: solid 1px gray;
 padding: 10px;
 line-height: 1.5;
 display: flex;
+width: 55vw;
+
+&:hover {
+    opacity: 0.5;
+}
+
+
 `
 const Icons = styled.div`
 display: flex;
@@ -248,8 +248,8 @@ padding: 10px;
 `
 const TweetImage = styled.img`
 border-radius: 10%;
-width: 100%;
 height: 400px;
+width: 600px;
 `
 
 

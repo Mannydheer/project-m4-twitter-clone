@@ -9,6 +9,8 @@ import { COLORS } from '../constants';
 
 const UserFollowUnfollow = ({ selectedUser }) => {
 
+    console.log(selectedUser, 'WHAT IS IN SELECTED USER')
+
     //reuse a state within this scope... same as DisplayFollowers. 
     const [selectedUserState, setSelectedUserState] = useState(selectedUser)
 

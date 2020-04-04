@@ -39,7 +39,6 @@ const Following = () => {
 
     return (
         <React.Fragment>
-            <div>FOLLOWING</div>
             {following !== null &&
 
                 following.map(eachUser => {
