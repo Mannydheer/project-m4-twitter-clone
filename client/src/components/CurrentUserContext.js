@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { createContext } from 'react';
+import Error from './Error';
+
 
 
 export const CurrentUserContext = createContext();
@@ -50,6 +52,7 @@ const reducer = (state, action) => {
 const CurrentUserProvider = ({ children }) => {
 
     const [state, dispatch] = React.useReducer(reducer, InitialState)
+    const [error, setError] = useState(false);
 
     //dispatcher Functions.
     const updateProfileUser = (userInfo) => {
@@ -86,6 +89,9 @@ const CurrentUserProvider = ({ children }) => {
                 let info = await userResponse.json();
                 updateProfileUser(info)
             }
+            else {
+                setError(true)
+            }
 
         }
         //perform fetch function above. 
@@ -115,6 +121,7 @@ const CurrentUserProvider = ({ children }) => {
 
         }}>
             {children}
+            {error && <Error></Error>}
 
         </CurrentUserContext.Provider>
 

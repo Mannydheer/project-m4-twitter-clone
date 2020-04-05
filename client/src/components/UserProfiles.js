@@ -96,7 +96,6 @@ const UserProfiles = () => {
                                 <StyledTweetDiv>
                                     <ImageAuthor src={userTweets.tweetsById[eachId].author.avatarSrc}></ImageAuthor>
                                     <div>
-
                                         <StyledUserDiv>{userTweets.tweetsById[eachId].author.displayName} @{userTweets.tweetsById[eachId].author.handle}</StyledUserDiv >
                                         <div>{userTweets.tweetsById[eachId].status}</div>
                                         {userTweets.tweetsById[eachId].media.length > 0 &&
@@ -126,6 +125,8 @@ export default UserProfiles
 const MainUserProfile = styled.div`
 width: 56vw;
 border: solid 1px gray;
+color: white;
+
 `
 const StyledTweetDiv = styled.div`
 border: solid 1px gray;
@@ -162,10 +163,12 @@ color: gray;
 
 `
 const FollowsYou = styled.span`
-color: black;
+color: white;
 background-color: lightgray;
 border-radius: 10px;
 opacity: 0.5;
+color: white;
+
 
 `
 
@@ -191,7 +194,11 @@ font-size: 1.9em;
 a{
     text-decoration: none;
     padding-right: 20px;
+    color: white;
+
 }
+
+
 `
 const FlexFollow = styled.div`
 display: flex;

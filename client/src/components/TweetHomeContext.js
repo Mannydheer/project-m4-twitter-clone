@@ -48,13 +48,8 @@ const reducer = (state, action) => {
                 homeFeedTweets: action.allTweets
             }
         }
-
     }
-
-
 }
-
-
 const TweetHomeProvider = ({ children }) => {
 
     const [tweetHomeFeedState, dispatch] = React.useReducer(reducer, InitialState)

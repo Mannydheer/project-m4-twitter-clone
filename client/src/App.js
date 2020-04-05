@@ -16,24 +16,28 @@ import { bell } from 'react-icons-kit/iconic/bell'
 import { bookmark } from 'react-icons-kit/fa/bookmark'
 import { CurrentUserContext } from './components/CurrentUserContext';
 import FollowHeader from './components/FollowHeader';
-
 import Followers from './components/Followers';
 import Following from './components/Following';
 import { COLORS } from './constants';
+import FormDialog from './components/FormDialog';
+import Search from './components/Search';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
+
 
 function App() {
 
   const { state } = React.useContext(CurrentUserContext)
-  console.log(state)
 
   return (
 
     <BrowserRouter>
       <GlobalStyles></GlobalStyles>
-
-
       {state.isLoaded ?
         <StyledBody>
+
+
           <StyledSide>
             {/* NAV BAR */}
             <StyledNav>
@@ -54,9 +58,15 @@ function App() {
                 <Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={bookmark}></Icon>
                 <NavText>Bookmarks</NavText></NavigationLink>
               </Nav>
+              <Nav>
+                <FormDialog></FormDialog>
+              </Nav>
+
+
             </StyledNav>
             {/* MAIN */}
             <Main>
+
               <Switch>
                 <Route exact path="/">
                   <HomeFeed></HomeFeed>
@@ -86,13 +96,17 @@ function App() {
 
               </Switch>
             </Main>
+
+
           </StyledSide>
+          <StyledFlexSearch>
+            <Search></Search>
+          </StyledFlexSearch>
+
+
         </StyledBody>
-        : <div>LOADING</div>
+        : <StyledCircle><CircularProgress></CircularProgress></StyledCircle>
       }
-
-
-
     </BrowserRouter >
 
 
@@ -106,28 +120,53 @@ const StyledNav = styled.nav`
 padding: 50px;
 display:flex;
 flex-direction: column;
+position: fixed;
+left: 50px;
 `
 
 const Main = styled.main`
+position: relative;
+left: 350px;
+background-color: rgb(21,32,43);
+
+
 `
 
 const StyledSide = styled.div`
 display: flex;
+`
+const StyledCircle = styled.div`
+display: flex;
+justify-content: center;
+`
+const StyledFlexSearch = styled.div`
+position: absolute;
+right: 10px;
+top: 10px;
 
 `
+
 const StyledBody = styled.div`
 /* display: flex;
 justify-content: center; */
+background-color: rgb(21,32,43);
+
+
 
 `
 
 const NavigationLink = styled(NavLink)`
 padding: 20px;
+color: white;
 
 
-&.active {
+
+
+
+/* &.active {
     color: ${COLORS.primary};
-  }
+    
+  } */
 
 
 text-decoration: none;
@@ -137,6 +176,7 @@ border-radius: 25px;
 &:hover {
   background-color: rgb(53,161,241);
     transition: 0.5s all;
+
   
 }
 `;
@@ -144,16 +184,18 @@ border-radius: 25px;
 const NavText = styled.div`
 font-size: 1.4rem;
 background-color: transparent;
-
-
-
-
 `
 
 const Nav = styled.div`
 padding: 10px;
-
 `
+
+
+//pseudocode for post modal.
+//Input
+//modal
+
+//on click, triggers the modal, which triggers apost. 
 
 
 

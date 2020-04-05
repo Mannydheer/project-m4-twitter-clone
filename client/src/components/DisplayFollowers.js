@@ -46,6 +46,7 @@ const DisplayBody = styled.div`
 display: flex;
 width: 56vw;
 border: solid 1px gray;
+
 `
 const StyledHandle = styled.div`
 color: gray;

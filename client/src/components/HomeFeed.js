@@ -50,5 +50,6 @@ const StyledHome = styled.div`
 font-size: 36px;
 padding: 10px 10px;
 border: solid 1px gray;
+
 `
 

@@ -7,22 +7,19 @@ import { TweetHomeContext } from './TweetHomeContext';
 import TweetActionIcon from './TweetActionIcon';
 import Heart from './Heart';
 import TweetAction from './TweetLikeRetweetAction';
-import TweetLikeRetweetAction from './TweetLikeRetweetAction'
 
 
 
 
-const Tweet = ({ allTweets, tweetId }) => {
+const TweetLikeRetweetAction = ({ tweetId }) => {
 
-    let Image = allTweets[tweetId].media[0]
-    let history = useHistory();
-    const { updateLikes } = React.useContext(CurrentUserContext)
+    //dont pass allTweets since we want to reuse compoenent so we can get homefeed state form context
     const { tweetHomeFeedState, handleUserLikes, handleUserRetweets } = React.useContext(TweetHomeContext)
 
-    const [retweet, setRetweeted] = useState(false);
+    console.log(tweetHomeFeedState, 'FUCKING HOME STATE k')
 
-    //-----------------------------------------------
-    // console.log(tweetId, 'SINDEI TWEET ID')
+    const [homeTweets, setHomeTweets] = useState(tweetHomeFeedState.homeFeedTweets.tweetsById)
+
 
     const handleLiking = (event) => {
         //double check these two. Stop reloading.. and onclick on PARENT. 
@@ -40,7 +37,7 @@ const Tweet = ({ allTweets, tweetId }) => {
     }
     const handlePutRetweet = async () => {
         //if false or NOT CURRENTLY LIKED
-        if (allTweets[tweetId].isRetweeted === false) {
+        if (homeTweets[tweetId].isRetweeted === false) {
             try {
                 console.log('INSIDE Retweet')
                 let response = await fetch(`/api/tweet/${tweetId}/retweet`, {
@@ -71,7 +68,7 @@ const Tweet = ({ allTweets, tweetId }) => {
         }
         //if already liked.
         //else if to not trigger both ifs.
-        else if (allTweets[tweetId].isRetweeted === true) {
+        else if (homeTweets[tweetId].isRetweeted === true) {
             console.log('INSIDE REMOVE RETWEET')
             try {
                 let response = await fetch(`/api/tweet/${tweetId}/retweet`, {
@@ -102,7 +99,7 @@ const Tweet = ({ allTweets, tweetId }) => {
     // -------------------------------------
     const handlePutLike = async () => {
         //if false or NOT CURRENTLY LIKED
-        if (allTweets[tweetId].isLiked === false) {
+        if (homeTweets[tweetId].isLiked === false) {
             try {
                 console.log('INSIDE LIKED')
                 let response = await fetch(`/api/tweet/${tweetId}/like`, {
@@ -131,7 +128,7 @@ const Tweet = ({ allTweets, tweetId }) => {
         }
         //if already liked.
         //else if to not trigger both ifs.
-        else if (allTweets[tweetId].isLiked === true) {
+        else if (homeTweets[tweetId].isLiked === true) {
             console.log('INSIDE REMOVE LIKE')
             try {
                 let response = await fetch(`/api/tweet/${tweetId}/like`, {
@@ -163,105 +160,23 @@ const Tweet = ({ allTweets, tweetId }) => {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-    //it will refresh this specific tweet... double check.
-    useEffect(() => {
-    }, [retweet])
-
-    // ------------------------------------
-    const handler = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        history.push(`/user/${allTweets[tweetId].author.handle}`)
-    }
-    // -------------------------------------
-
-    // -------------------------------------
-
     return (
         <React.Fragment>
-            <StyledTweetDiv>
-                {/* if retweet exists */}
-                <ImageAuthor src={allTweets[tweetId].author.avatarSrc} alt='author'></ImageAuthor>
+            {homeTweets !== null && <Icons>
                 <div>
-                    {/* {retweetName !== undefined ? <div>Name: {allTweets[tweetId].retweetFrom.displayName}</div> : <span></span>} */}
-                    <StyledUserDiv onClick={handler}>{allTweets[tweetId].author.displayName} @{allTweets[tweetId].author.handle}</StyledUserDiv>
-                    <span>{allTweets[tweetId].timestamp}</span>
-                    <div>{allTweets[tweetId].status}</div>
-                    {Image !== undefined ? <TweetImage src={Image.url} alt='media'></TweetImage>
-                        : <span></span>}
-                    {/* like and retweeting. compoenent  */}
-                    <Icons>
-                        <div>
-                            {allTweets[tweetId].isLiked ? <div onClick={handleLiking}><Heart width={30} isToggled={true}></Heart></div> : <div onClick={handleLiking}><Heart width={30}></Heart></div>}
-                        </div>
-                        {allTweets[tweetId].isRetweeted ?
-                            <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'green'} /></div>
-                            :
-                            <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'black'} /></div>}
-                    </Icons>
-
+                    {homeTweets[tweetId].isLiked ? <div onClick={handleLiking}><Heart width={30} isToggled={true}></Heart></div> : <div onClick={handleLiking}><Heart width={30}></Heart></div>}
                 </div>
-                {/*  <Heart width={heartSize} isToggled={isLiked} */}
-            </StyledTweetDiv>
-
-        </React.Fragment >
-
-
+                {homeTweets[tweetId].isRetweeted ?
+                    <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'green'} /></div>
+                    :
+                    <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'black'} /></div>}
+            </Icons>}
+        </React.Fragment>
     )
-
-
 }
 
-export default Tweet;
 
-const StyledTweetDiv = styled.div`
-border: solid 1px gray;
-padding: 10px;
-line-height: 1.5;
-display: flex;
-width: 55vw;
-color: white;
-
-
-
-
-
-`
-
-const ImageAuthor = styled.img`
-border-radius: 50%;
-width: 50px,;
-height: 50px;
-padding: 10px;
-`
-const TweetImage = styled.img`
-border-radius: 10%;
-height: 400px;
-width: 600px;
-`
-
-
-const StyledUserDiv = styled.div`
-font-weight: bold;
-
-
-&:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-`
+export default TweetLikeRetweetAction;
 const Icons = styled.div`
 display: flex;
 justify-content: space-evenly;
@@ -270,10 +185,3 @@ justify-content: space-evenly;
 }
 
 `
-
-const Btn = styled.button`
-font-size: 24px;
-padding: 10px;
-cursor: pointer;
-
-` 

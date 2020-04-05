@@ -50,8 +50,8 @@ const UserFollowUnfollow = ({ selectedUser }) => {
 
     return (
         <div>
-            {selectedUserState.isBeingFollowedByYou ? <Btn style={{ backgroundColor: `${COLORS.buttons}` }} onClick={handleFollowerPut}>Following</Btn> :
-                <Btn style={{ backgroundColor: 'transparent' }} onClick={handleFollowerPut}>Follow</Btn>}
+            {selectedUserState.isBeingFollowedByYou ? <Btn style={{ backgroundColor: `${COLORS.buttons}`, color: 'white' }} onClick={handleFollowerPut}>Following</Btn> :
+                <Btn onClick={handleFollowerPut}>Follow</Btn>}
         </div>
 
 
@@ -68,6 +68,8 @@ padding: 10px;
 cursor: pointer;
 border-radius: 25px;
 outline: none;
+color: black;
+
 
 
 ` 

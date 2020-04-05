@@ -24,9 +24,10 @@ const FollowHeader = () => {
 export default FollowHeader;
 
 const Header = styled.div`
+
 a{
     text-decoration: none;
-    color: white;
+    
 }
 border: solid 1px gray;
 width: 56vw;
@@ -41,12 +42,13 @@ text-align: center;
 padding: 10px;
 
 
+
 &.active {
     color: ${COLORS.buttons};
     text-decoration: underline;
   }
 &:hover {
-    border: solid white 0.5px;
+    border: solid gray 0.5px;
     color: ${COLORS.buttons};
 
     
@@ -55,6 +57,7 @@ padding: 10px;
 const FollowNav = styled.div`
 display: flex;
 padding-top: 30px;
+
 
 
 `
