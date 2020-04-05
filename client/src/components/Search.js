@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { TweetHomeContext } from './TweetHomeContext';
 import { Link, useHistory } from 'react-router-dom';
+import { COLORS } from '../constants'
+
 
 
 
@@ -11,44 +13,14 @@ const Search = () => {
 
     //have access to the newly update state of all users here. 
     const [type, setType] = useState('');
-    const [searchedUsers, setSearchedUsers] = useState(null)
+    const [searchedUsers, setSearchedUsers] = useState('')
     const { tweetHomeFeedState } = React.useContext(TweetHomeContext);
-    console.log(tweetHomeFeedState)
 
-
-
-    //will update the valye of searchedUsers with currently typed letters.
-    useEffect(() => {
-
-        if (tweetHomeFeedState.isRetrieved === true) {
-
-            let userNames = Object.values(tweetHomeFeedState.homeFeedTweets.tweetsById)
-            userNames.forEach(user => {
-                let splitUser = user.author.displayName.toLowerCase().split('')
-                splitUser.forEach((letter, index) => {
-                    if (letter === type && index < 4) {
-                        // statusHolder.push(user.status)
-                        setSearchedUsers({
-                            ...searchedUsers,
-                            users: user.author.displayName,
-                            current: user.author.handle
-
-                        })
-
-                    }
-                });
-            });
+    let matchedResults = Object.values(tweetHomeFeedState.homeFeedTweets.tweetsById).filter(user => {
+        if (type.length >= 3 && user.status.toLowerCase().includes(type.toLowerCase())) {
+            return (user)
         }
-
-    }, [type])
-
-    //listen for a keypress
-
-    const handleClickReset = () => {
-        setSearchedUsers(null)
-        history.push(`/user/${searchedUsers.current}`)
-    }
-
+    })
     //reseting on empty
     useEffect(() => {
         if (type === '') {
@@ -56,7 +28,10 @@ const Search = () => {
         }
     }, [type])
 
-
+    const handleSearch = (props) => {
+        history.push(`/tweet/${props}`)
+        setType('')
+    }
 
 
     return (
@@ -74,32 +49,37 @@ const Search = () => {
                         required
                     ></StyledInput>
                 </form>
-                {searchedUsers !== null &&
-                    <div>
-                        <button onClick={handleClickReset}>
-                            {searchedUsers.users}
+                <div>
+                    {matchedResults.map(result => {
+                        let getIndex = result.status.toLowerCase().indexOf(type.toLowerCase())
+                        let splitWords = result.status.split('')
+                        let lengthWord = type.split('').length
+                        let firstHalf = splitWords.slice(0, getIndex);
+                        let wordPart = splitWords.slice(getIndex, getIndex + lengthWord)
+                        let secondHalf = splitWords.slice(getIndex + lengthWord, splitWords.length)
+                        return (
+                            <Wrapper>
+                                <StyledUl>
+                                    <EachList onClick={() => handleSearch(result.id)}>
+                                        {firstHalf}
+                                        <StyledStrong>{wordPart}</StyledStrong>
+                                        {secondHalf}
+                                    </EachList>
+                                </StyledUl>
+                            </Wrapper>
+                        )
 
-                        </button>
+                    })}
 
-                    </div>
-                }
+                </div>
+
             </StyledSearchContainer>
         </React.Fragment>
 
     )
 
 }
-//           // Object.values(searchedUsers).foreach(phrase => {
-//     return <Phrase>
-//         <button>
-//             {phrase}
-//         </button>
-//     </Phrase>
-// })}
-{/* {searchedUsers !== null &&
-                    <button>{searchedUsers.users}</button>
 
-                } */}
 export default Search;
 
 const StyledInput = styled.input``
@@ -108,4 +88,39 @@ const StyledSearchContainer = styled.div``
 const Phrase = styled.div`
 display: flex;
 flex-wrap: wrap;
+`
+
+const EachList = styled.li`
+&:hover {
+    background-color: ${COLORS.buttons};
+}
+
+
+`
+
+const StyledUl = styled.ul`
+
+
+
+li {
+    cursor: pointer;
+list-style: none;
+
+}
+
+
+
+`
+
+const Wrapper = styled.div`
+display: flex;
+flex-wrap: wrap;
+width: 20vw;
+
+
+
+`
+
+const StyledStrong = styled.strong`
+background-color: transparent;
 `

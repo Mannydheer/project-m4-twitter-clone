@@ -10,6 +10,8 @@ const TweetDetails = () => {
     let splitpath = location.pathname.split('/')
     let path = splitpath[2];
 
+    console.log('INSIDE TWEET DETAILS')
+
 
 
     const [singleTweetState, setsingleTweetState] = useState(null)
@@ -26,9 +28,7 @@ const TweetDetails = () => {
         }
         getSingleTweet();
     }, [])
-
     console.log(singleTweetState)
-
     return (
         <React.Fragment>
             {fetchCheck && <Text>
@@ -39,9 +39,9 @@ const TweetDetails = () => {
                 {singleTweetState.media.length > 0 &&
                     <TweetImage src={singleTweetState.media[0].url}></TweetImage>}
                 {/* message */}
-                {/* <StyledLikeRetweet>
+                <StyledLikeRetweet>
                     <TweetLikeRetweetAction tweetId={path}></TweetLikeRetweetAction>
-                </StyledLikeRetweet> */}
+                </StyledLikeRetweet>
 
             </Text>}
         </React.Fragment>
