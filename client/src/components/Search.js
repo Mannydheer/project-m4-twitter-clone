@@ -16,33 +16,27 @@ const Search = () => {
     const [searchedUsers, setSearchedUsers] = useState('')
     const { tweetHomeFeedState } = React.useContext(TweetHomeContext);
 
+    //will always update with new matched results as setType rerenders the Search componenets.
     let matchedResults = Object.values(tweetHomeFeedState.homeFeedTweets.tweetsById).filter(user => {
         if (type.length >= 3 && user.status.toLowerCase().includes(type.toLowerCase())) {
             return (user)
         }
     })
-    //reseting on empty
-    useEffect(() => {
-        if (type === '') {
-            setSearchedUsers(null)
-        }
-    }, [type])
 
     const handleSearch = (props) => {
         history.push(`/tweet/${props}`)
         setType('')
     }
-
-
     return (
         <React.Fragment>
             <StyledSearchContainer>
                 <form>
                     <label htmlFor="search"></label>
-                    <div>Search For A User</div>
+                    <i class="fa fa-search"></i>
+
                     <StyledInput
                         onChange={e => setType(e.target.value)}
-                        placeholder=" Search"
+                        placeholder="Search Meows"
                         id="search"
                         type="text"
                         maxLength={30}
@@ -82,40 +76,51 @@ const Search = () => {
 
 export default Search;
 
-const StyledInput = styled.input``
-const StyledSearchContainer = styled.div``
+const StyledInput = styled.input`
+border: black 1px solid;
+border-radius: 25px;
+padding: 5px;
+outline: none;
+
+@media only screen and (max-width: 450px) {
+background-color: white;
+color: black;
+}
+`
+const StyledSearchContainer = styled.div`
+@media only screen and (max-width: 450px) {
+padding: 10px;}
+`
 
 const Phrase = styled.div`
-display: flex;
-flex-wrap: wrap;
+
 `
 
 const EachList = styled.li`
 &:hover {
-    background-color: ${COLORS.buttons};
+    opacity: 0.7;
 }
-
-
 `
 
 const StyledUl = styled.ul`
-
-
-
 li {
     cursor: pointer;
 list-style: none;
 
 }
-
-
-
 `
 
 const Wrapper = styled.div`
+
+
+@media only screen and (min-width: 475px) {
 display: flex;
 flex-wrap: wrap;
-width: 20vw;
+width: 10vw;}
+
+@media only screen and (max-width: 450px) {
+    width: 100vw;
+}
 
 
 

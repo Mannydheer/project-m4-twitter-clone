@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../constants';
+import { CurrentUserContext } from './CurrentUserContext';
+// import {TweetHomeContext} from './TweetHomeContext';
 
 
 
@@ -9,7 +11,9 @@ import { COLORS } from '../constants';
 
 const UserFollowUnfollow = ({ selectedUser }) => {
 
-    console.log(selectedUser, 'WHAT IS IN SELECTED USER')
+    const { updateFollow } = React.useContext(CurrentUserContext)
+    // const { handleFollow } = React.useContext(TweetHomeContext)
+
 
     //reuse a state within this scope... same as DisplayFollowers. 
     const [selectedUserState, setSelectedUserState] = useState(selectedUser)
@@ -30,6 +34,10 @@ const UserFollowUnfollow = ({ selectedUser }) => {
                 ...selectedUserState,
                 isBeingFollowedByYou: true
             })
+            //increment the # of followers... current user has
+            updateFollow({
+                isBeingFollowedByYou: true
+            })
         }
         //if you are already following
         if (followResponse.status === 409) {
@@ -40,6 +48,9 @@ const UserFollowUnfollow = ({ selectedUser }) => {
             //change users key to UNFOLLOW
             setSelectedUserState({
                 ...selectedUserState,
+                isBeingFollowedByYou: false
+            })
+            updateFollow({
                 isBeingFollowedByYou: false
             })
         }
@@ -69,6 +80,12 @@ cursor: pointer;
 border-radius: 25px;
 outline: none;
 color: black;
+
+@media only screen and (max-width: 450px) {
+background-color: white;
+outline: none;
+}
+
 
 
 

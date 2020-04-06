@@ -20,23 +20,17 @@ export default function FormDialog() {
     const [tweet, setTweet] = useState('');
     const { handlePost } = React.useContext(TweetHomeContext);
 
-
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleCancel = () => {
         setOpen(false)
-
     }
     const handleClose = () => {
         setOpen(false)
         postHandler();
     }
-
-
     const postHandler = async () => {
-
         const data = {
             status: tweet
         }
@@ -71,8 +65,6 @@ export default function FormDialog() {
                 throw Error('POST UNSUCCESSFUL')
             }
         }
-
-
     };
 
     return (
@@ -90,13 +82,11 @@ export default function FormDialog() {
           </DialogContentText>
                     <TextField
                         autoFocus
-
                         margin="dense"
                         id="name"
                         label="Tweet"
                         fullWidth
                         onChange={e => setTweet(e.target.value)}
-
                     />
                 </DialogContent>
                 <DialogActions>

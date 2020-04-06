@@ -60,6 +60,11 @@ const TweetText = ({ setTweets }) => {
     const handlePostData = (event) => {
         event.preventDefault();
         postHandler();
+        //posthandler will enter the CALLBACK and setTweet will initiate...
+        //cause a reset of the input box, and when postHanlder has completed, it will be released from callbacl
+        //and the post will be done
+        setTweet('')
+
         //store input into postedTweet
     }
 
@@ -114,10 +119,14 @@ height: 10vh;
 width: 55.9vw;
 border: none;
 outline: none;
-font-size: 1.7rem;
+font-size: 1.1rem;
 
 ::placeholder {
     font-size: 1.7rem;
+}
+
+@media only screen and (max-width: 450px) {
+    width: 100vw;
 }
 
 
@@ -141,13 +150,16 @@ font-size: 24px;
 border-radius: 25px;
 padding: 10px;
 margin: 10px;
+outline: none;
 background-color: rgb(53,161,241);
+color: white;
 
 
 &:hover {
     opacity: 0.7;
     transition: 0.3s all;
     cursor: pointer;
+    
 
 }
 `

@@ -43,6 +43,15 @@ display: block;
 width: 56vw;
 cursor: pointer;
 
+&:hover {
+    opacity: 0.7;
+}
+
+@media only screen and (max-width: 450px) {
+
+    width: 50vw;
+}
+
 
 `
 

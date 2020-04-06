@@ -8,6 +8,7 @@ import UserFollowUnfollow from './UserFollowUnfollow';
 
 const DisplayFollowers = ({ eachUser }) => {
     //each user has all the followers/following users
+    console.log(eachUser, 'each usererrr')
     return (
 
         <React.Fragment>
@@ -35,17 +36,19 @@ const DisplayFollowers = ({ eachUser }) => {
 
 export default DisplayFollowers;
 
-const Btn = styled.button`
-font-size: 24px;
-padding: 10px;
-cursor: pointer;
 
-`
 
 const DisplayBody = styled.div`
-display: flex;
+
+
+@media only screen and (min-width: 475px) {
+    display: flex;
 width: 56vw;
 border: solid 1px gray;
+}
+@media only screen and (max-width: 450px) {
+
+}
 
 `
 const StyledHandle = styled.div`

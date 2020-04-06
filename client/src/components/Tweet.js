@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { CurrentUserContext } from './CurrentUserContext';
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { TweetHomeContext } from './TweetHomeContext';
-
 import TweetActionIcon from './TweetActionIcon';
 import Heart from './Heart';
-import TweetAction from './TweetLikeRetweetAction';
-import TweetLikeRetweetAction from './TweetLikeRetweetAction'
 
 
 
@@ -16,10 +12,8 @@ const Tweet = ({ allTweets, tweetId }) => {
 
     let Image = allTweets[tweetId].media[0]
     let history = useHistory();
-    const { updateLikes } = React.useContext(CurrentUserContext)
-    const { tweetHomeFeedState, handleUserLikes, handleUserRetweets } = React.useContext(TweetHomeContext)
+    const { handleUserLikes, handleUserRetweets } = React.useContext(TweetHomeContext)
 
-    const [retweet, setRetweeted] = useState(false);
 
     //-----------------------------------------------
     // console.log(tweetId, 'SINDEI TWEET ID')
@@ -62,6 +56,7 @@ const Tweet = ({ allTweets, tweetId }) => {
                     handleUserRetweets({
                         id: tweetId,
                         retweeted: true,
+                        value: 1,
                     })
                 }
             }
@@ -91,6 +86,7 @@ const Tweet = ({ allTweets, tweetId }) => {
                     handleUserRetweets({
                         id: tweetId,
                         retweeted: false,
+                        value: 0,
                     })
                 }
             }
@@ -122,6 +118,7 @@ const Tweet = ({ allTweets, tweetId }) => {
                     handleUserLikes({
                         id: tweetId,
                         liked: true,
+                        value: 1,
                     })
                 }
             }
@@ -145,17 +142,15 @@ const Tweet = ({ allTweets, tweetId }) => {
                         like: false
                     })
                 })
+                console.log(response)
                 let status = await response.json();
                 if (status.success) {
                     handleUserLikes({
                         id: tweetId,
                         liked: false,
+                        value: 0,
                     })
-                    // allTweets[tweetId].isLiked = false;
-                    // allTweets[tweetId].numLikes -= 1
-                    // updateLikes({
-                    //     liked: false
-                    // })
+
                 }
             }
             catch (error) {
@@ -164,56 +159,52 @@ const Tweet = ({ allTweets, tweetId }) => {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-    //it will refresh this specific tweet... double check.
-    useEffect(() => {
-    }, [retweet])
-
     // ------------------------------------
     const handler = (event) => {
         event.preventDefault();
         event.stopPropagation();
         history.push(`/user/${allTweets[tweetId].author.handle}`)
     }
-    // -------------------------------------
 
-    // -------------------------------------
 
     return (
         <React.Fragment>
-            <StyledTweetDiv>
-                {/* if retweet exists */}
-                <ImageAuthor src={allTweets[tweetId].author.avatarSrc} alt='author'></ImageAuthor>
-                <div>
-                    {/* {retweetName !== undefined ? <div>Name: {allTweets[tweetId].retweetFrom.displayName}</div> : <span></span>} */}
-                    <StyledUserDiv onClick={handler}>{allTweets[tweetId].author.displayName} @{allTweets[tweetId].author.handle}</StyledUserDiv>
-                    <span>{allTweets[tweetId].timestamp}</span>
-                    <div>{allTweets[tweetId].status}</div>
-                    {Image !== undefined ? <TweetImage src={Image.url} alt='media'></TweetImage>
-                        : <span></span>}
-                    {/* like and retweeting. compoenent  */}
-                    <Icons>
-                        <div>
-                            {allTweets[tweetId].isLiked ? <div onClick={handleLiking}><Heart width={30} isToggled={true}></Heart></div> : <div onClick={handleLiking}><Heart width={30}></Heart></div>}
+            <Wrapper>
+                <StyledTweetDiv>
+                    {/* if retweet exists */}
+                    <ImageAuthor src={allTweets[tweetId].author.avatarSrc} alt='author'></ImageAuthor>
+                    <div>
+                        {allTweets[tweetId].retweetFrom !== undefined ? <div><TweetActionIcon size={15} color={'black'} /> {allTweets[tweetId].retweetFrom.displayName} Remeowed</div> : <span></span>}
+                        <StyledUserDiv onClick={handler}>{allTweets[tweetId].author.displayName} @{allTweets[tweetId].author.handle}</StyledUserDiv>
+                        <span>{allTweets[tweetId].timestamp}</span>
+                        <div>{allTweets[tweetId].status}</div>
+                        {Image !== undefined ? <TweetImage src={Image.url} alt='media'></TweetImage>
+                            : <span></span>}
+                        {/* like and retweeting. compoenent  */}
+
+
+                    </div>
+                    {/*  <Heart width={heartSize} isToggled={isLiked} */}
+                </StyledTweetDiv>
+                <Icons>
+                    <Wrap>
+                        {allTweets[tweetId].isLiked ? <div onClick={handleLiking}>
+                            <Heart width={30} isToggled={true}></Heart><span>{allTweets[tweetId].numLikes}</span>
                         </div>
+                            :
+                            <div onClick={handleLiking}><Heart width={30}></Heart></div>}
+                    </Wrap>
+                    <Wrap>
+
+
                         {allTweets[tweetId].isRetweeted ?
-                            <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'green'} /></div>
+                            <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'green'} /><div>{allTweets[tweetId].numRetweets}</div>
+                            </div>
                             :
                             <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'black'} /></div>}
-                    </Icons>
-
-                </div>
-                {/*  <Heart width={heartSize} isToggled={isLiked} */}
-            </StyledTweetDiv>
+                    </Wrap>
+                </Icons>
+            </Wrapper>
 
         </React.Fragment >
 
@@ -226,15 +217,25 @@ const Tweet = ({ allTweets, tweetId }) => {
 export default Tweet;
 
 const StyledTweetDiv = styled.div`
-border: solid 1px gray;
 padding: 10px;
 line-height: 1.5;
 display: flex;
-width: 55vw;
+width: 54.5vw;
 color: white;
 
-
-
+@media only screen and (max-width: 450px) {
+    width: 100vw;
+    display: block;
+}
+`
+const Wrapper = styled.div`
+border: solid 1px gray;
+@media only screen and (max-width: 450px) {
+    width: 100vw;
+}
+`
+const Wrap = styled.div`
+display: flex;
 
 
 `
@@ -249,6 +250,11 @@ const TweetImage = styled.img`
 border-radius: 10%;
 height: 400px;
 width: 600px;
+@media only screen and (max-width: 450px) {
+
+height: 100px;
+width: 200px;
+}
 `
 
 
@@ -275,5 +281,7 @@ const Btn = styled.button`
 font-size: 24px;
 padding: 10px;
 cursor: pointer;
+
+
 
 ` 

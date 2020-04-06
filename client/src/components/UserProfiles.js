@@ -17,7 +17,6 @@ const UserProfiles = () => {
     //state for userTweet/Retweet fetch;
     const [userTweets, setUserTweets] = useState(null);
     //handler for userprofile
-
     //on mount
     //add ERROR HANDLING
     useEffect(() => {
@@ -32,8 +31,7 @@ const UserProfiles = () => {
         //function call.
         //if its null, then followers was not clicked.Not undefined if I dont click on followers
         handleClickedProfile()
-    }, [path])
-
+    }, [])
 
     useEffect(() => {
 
@@ -63,7 +61,6 @@ const UserProfiles = () => {
     }, [path])
 
     //follow unfollow button: MaybeRefactor this to a reuse. 
-    console.log(selectedUser)
     return (
         <React.Fragment>
 
@@ -123,16 +120,39 @@ const UserProfiles = () => {
 export default UserProfiles
 
 const MainUserProfile = styled.div`
-width: 56vw;
+
+@media only screen and (min-width: 475px) {
+
+    width: 56vw;
 border: solid 1px gray;
 color: white;
+}
+@media only screen and (max-width: 450px) {
+    width: 100vw;
+    border: solid 1px gray;
+color: white;
+
+}
+
 
 `
 const StyledTweetDiv = styled.div`
-border: solid 1px gray;
+
+@media only screen and (min-width: 475px) {
+    border: solid 1px gray;
 padding: 10px;
 line-height: 1.5;
 display: flex;
+}
+@media only screen and (max-width: 450px) {
+display: block;
+line-height: 1.5;
+    border: solid 1px gray;
+
+
+
+}
+
 `
 const Profile = styled.div`
 
@@ -174,39 +194,64 @@ color: white;
 
 
 const Banner = styled.img`
-width: 56vw;
+
+@media only screen and (min-width: 475px) {
+    width: 56vw;
 height: 35vh;
+}
+@media only screen and (max-width: 450px) {
+width: 100vw;
+height: 70vw;
+
+}
 `
 const UserImg = styled.img`
-width: 10vw;
+
+@media only screen and (min-width: 475px) {
+    width: 10vw;
 height: 20vh;
 border-radius: 50%;
-
-border: solid white 5px;
+}
+@media only screen and (max-width: 450px) {
+width: 50vw;
+height: 70vw;
+border-radius: 50%;
+}
 
 `
 
 const UserInfo = styled.div`
-padding-left: 10px;
 
+@media only screen and (min-width: 475px) {
+    padding-left: 10px;
 font-size: 1.9em;
-
 a{
     text-decoration: none;
     padding-right: 20px;
     color: white;
-
+}
+}
+@media only screen and (max-width: 450px) {
+width: 100vw;
 }
 
 
 `
 const FlexFollow = styled.div`
-display: flex;
+
+
+    @media only screen and (min-width: 475px) {
+        display: flex;
 justify-content: flex-end;
 padding-right: 20px;
 
 background-color: transparent;
-
+    border: solid 1px gray;
+}
+@media only screen and (max-width: 450px) {
+display: block;
+justify-content: center;
+}
 
 
 `

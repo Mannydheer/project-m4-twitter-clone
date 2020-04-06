@@ -25,12 +25,25 @@ export default FollowHeader;
 
 const Header = styled.div`
 
-a{
+
+
+@media only screen and (min-width: 475px) {
+    a{
     text-decoration: none;
     
 }
 border: solid 1px gray;
 width: 56vw;
+}
+@media only screen and (max-width: 450px) {
+    width: 100vw;
+    border: solid 1px gray;
+    text-align: center;
+
+
+
+}
+
 
 
 
@@ -55,8 +68,20 @@ padding: 10px;
 }
 `
 const FollowNav = styled.div`
+
+@media only screen and (min-width: 475px) {
 display: flex;
 padding-top: 30px;
+}
+@media only screen and (max-width: 450px) {
+    width: 100vw;
+    text-align: center;
+    padding: 20px;
+
+
+
+}
+
 
 
 

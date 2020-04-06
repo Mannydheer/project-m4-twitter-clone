@@ -36,11 +36,11 @@ const reducer = (state, action) => {
         }
         case 'update-follow': {
             console.log(action, 'INSIDE UPDAT FOLOW')
-            if (action.follow) {
-                state.currentUser.numFollowers += 1;
+            if (action.isBeingFollowedByYou) {
+                state.currentUser.numFollowing += 1;
             }
-            else if (action.follow === false) {
-                state.currentUser.numFollowers -= 1;
+            else if (action.isBeingFollowedByYou === false) {
+                state.currentUser.numFollowing -= 1;
             }
             return {
                 ...state,
@@ -53,7 +53,6 @@ const CurrentUserProvider = ({ children }) => {
 
     const [state, dispatch] = React.useReducer(reducer, InitialState)
     const [error, setError] = useState(false);
-
     //dispatcher Functions.
     const updateProfileUser = (userInfo) => {
         dispatch({
@@ -62,12 +61,14 @@ const CurrentUserProvider = ({ children }) => {
         })
     }
     const updateLikes = (liked) => {
-        dispatch({
-            type: 'update-likes',
-            ...liked
-        })
+        // dispatch({
+        //     type: 'update-likes',
+        //     ...liked
+        // })
     }
     const updateFollow = (follow) => {
+
+        console.log(follow, 'FOLLOW')
         dispatch({
             type: 'update-follow',
             ...follow
