@@ -10,6 +10,8 @@ import Heart from './Heart';
 
 const Tweet = ({ allTweets, tweetId }) => {
 
+    console.log(allTweets, 'THIS IS ALL TWEETS')
+
     let Image = allTweets[tweetId].media[0]
     let history = useHistory();
     const { handleUserLikes, handleUserRetweets } = React.useContext(TweetHomeContext)
@@ -188,9 +190,12 @@ const Tweet = ({ allTweets, tweetId }) => {
                 </StyledTweetDiv>
                 <Icons>
                     <Wrap>
-                        {allTweets[tweetId].isLiked ? <div onClick={handleLiking}>
-                            <Heart width={30} isToggled={true}></Heart><span>{allTweets[tweetId].numLikes}</span>
-                        </div>
+                        {allTweets[tweetId].isLiked ? <Flex onClick={handleLiking}>
+                            <Heart width={30} isToggled={true}></Heart>
+                            <div style={{ position: 'relative', right: '40px', top: '5px' }}>
+                                {allTweets[tweetId].numLikes}
+                            </div>
+                        </Flex>
                             :
                             <div onClick={handleLiking}><Heart width={30}></Heart></div>}
                     </Wrap>
@@ -198,8 +203,11 @@ const Tweet = ({ allTweets, tweetId }) => {
 
 
                         {allTweets[tweetId].isRetweeted ?
-                            <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'green'} /><div>{allTweets[tweetId].numRetweets}</div>
-                            </div>
+                            <Flex onClick={handleRetweeting}>
+                                <TweetActionIcon size={30} color={'green'} />
+                                <div style={{ position: 'relative', right: '40px', top: '5px' }}>
+                                    {allTweets[tweetId].numRetweets}</div>
+                            </Flex>
                             :
                             <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'black'} /></div>}
                     </Wrap>
@@ -230,11 +238,18 @@ color: white;
 `
 const Wrapper = styled.div`
 border: solid 1px gray;
+width: 100%;
+height: 50%;
 @media only screen and (max-width: 450px) {
     width: 100vw;
 }
 `
 const Wrap = styled.div`
+display: flex;
+
+
+`
+const Flex = styled.div`
 display: flex;
 
 
@@ -248,13 +263,9 @@ padding: 10px;
 `
 const TweetImage = styled.img`
 border-radius: 10%;
-height: 400px;
-width: 600px;
-@media only screen and (max-width: 450px) {
+height: 83%;
+width: 80%;
 
-height: 100px;
-width: 200px;
-}
 `
 
 

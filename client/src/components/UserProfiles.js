@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import UserFollowUnfollow from './UserFollowUnfollow';
 import { COLORS } from '../constants';
+import Tweet from '../components/Tweet';
 
 
 
@@ -10,12 +11,16 @@ import { COLORS } from '../constants';
 const UserProfiles = () => {
 
 
+    let history = useHistory();
+
     let location = useLocation().pathname.split('/')
     let path = location[2];
 
     const [selectedUser, setSelectedUser] = useState(null);
     //state for userTweet/Retweet fetch;
     const [userTweets, setUserTweets] = useState(null);
+
+
     //handler for userprofile
     //on mount
     //add ERROR HANDLING
@@ -31,12 +36,11 @@ const UserProfiles = () => {
         //function call.
         //if its null, then followers was not clicked.Not undefined if I dont click on followers
         handleClickedProfile()
-    }, [])
+    }, [path])
 
     useEffect(() => {
-
-
         const getUserTweets = async () => {
+            console.log(path, 'INSIDE USE EFFECT USER PROFILE')
             try {
                 const response = await fetch(`/api/${path}/feed`);
                 console.log(response, 'RESPONSE OF USER PROFILE')
@@ -60,14 +64,19 @@ const UserProfiles = () => {
 
     }, [path])
 
+    console.log(userTweets, 'THIS IS USER TWEETS')
+
+
     //follow unfollow button: MaybeRefactor this to a reuse. 
     return (
         <React.Fragment>
 
 
 
-            {selectedUser !== null && path !== null &&
-                <MainUserProfile>
+
+            {selectedUser !== null && path !== null && userTweets !== null &&
+                < MainUserProfile >
+
                     <Profile>
                         {/* follow and unfollow button */}
                         {/* follow and unfollow button */}
@@ -89,17 +98,11 @@ const UserProfiles = () => {
                     {userTweets !== null && <div>
                         {userTweets.tweetIds.map((eachId, index) => {
                             return (
+                                <Btn type='button' onClick={() => history.push(`/tweet/${eachId}`)}>
+                                    <Tweet allTweets={userTweets.tweetsById} tweetId={eachId}></Tweet>
 
-                                <StyledTweetDiv>
-                                    <ImageAuthor src={userTweets.tweetsById[eachId].author.avatarSrc}></ImageAuthor>
-                                    <div>
-                                        <StyledUserDiv>{userTweets.tweetsById[eachId].author.displayName} @{userTweets.tweetsById[eachId].author.handle}</StyledUserDiv >
-                                        <div>{userTweets.tweetsById[eachId].status}</div>
-                                        {userTweets.tweetsById[eachId].media.length > 0 &&
-                                            <TweetImage src={userTweets.tweetsById[eachId].media[0].url}></TweetImage>}
-                                    </div>
+                                </Btn>
 
-                                </StyledTweetDiv>
 
 
                             )
@@ -118,6 +121,23 @@ const UserProfiles = () => {
 }
 
 export default UserProfiles
+
+const Btn = styled.div`
+display: block;
+width: 56vw;
+cursor: pointer;
+
+&:hover {
+    opacity: 0.7;
+}
+
+@media only screen and (max-width: 450px) {
+
+    width: 50vw;
+}
+
+
+`
 
 const MainUserProfile = styled.div`
 
@@ -179,15 +199,15 @@ const Bio = styled.div`
 padding: 10px 0 10px 0;
 `
 const Handle = styled.div`
-color: gray;
+color: black;
 
 `
 const FollowsYou = styled.span`
-color: white;
+
 background-color: lightgray;
 border-radius: 10px;
-opacity: 0.5;
-color: white;
+padding: 5px;
+
 
 
 `
@@ -223,12 +243,20 @@ border-radius: 50%;
 const UserInfo = styled.div`
 
 @media only screen and (min-width: 475px) {
-    padding-left: 10px;
 font-size: 1.9em;
 a{
     text-decoration: none;
     padding-right: 20px;
-    color: white;
+    color: black;
+    background-color: lightgray;
+    border-radius: 25px;
+    padding: 5px;
+    margin: 10px;
+
+    :hover {
+        color: black;
+        transition: 0.5s all ease;
+    }
 }
 }
 @media only screen and (max-width: 450px) {

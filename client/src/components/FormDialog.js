@@ -75,7 +75,7 @@ export default function FormDialog() {
 
       </Btn>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Tweet Something</DialogTitle>
+                <DialogTitle id="form-dialog-title">Meow Something</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Whats happening...?
@@ -94,7 +94,7 @@ export default function FormDialog() {
                         Cancel
           </MyButton>
                     <MyButton onClick={handleClose}>
-                        Tweet
+                        Meow
           </MyButton>
                 </DialogActions>
             </Dialog>

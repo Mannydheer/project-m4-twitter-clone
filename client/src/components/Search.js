@@ -23,6 +23,8 @@ const Search = () => {
         }
     })
 
+    console.log(matchedResults)
+
     const handleSearch = (props) => {
         history.push(`/tweet/${props}`)
         setType('')
@@ -33,13 +35,13 @@ const Search = () => {
                 <form>
                     <label htmlFor="search"></label>
                     <i class="fa fa-search"></i>
-
                     <StyledInput
                         onChange={e => setType(e.target.value)}
                         placeholder="Search Meows"
                         id="search"
                         type="text"
                         maxLength={30}
+                        value={type}
                         required
                     ></StyledInput>
                 </form>
@@ -51,6 +53,7 @@ const Search = () => {
                         let firstHalf = splitWords.slice(0, getIndex);
                         let wordPart = splitWords.slice(getIndex, getIndex + lengthWord)
                         let secondHalf = splitWords.slice(getIndex + lengthWord, splitWords.length)
+
                         return (
                             <Wrapper>
                                 <StyledUl>

@@ -87,7 +87,6 @@ function App() {
                 <Route exact path='/user/:selectedUser'>
                   <UserProfiles></UserProfiles>
                 </Route>
-
                 <Route exact path='/:user/followers'>
                   <FollowHeader></FollowHeader>
                   <Followers></Followers>
@@ -96,6 +95,7 @@ function App() {
                   <FollowHeader></FollowHeader>
                   <Following></Following>
                 </Route>
+
 
               </Switch>
             </Main>
@@ -117,25 +117,6 @@ function App() {
 export default App;
 
 
-// const StyledNav = styled.nav`
-
-
-// @media only screen and (min-width: 400px) {
-
-// padding: 50px;
-// display:flex;
-// flex-direction: column;
-// position: fixed;
-// left: 50px;
-// }
-
-
-// @media only screen and (max-width: 375px) {
-//   display: none;
-// }
-
-
-// `
 const StyledNavi = styled.div`
 `
 const NavUl = styled.ul`
@@ -154,7 +135,7 @@ const Main = styled.main`
 
 @media only screen and (min-width: 475px) {
   position: relative;
-left: 350px;
+left: 200px;
 }
 
 @media only screen and (max-width: 450px) {
@@ -173,7 +154,7 @@ const StyledFlexSearch = styled.div`
 
 @media only screen and (min-width: 475px) {
   position: absolute;
-right: 150px;
+right: 60px;
 top: 10px;
 }
 

@@ -5,7 +5,7 @@ const Notifications = () => {
     return (
 
         <div>
-            notifications
+            There is nothing on this page! See Read-Me!
         </div>
 
     )

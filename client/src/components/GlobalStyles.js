@@ -11,6 +11,12 @@ const GlobalStyles = createGlobalStyle`
 background-color: rgb(21,32,43);
 color: white;
 }
+
+body {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
     
 
 
