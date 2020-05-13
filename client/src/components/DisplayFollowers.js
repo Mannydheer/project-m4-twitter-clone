@@ -9,26 +9,18 @@ import UserFollowUnfollow from './UserFollowUnfollow';
 const DisplayFollowers = ({ eachUser }) => {
     //each user has all the followers/following users
     console.log(eachUser, 'each usererrr')
-    return (
-
-        <React.Fragment>
-            <DisplayBody>
-                <div>
-                    <ImageAuthor src={eachUser.avatarSrc}></ImageAuthor>
-                </div>
-                <StyledText>
-                    <div> {eachUser.displayName}</div>
-                    <StyledHandle>@{eachUser.handle}</StyledHandle>
-                    <div>{eachUser.bio}</div>
-                    {/* Reusable compoenent which will render the follow/unfollow button */}
-                </StyledText>
-                <UserFollowUnfollow selectedUser={eachUser}></UserFollowUnfollow>
-
-            </DisplayBody>
-
-
-        </React.Fragment>
-
+    return (<DisplayBody>
+        <div>
+            <ImageAuthor src={eachUser.avatarSrc}></ImageAuthor>
+        </div>
+        <StyledText>
+            <div> {eachUser.displayName}</div>
+            <StyledHandle>@{eachUser.handle}</StyledHandle>
+            <div>{eachUser.bio}</div>
+            {/* Reusable compoenent which will render the follow/unfollow button */}
+        </StyledText>
+        <UserFollowUnfollow selectedUser={eachUser}></UserFollowUnfollow>
+    </DisplayBody>
     )
 
 }
@@ -39,16 +31,18 @@ export default DisplayFollowers;
 
 
 const DisplayBody = styled.div`
-
-
-@media only screen and (min-width: 475px) {
-    display: flex;
-width: 56vw;
+width: 50%;
+display: flex;
+margin: 0 auto;
 border: solid 1px gray;
+@media screen and (max-width: 768px) {
+display: block;
+width: 100%;
 }
-@media only screen and (max-width: 450px) {
 
-}
+
+
+
 
 `
 const StyledHandle = styled.div`
@@ -56,6 +50,7 @@ color: gray;
 `
 const StyledText = styled.div`
 padding: 10px;
+width: 100%;
 
 `
 

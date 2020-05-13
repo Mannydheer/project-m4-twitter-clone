@@ -81,18 +81,21 @@ export default Search;
 
 const StyledInput = styled.input`
 border: black 1px solid;
-border-radius: 25px;
+border-radius: 10px;
 padding: 5px;
 outline: none;
+width: 20vw;
 
-@media only screen and (max-width: 450px) {
-background-color: white;
-color: black;
-}
+
+
+
 `
 const StyledSearchContainer = styled.div`
-@media only screen and (max-width: 450px) {
-padding: 10px;}
+@media screen and (max-width: 768px) {
+display: flex;
+justify-content: center;
+
+}
 `
 
 const Phrase = styled.div`
@@ -114,17 +117,10 @@ list-style: none;
 `
 
 const Wrapper = styled.div`
-
-
-@media only screen and (min-width: 475px) {
 display: flex;
 flex-wrap: wrap;
-width: 10vw;}
-
-@media only screen and (max-width: 450px) {
-    width: 100vw;
-}
-
+width: 20vw;
+box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 
 
 `

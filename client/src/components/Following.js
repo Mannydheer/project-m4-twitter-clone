@@ -40,7 +40,6 @@ const Following = () => {
     return (
         <React.Fragment>
             {following !== null &&
-
                 following.map(eachUser => {
                     return (
                         // reuse componenet

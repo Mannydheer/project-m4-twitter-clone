@@ -88,12 +88,16 @@ function App() {
                   <UserProfiles></UserProfiles>
                 </Route>
                 <Route exact path='/:user/followers'>
-                  <FollowHeader></FollowHeader>
-                  <Followers></Followers>
+                  <FollowWrapper>
+                    <FollowHeader></FollowHeader>
+                    <Followers></Followers>
+                  </FollowWrapper>
                 </Route>
                 <Route exact path='/:user/following'>
-                  <FollowHeader></FollowHeader>
-                  <Following></Following>
+                  <FollowWrapper>
+                    <FollowHeader></FollowHeader>
+                    <Following></Following>
+                  </FollowWrapper>
                 </Route>
 
 
@@ -115,6 +119,11 @@ function App() {
 }
 
 export default App;
+
+const FollowWrapper = styled.div`
+
+
+`
 
 
 const StyledNavi = styled.div`
@@ -147,6 +156,13 @@ const StyledFlexSearch = styled.div`
 position: absolute;
 right: 60px;
 top: 10px;
+
+@media screen and (max-width: 768px) {
+position: static;
+display: flex;
+justify-content: center;
+padding: 2rem;
+}
 `
 
 const StyledBody = styled.div`

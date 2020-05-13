@@ -25,36 +25,23 @@ export default FollowHeader;
 
 const Header = styled.div`
 
-
-
-@media only screen and (min-width: 475px) {
-    a{
-    text-decoration: none;
-    
-}
+width: 50%;
+margin: 0 auto;
+a{
+text-decoration: none;
+width: 50%;
 border: solid 1px gray;
-width: 56vw;
 }
-@media only screen and (max-width: 450px) {
-    width: 100vw;
-    border: solid 1px gray;
-    text-align: center;
-
-
-
+@media screen and (max-width: 768px) {
+width: 100%;
+margin: 0;
 }
-
-
-
 
 `
 
 const NavigationLink = styled(NavLink)`
-width: 28vw;
 text-align: center;
 padding: 10px;
-
-
 
 &.active {
     color: ${COLORS.buttons};
@@ -68,21 +55,8 @@ padding: 10px;
 }
 `
 const FollowNav = styled.div`
-
-@media only screen and (min-width: 475px) {
 display: flex;
 padding-top: 30px;
-}
-@media only screen and (max-width: 450px) {
-    width: 100vw;
-    text-align: center;
-    padding: 20px;
-
-
-
-}
-
-
-
+width: 100%;
 
 `
