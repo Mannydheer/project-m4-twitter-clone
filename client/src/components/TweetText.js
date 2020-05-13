@@ -77,18 +77,16 @@ const TweetText = ({ setTweets }) => {
                 <StyledProfileImage>
                     <ImageAuthor src={state.currentUser.avatarSrc}></ImageAuthor>
                 </StyledProfileImage>
-                <div class="form-content user">
-                    <div class='form-item'>
-                        <label for="tweetText"></label>
-                        <TextTweet id="TweetText" type="text" value={tweet}
-                            onChange={e => setTweet(e.target.value)}
-                            name="givenTweet" placeholder="Whats happening..."
-                            maxLength={280} required>
-                        </TextTweet>
-                        <Length>
-                            <div>{280 - tweet.length}</div>
-                        </Length>
-                    </div>
+                <div>
+                    <label for="tweetText"></label>
+                    <TextTweet id="TweetText" type="text" value={tweet}
+                        onChange={e => setTweet(e.target.value)}
+                        name="givenTweet" placeholder="Whats happening..."
+                        maxLength={280} required>
+                    </TextTweet>
+                    <Length>
+                        <div>{280 - tweet.length}</div>
+                    </Length>
                 </div>
                 <TweetButton>
                     <Btn class='button confirm' id='confirm-button'>
@@ -109,25 +107,37 @@ export default TweetText;
 const StyledForm = styled.form`
 border: solid 1px gray;
 border-bottom: none;
+width: 100%;
+
+@media screen and (max-width: 768px) {
+}
+/* width: 50%; */
+
 `
 const StyledTweeting = styled.div`
 display: flex;
+width: 80%;
+margin: 0 auto;
+@media screen and (max-width: 768px) {
+width: 100%;
+}
+
 `
 
 const TextTweet = styled.textarea`
 height: 10vh;
-width: 55.9vw;
+width: 100%;
 border: none;
 outline: none;
+resize: none;
 font-size: 1.1rem;
+
 
 ::placeholder {
     font-size: 1.7rem;
 }
 
-@media only screen and (max-width: 450px) {
-    width: 100vw;
-}
+
 
 
 `

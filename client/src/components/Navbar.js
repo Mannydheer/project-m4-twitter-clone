@@ -21,12 +21,9 @@ import { ReactComponent as Logo } from '../assets/logo.svg'
 const NavBar = () => {
   const { state } = React.useContext(CurrentUserContext)
 
-
-
   return (
     <StyledNav>
       <Logo></Logo>
-
       <Nav><NavigationLink to='/'>
         <Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={home}></Icon>
         <NavText>Home</NavText></NavigationLink>
@@ -57,26 +54,22 @@ export default NavBar;
 
 
 const StyledNav = styled.nav`
-
-
-@media only screen and (min-width: 475px) {
-
 padding: 50px;
 display:flex;
 flex-direction: column;
 position: fixed;
 left: 15px;
+@media screen and (max-width: 768px) {
+display: none;
+padding: 0;
 }
 
 
-@media only screen and (max-width: 450px) {
-  display: none;
-}
 `
 
 const NavigationLink = styled(NavLink)`
 padding: 20px;
-color: white;
+color: black;
 /* &.active {
     color: ${COLORS.primary};
 
@@ -95,13 +88,7 @@ border-radius: 25px;
 const NavText = styled.div`
 font-size: 1.4rem;
 background-color: transparent;
-
-
-@media only screen and (max-width: 450px) {
-
   font-size: 1.1rem;
-
-}
 `
 const Nav = styled.div`
 padding: 10px;

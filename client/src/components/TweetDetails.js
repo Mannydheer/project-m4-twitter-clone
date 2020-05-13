@@ -4,18 +4,23 @@ import styled from 'styled-components';
 import TweetLikeRetweetAction from './TweetLikeRetweetAction';
 
 
+
+
+
 const TweetDetails = () => {
 
     let location = useLocation();
     let splitpath = location.pathname.split('/')
     let path = splitpath[2];
-
-    console.log('INSIDE TWEET DETAILS')
-
-
-
     const [singleTweetState, setsingleTweetState] = useState(null)
     const [fetchCheck, setFetchCheck] = useState(false)
+
+
+    const dateConverter = (timeData) => {
+        let d = new Date(timeData);
+        let fullDate = d.toDateString(timeData).split(' ').splice(1, 2).join(', ')
+        return fullDate
+    }
 
     //component mount
     useEffect(() => {
@@ -35,7 +40,7 @@ const TweetDetails = () => {
                 <ImageAuthor src={singleTweetState.author.avatarSrc} alt='author'></ImageAuthor>
                 <StyledUserDiv>{singleTweetState.author.displayName} @{singleTweetState.author.handle}</StyledUserDiv>
                 <div>{singleTweetState.status}</div>
-                <div>{singleTweetState.timestamp}</div>
+                <div>{dateConverter(singleTweetState.timestamp)}</div>
                 {singleTweetState.media.length > 0 &&
                     <TweetImage src={singleTweetState.media[0].url}></TweetImage>}
                 {/* message */}

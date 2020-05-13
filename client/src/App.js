@@ -120,28 +120,21 @@ export default App;
 const StyledNavi = styled.div`
 `
 const NavUl = styled.ul`
-
-@media only screen and (max-width: 450px) {
 display: flex;
 justify-content: space-evenly;
 li{
 list-style: none;
 padding: 10px;
 }
+@media screen and (max-width: 768px) {
+
 }
+
+
 `
 
 const Main = styled.main`
-
-@media only screen and (min-width: 475px) {
-  position: relative;
-left: 200px;
-}
-
-@media only screen and (max-width: 450px) {
-width: 100vw;
-text-align: center;
-}
+width: 100%;
 `
 
 const StyledSide = styled.div`
@@ -151,59 +144,28 @@ display: flex;
 justify-content: center;
 `
 const StyledFlexSearch = styled.div`
-
-@media only screen and (min-width: 475px) {
-  position: absolute;
+position: absolute;
 right: 60px;
 top: 10px;
-}
-
-@media only screen and (max-width: 450px) {
-   display: flex;
-   justify-content: center;
-   font-weight: bold;
-   width: 100vw;
-}
-
 `
 
 const StyledBody = styled.div`
-@media only screen and (min-width: 475px) {
 display: flex;
-}
-
-@media only screen and (max-width: 450px) {
-}
-
-
-
 `
 
 const BurgerMenu = styled.div`
 text-align: center;
-@media only screen and (min-width: 450px) {
-
 display: none;
+@media screen and (max-width: 768px) {
+display: block;
 }
-
 `
 
 const BurgerNav = styled.div`
 text-align: center;
-@media only screen and (min-width: 450px) {
-
 display: none;
-}
+@media screen and (max-width: 768px) {
+display: block;
 `
-
-
-
-//pseudocode for post modal.
-//Input
-//modal
-
-//on click, triggers the modal, which triggers apost. 
-
-
 
 

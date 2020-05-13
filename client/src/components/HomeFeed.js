@@ -19,46 +19,54 @@ const HomeFeed = () => {
     const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
 
     return (
-        <div>
+        <BigWrapper>
             <StyledHome>Home</StyledHome>
             <TweetText setTweets={setTweets}></TweetText>
             {/* {tweetIds !== null && allTweets !== null && */}
             {tweetHomeFeedState.homeFeedTweets !== null &&
                 tweetHomeFeedState.homeFeedTweets.tweetIds.map((tweetId) => {
-                    return (
-                        <React.Fragment>
-                            <Btn type='button' onClick={() => history.push(`/tweet/${tweetId}`)}>
-                                <Tweet keys={tweetId} allTweets={tweetHomeFeedState.homeFeedTweets.tweetsById} tweetId={tweetId} ></Tweet>
-                            </Btn>
-                        </React.Fragment>
+                    return (<Btn type='button' onClick={() => history.push(`/tweet/${tweetId}`)}>
+                        <Tweet keys={tweetId} allTweets={tweetHomeFeedState.homeFeedTweets.tweetsById} tweetId={tweetId} ></Tweet>
+                    </Btn>
                     )
                 })
             }
-        </div>
+        </BigWrapper>
     )
 }
 export default HomeFeed;
-const Btn = styled.div`
-display: block;
-width: 56vw;
-cursor: pointer;
 
+const BigWrapper = styled.div`
+width: 50%;
+margin: 0 auto;
+@media screen and (max-width: 768px) {
+width: 100%;
+margin: 0;
+}
+
+`
+const Btn = styled.div`
+width: 100%;
+cursor: pointer;
 &:hover {
     opacity: 0.7;
 }
 
-@media only screen and (max-width: 450px) {
-
-    width: 50vw;
-}
 
 
 `
 
 const StyledHome = styled.div`
+width: 80%;
+margin: 0 auto;
+padding: 1rem 0;
+text-align: center;
 font-size: 36px;
-padding: 10px 10px;
 border: solid 1px gray;
+@media screen and (max-width: 768px) {
+width: 100%;
+margin: 0;
+}
 
 `
 

@@ -8,6 +8,8 @@ import Heart from './Heart';
 
 
 
+
+
 const Tweet = ({ allTweets, tweetId }) => {
 
     console.log(allTweets, 'THIS IS ALL TWEETS')
@@ -18,7 +20,11 @@ const Tweet = ({ allTweets, tweetId }) => {
 
 
     //-----------------------------------------------
-    // console.log(tweetId, 'SINDEI TWEET ID')
+    const dateConverter = (timeData) => {
+        let d = new Date(timeData);
+        let fullDate = d.toDateString(timeData).split(' ').splice(1, 2).join(', ')
+        return fullDate
+    }
 
     const handleLiking = (event) => {
         //double check these two. Stop reloading.. and onclick on PARENT. 
@@ -178,11 +184,11 @@ const Tweet = ({ allTweets, tweetId }) => {
                     <div>
                         {allTweets[tweetId].retweetFrom !== undefined ? <div><TweetActionIcon size={15} color={'black'} /> {allTweets[tweetId].retweetFrom.displayName} Remeowed</div> : <span></span>}
                         <StyledUserDiv onClick={handler}>{allTweets[tweetId].author.displayName} @{allTweets[tweetId].author.handle}</StyledUserDiv>
-                        <span>{allTweets[tweetId].timestamp}</span>
+                        <span>{dateConverter(allTweets[tweetId].timestamp)}</span>
                         <div>{allTweets[tweetId].status}</div>
-                        {Image !== undefined ? <TweetImage src={Image.url} alt='media'></TweetImage>
-                            : <span></span>}
-                        {/* like and retweeting. compoenent  */}
+                        <ImageWrapper>
+                            {Image !== undefined && <TweetImage src={Image.url} alt='media'></TweetImage>}
+                        </ImageWrapper>
 
 
                     </div>
@@ -225,24 +231,30 @@ const Tweet = ({ allTweets, tweetId }) => {
 export default Tweet;
 
 const StyledTweetDiv = styled.div`
+width: 100%;
+
 padding: 10px;
 line-height: 1.5;
 display: flex;
-width: 54.5vw;
-color: white;
-
-@media only screen and (max-width: 450px) {
-    width: 100vw;
-    display: block;
+@media screen and (max-width: 768px) {
+display: block;
+width: 100%;
+text-align: center;
 }
+
+
+
 `
 const Wrapper = styled.div`
+width: 80%;
+margin: 0 auto;
 border: solid 1px gray;
+@media screen and (max-width: 768px) {
 width: 100%;
-height: 50%;
-@media only screen and (max-width: 450px) {
-    width: 100vw;
 }
+
+
+
 `
 const Wrap = styled.div`
 display: flex;
@@ -257,15 +269,20 @@ display: flex;
 
 const ImageAuthor = styled.img`
 border-radius: 50%;
-width: 50px,;
-height: 50px;
+width: 30px,;
+height: 75px;
 padding: 10px;
 `
 const TweetImage = styled.img`
-border-radius: 10%;
-height: 83%;
-width: 80%;
+border-radius: 25px;
+width: 70%;
+height: 70%;
+margin: 1rem;
 
+`
+const ImageWrapper = styled.div`
+display: flex;
+justify-content: center;
 `
 
 
@@ -280,6 +297,8 @@ font-weight: bold;
 
 `
 const Icons = styled.div`
+border: solid 1px black;
+border-bottom: none;
 display: flex;
 justify-content: space-evenly;
 &:hover {

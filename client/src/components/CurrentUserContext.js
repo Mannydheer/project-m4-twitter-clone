@@ -93,18 +93,11 @@ const CurrentUserProvider = ({ children }) => {
             else {
                 setError(true)
             }
-
         }
         //perform fetch function above. 
         getUserData();
         //on component MOUNT only. One render. 
     }, [])
-
-
-
-
-
-
 
     //compoment on Load...Fetch with React.useEffect. 
     //onLoad can call a function that will dispatch to the updated State.

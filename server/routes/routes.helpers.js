@@ -74,11 +74,17 @@ const resolveRetweet = tweet => {
 };
 
 const denormalizeTweet = tweet => {
+
   const tweetCopy = { ...tweet };
 
   delete tweetCopy.authorHandle;
 
   tweetCopy.author = getUserProfile(tweet.authorHandle);
+
+  console.log(tweetCopy, 'TWEETCOPY')
+
+
+  console.log(tweet)
 
   delete tweetCopy.likedBy;
   delete tweetCopy.retweetedBy;
