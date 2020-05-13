@@ -87,6 +87,7 @@ function App() {
                 <Route exact path='/user/:selectedUser'>
                   <UserProfiles></UserProfiles>
                 </Route>
+
                 <Route exact path='/:user/followers'>
                   <FollowWrapper>
                     <FollowHeader></FollowHeader>
@@ -99,16 +100,11 @@ function App() {
                     <Following></Following>
                   </FollowWrapper>
                 </Route>
-
-
               </Switch>
             </Main>
 
 
           </StyledSide>
-
-
-
         </StyledBody>
         : <StyledCircle><CircularProgress></CircularProgress></StyledCircle>
       }
@@ -121,8 +117,6 @@ function App() {
 export default App;
 
 const FollowWrapper = styled.div`
-
-
 `
 
 
@@ -144,6 +138,7 @@ padding: 10px;
 
 const Main = styled.main`
 width: 100%;
+
 `
 
 const StyledSide = styled.div`
@@ -167,6 +162,8 @@ padding: 2rem;
 
 const StyledBody = styled.div`
 display: flex;
+width: 80%;
+margin: 0 auto;
 `
 
 const BurgerMenu = styled.div`
@@ -178,6 +175,7 @@ display: block;
 `
 
 const BurgerNav = styled.div`
+color: black;
 text-align: center;
 display: none;
 @media screen and (max-width: 768px) {

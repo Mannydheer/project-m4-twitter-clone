@@ -12,7 +12,7 @@ const FollowHeader = () => {
 
     return (
         <Header>
-            <div>@{path}</div>
+            <Path>@{path}</Path>
             <FollowNav>
                 <NavigationLink to={`/${path}/followers`}>Follower</NavigationLink>
                 <NavigationLink to={`/${path}/following`}>Following</NavigationLink>
@@ -23,9 +23,15 @@ const FollowHeader = () => {
 
 export default FollowHeader;
 
-const Header = styled.div`
 
-width: 50%;
+const Path = styled.div`
+text-align: center;
+font-size: 2rem;
+font-weight: bold;
+`
+const Header = styled.div`
+margin-top: 2rem;
+width: 80%;
 margin: 0 auto;
 a{
 text-decoration: none;

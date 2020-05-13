@@ -31,7 +31,7 @@ export default DisplayFollowers;
 
 
 const DisplayBody = styled.div`
-width: 50%;
+width: 80%;
 display: flex;
 margin: 0 auto;
 border: solid 1px gray;

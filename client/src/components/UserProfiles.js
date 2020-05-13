@@ -127,7 +127,8 @@ cursor: pointer;
 `
 
 const MainUserProfile = styled.div`
-width: 50%;
+width: 80%;
+
 margin: 0 auto;
 @media screen and (max-width: 768px) {
 width: 100%;
@@ -147,6 +148,10 @@ const Profile = styled.div`
 width: 80%;
 margin: 0 auto;
 font-size:1.1rem;
+@media screen and (max-width: 768px) {
+width: 100%;
+margin: 0;
+}
 
 `
 const TweetImage = styled.img`
@@ -183,9 +188,12 @@ width: 100%;
 `
 const UserImg = styled.img`
 
-    width: 10vw;
+width: 10vw;
 height: 20vh;
 border-radius: 50%;
+@media screen and (max-width: 768px) {
+width: 30vw;
+}
 
 
 
@@ -213,6 +221,8 @@ a{
         cursor: pointer;
     }
 }
+
+
 
 `
 const FlexFollow = styled.div`

@@ -33,9 +33,8 @@ const TweetDetails = () => {
         }
         getSingleTweet();
     }, [])
-    console.log(singleTweetState)
     return (
-        <React.Fragment>
+        <BigWrapper>
             {fetchCheck && <Text>
                 <ImageAuthor src={singleTweetState.author.avatarSrc} alt='author'></ImageAuthor>
                 <StyledUserDiv>{singleTweetState.author.displayName} @{singleTweetState.author.handle}</StyledUserDiv>
@@ -49,35 +48,32 @@ const TweetDetails = () => {
                 </StyledLikeRetweet>
 
             </Text>}
-        </React.Fragment>
+        </BigWrapper>
     )
 }
 
 export default TweetDetails;
-const TweetImage = styled.img`
 
-@media only screen and (min-width: 475px) {
-width: 700px;
-height: 450px;
-border-radius: 25px;
+const BigWrapper = styled.div`
+width: 80%;
 
+margin: 0 auto;
+@media screen and (max-width: 768px) {
+width: 100%;
+height: 100%;
 }
-@media only screen and (max-width: 450px) {
-    width: 100vw;
-height: 450px;
-}
-
-
 `
-
+const TweetImage = styled.img`
+border-radius: 25px;
+width: 70%;
+height: 70%;
+`
 const ImageAuthor = styled.img`
-
 border-radius: 50%;
-width: 50px,;
-height: 50px;
+width: 100px,;
+height: 100px;
 padding: 20px;
 color: white;
-
 `
 const StyledUserDiv = styled.div`
 font-weight: bold;
@@ -85,21 +81,11 @@ padding: 10px 0 10px 0;
 `
 const StyledLikeRetweet = styled.div`
 border: solid gray 1px;
-
 `
 const Text = styled.div`
-
-
-@media only screen and (min-width: 475px) {
-color: white;
 border: gray 1px solid;
-width: 50vw;
-}
+width: 100%;
 
-@media only screen and (max-width: 450px) {
-width: 100vw;
-}
-
-
+text-align: center;
 
 `

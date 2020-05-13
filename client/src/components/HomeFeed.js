@@ -37,7 +37,7 @@ const HomeFeed = () => {
 export default HomeFeed;
 
 const BigWrapper = styled.div`
-width: 50%;
+width: 80%;
 margin: 0 auto;
 @media screen and (max-width: 768px) {
 width: 100%;
