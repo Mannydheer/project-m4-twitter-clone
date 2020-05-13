@@ -82,9 +82,9 @@ export default Search;
 const StyledInput = styled.input`
 border: black 1px solid;
 border-radius: 10px;
-padding: 5px;
+padding: 2px;
 outline: none;
-width: 20vw;
+width: 13vw;
 
 
 
@@ -119,7 +119,7 @@ list-style: none;
 const Wrapper = styled.div`
 display: flex;
 flex-wrap: wrap;
-width: 20vw;
+width: 15vw;
 box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 
 
