@@ -10,6 +10,7 @@ const Bookmarks = () => {
 }
 export default Bookmarks;
 const Wrapper = styled.div`
+width: 80vw;
 text-align: center;
 font-size: 2rem;
 font-weight: bold;

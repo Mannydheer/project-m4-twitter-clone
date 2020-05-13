@@ -50,16 +50,16 @@ function App() {
             </StyledNavi>
 
             <BurgerMenu onClick={() => setBurgerBool(!burgerBool)}>
-              <i style={{ fontSize: '50px' }} class="fa fa-bars"></i>
+              <i style={{ fontSize: '50px' }} className="fa fa-bars"></i>
             </BurgerMenu>
             <BurgerNav>
               {burgerBool && <NavUl>
-                <li><Link to='/'>        <Icon style={{ backgroundColor: 'transparent' }} icon={home}></Icon>
+                <li><Link to='/'>        <Icon size={30} style={{ backgroundColor: 'transparent' }} icon={home}></Icon>
                 </Link></li>
-                <li><Link to={`/user/${state.currentUser.handle}`}><Icon style={{ backgroundColor: 'transparent' }} icon={user}></Icon>
+                <li><Link to={`/user/${state.currentUser.handle}`}><Icon size={30} style={{ backgroundColor: 'transparent' }} icon={user}></Icon>
                 </Link></li>
-                <li><Link to='/notifications'><Icon style={{ backgroundColor: 'transparent' }} icon={bell}></Icon></Link></li>
-                <li><Link to='/bookmarks'> <Icon style={{ backgroundColor: 'transparent' }} icon={bookmark}></Icon></Link></li>
+                <li><Link to='/notifications'><Icon size={30} style={{ backgroundColor: 'transparent' }} icon={bell}></Icon></Link></li>
+                <li><Link to='/bookmarks'> <Icon size={30} style={{ backgroundColor: 'transparent' }} icon={bookmark}></Icon></Link></li>
               </NavUl>}
               <div><FormDialog></FormDialog></div>
             </BurgerNav>
@@ -166,6 +166,7 @@ margin: 0 auto;
 `
 
 const BurgerMenu = styled.div`
+
 text-align: center;
 display: none;
 @media screen and (max-width: 768px) {
@@ -177,6 +178,10 @@ const BurgerNav = styled.div`
 color: black;
 text-align: center;
 display: none;
+
+a {
+  color: black;
+}
 @media screen and (max-width: 768px) {
 display: block;
 `

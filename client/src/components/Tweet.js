@@ -42,13 +42,8 @@ const Tweet = ({ allTweets, tweetId }) => {
                 </StyledTweetDiv>
                 <TweetLikeRetweetAction allTweets={allTweets} tweetId={tweetId} />
             </Wrapper>
-
         </React.Fragment >
-
-
     )
-
-
 }
 
 export default Tweet;
@@ -70,6 +65,7 @@ margin: 0 auto;
 border: solid 1px gray;
 @media screen and (max-width: 768px) {
 width: 100%;
+margin: 0;
 }
 `
 

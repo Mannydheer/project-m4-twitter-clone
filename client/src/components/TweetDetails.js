@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import TweetLikeRetweetAction from './TweetLikeRetweetAction';
 import { TweetHomeContext } from './TweetHomeContext';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 
 
@@ -52,9 +54,9 @@ const TweetDetails = () => {
                 {/* message */}
 
             </Text>}
-            <StyledLikeRetweet>
+            {fetchCheck ? <StyledLikeRetweet>
                 <TweetLikeRetweetAction tweetId={path} allTweets={homeTweets}></TweetLikeRetweetAction>
-            </StyledLikeRetweet>
+            </StyledLikeRetweet> : <StyledCircle><CircularProgress></CircularProgress></StyledCircle>}
 
         </BigWrapper>
 
@@ -63,6 +65,11 @@ const TweetDetails = () => {
 }
 
 export default TweetDetails;
+const StyledCircle = styled.div`
+position: absolute;
+top: 0%;
+right: 50%;
+`
 
 const BigWrapper = styled.div`
 width: 70%;

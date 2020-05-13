@@ -76,8 +76,8 @@ const UserProfiles = () => {
                     {userTweets !== null && <div>
                         {userTweets.tweetIds.map((eachId, index) => {
                             return (
-                                <Btn type='button' onClick={() => history.push(`/tweet/${eachId}`)}>
-                                    <Tweet keys={`${eachId}${index}`} allTweets={userTweets.tweetsById} tweetId={eachId}></Tweet>
+                                <Btn key={`${eachId}${index}`} type='button' onClick={() => history.push(`/tweet/${eachId}`)}>
+                                    <Tweet allTweets={userTweets.tweetsById} tweetId={eachId}></Tweet>
                                 </Btn>
                             )
                         })}
@@ -102,6 +102,7 @@ cursor: pointer;
 `
 const MainUserProfile = styled.div`
 width: 80%;
+border-top: solid 1px black;
 
 margin: 0 auto;
 @media screen and (max-width: 768px) {

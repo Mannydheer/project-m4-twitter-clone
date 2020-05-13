@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Tweet from './Tweet';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CurrentUserContext } from './CurrentUserContext';
 import { TweetHomeContext } from './TweetHomeContext';
-import { COLORS } from '../constants';
 import Error from './Error';
-
-
 
 const TweetText = ({ setTweets }) => {
 
@@ -14,10 +10,7 @@ const TweetText = ({ setTweets }) => {
     const { state } = React.useContext(CurrentUserContext)
     const { handlePost } = React.useContext(TweetHomeContext)
 
-    //when postedTweet holds the tweet√√
-
     const postHandler = async () => {
-
         const data = {
             status: tweet
         }
@@ -53,10 +46,6 @@ const TweetText = ({ setTweets }) => {
         }
     }
 
-    //on change of postedTweet, meaning when there is a submit
-
-
-
     const handlePostData = (event) => {
         event.preventDefault();
         postHandler();
@@ -64,21 +53,18 @@ const TweetText = ({ setTweets }) => {
         //cause a reset of the input box, and when postHanlder has completed, it will be released from callbacl
         //and the post will be done
         setTweet('')
-
         //store input into postedTweet
     }
-
-
 
     //on submit will store tweet
     return (
         <StyledTweeting>
-            <StyledForm class="tweet" name="tweet" onSubmit={handlePostData}>
+            <StyledForm className="tweet" name="tweet" onSubmit={handlePostData}>
                 <StyledProfileImage>
                     <ImageAuthor src={state.currentUser.avatarSrc}></ImageAuthor>
                 </StyledProfileImage>
                 <div>
-                    <label for="tweetText"></label>
+                    <label htmlFor="tweetText"></label>
                     <TextTweet id="TweetText" type="text" value={tweet}
                         onChange={e => setTweet(e.target.value)}
                         name="givenTweet" placeholder="Whats happening..."
@@ -89,7 +75,7 @@ const TweetText = ({ setTweets }) => {
                     </Length>
                 </div>
                 <TweetButton>
-                    <Btn class='button confirm' id='confirm-button'>
+                    <Btn className='button confirm' id='confirm-button'>
                         Meow
             </Btn>
                 </TweetButton>

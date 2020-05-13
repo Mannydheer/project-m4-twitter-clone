@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Tweet from './Tweet';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
-import { CurrentUserContext } from './CurrentUserContext';
+import { useHistory } from 'react-router-dom';
 import TweetText from './TweetText';
 import { TweetHomeContext } from './TweetHomeContext';
-
-
-
-
 
 
 const HomeFeed = () => {
@@ -17,7 +12,6 @@ const HomeFeed = () => {
     let history = useHistory();
     const [tweets, setTweets] = useState(null);
     const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
-
     return (
         <BigWrapper>
             <StyledHome>Home</StyledHome>
@@ -25,8 +19,8 @@ const HomeFeed = () => {
             {/* {tweetIds !== null && allTweets !== null && */}
             {tweetHomeFeedState.homeFeedTweets !== null &&
                 tweetHomeFeedState.homeFeedTweets.tweetIds.map((tweetId) => {
-                    return (<Btn type='button' onClick={() => history.push(`/tweet/${tweetId}`)}>
-                        <Tweet keys={tweetId} allTweets={tweetHomeFeedState.homeFeedTweets.tweetsById} tweetId={tweetId} ></Tweet>
+                    return (<Btn key={tweetId} type='button' onClick={() => history.push(`/tweet/${tweetId}`)}>
+                        <Tweet allTweets={tweetHomeFeedState.homeFeedTweets.tweetsById} tweetId={tweetId} ></Tweet>
                     </Btn>
                     )
                 })

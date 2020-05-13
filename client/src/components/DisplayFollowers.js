@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { CurrentUserContext } from './CurrentUserContext';
+import React from 'react';
 import styled from 'styled-components';
 import UserFollowUnfollow from './UserFollowUnfollow';
 
@@ -8,7 +7,6 @@ import UserFollowUnfollow from './UserFollowUnfollow';
 
 const DisplayFollowers = ({ eachUser }) => {
     //each user has all the followers/following users
-    console.log(eachUser, 'each usererrr')
     return (<DisplayBody>
         <div>
             <ImageAuthor src={eachUser.avatarSrc}></ImageAuthor>
@@ -25,11 +23,7 @@ const DisplayFollowers = ({ eachUser }) => {
 
 }
 
-
 export default DisplayFollowers;
-
-
-
 const DisplayBody = styled.div`
 width: 80%;
 display: flex;
@@ -39,11 +33,6 @@ border: solid 1px gray;
 display: block;
 width: 100%;
 }
-
-
-
-
-
 `
 const StyledHandle = styled.div`
 color: gray;

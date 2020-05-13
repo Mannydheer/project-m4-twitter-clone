@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { home } from 'react-icons-kit/icomoon/home';
 import { user } from 'react-icons-kit/fa/user';
 import { bell } from 'react-icons-kit/iconic/bell'

@@ -34,7 +34,7 @@ const Search = () => {
             <StyledSearchContainer>
                 <form>
                     <label htmlFor="search"></label>
-                    <i class="fa fa-search"></i>
+                    <i className="fa fa-search"></i>
                     <StyledInput
                         onChange={e => setType(e.target.value)}
                         placeholder="Search Meows"
