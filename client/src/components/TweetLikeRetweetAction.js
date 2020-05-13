@@ -11,15 +11,13 @@ import TweetAction from './TweetLikeRetweetAction';
 
 
 
-const TweetLikeRetweetAction = ({ tweetId }) => {
+const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
+
 
     //dont pass allTweets since we want to reuse compoenent so we can get homefeed state form context
     const { tweetHomeFeedState, handleUserLikes, handleUserRetweets } = React.useContext(TweetHomeContext)
 
-    console.log(tweetHomeFeedState, 'FUCKING HOME STATE k')
-
-    const [homeTweets, setHomeTweets] = useState(tweetHomeFeedState.homeFeedTweets.tweetsById)
-
+    // const [homeTweets, setHomeTweets] = useState(tweetHomeFeedState.homeFeedTweets.tweetsById)
 
     const handleLiking = (event) => {
         //double check these two. Stop reloading.. and onclick on PARENT. 
@@ -37,9 +35,8 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
     }
     const handlePutRetweet = async () => {
         //if false or NOT CURRENTLY LIKED
-        if (homeTweets[tweetId].isRetweeted === false) {
+        if (allTweets[tweetId].isRetweeted === false) {
             try {
-                console.log('INSIDE Retweet')
                 let response = await fetch(`/api/tweet/${tweetId}/retweet`, {
                     method: 'PUT',
                     headers: {
@@ -52,13 +49,13 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
                     })
                 })
                 let status = await response.json();
-                console.log(status, 'RETWEET')
 
                 //must change the value in the front end. 
                 if (status.success) {
                     handleUserRetweets({
                         id: tweetId,
                         retweeted: true,
+                        value: 1,
                     })
                 }
             }
@@ -68,8 +65,7 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
         }
         //if already liked.
         //else if to not trigger both ifs.
-        else if (homeTweets[tweetId].isRetweeted === true) {
-            console.log('INSIDE REMOVE RETWEET')
+        else if (allTweets[tweetId].isRetweeted === true) {
             try {
                 let response = await fetch(`/api/tweet/${tweetId}/retweet`, {
                     method: 'PUT',
@@ -83,11 +79,11 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
                     })
                 })
                 let status = await response.json();
-                console.log(status, 'remove RETWEET')
                 if (status.success) {
                     handleUserRetweets({
                         id: tweetId,
                         retweeted: false,
+                        value: 0,
                     })
                 }
             }
@@ -99,7 +95,7 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
     // -------------------------------------
     const handlePutLike = async () => {
         //if false or NOT CURRENTLY LIKED
-        if (homeTweets[tweetId].isLiked === false) {
+        if (allTweets[tweetId].isLiked === false) {
             try {
                 console.log('INSIDE LIKED')
                 let response = await fetch(`/api/tweet/${tweetId}/like`, {
@@ -119,6 +115,7 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
                     handleUserLikes({
                         id: tweetId,
                         liked: true,
+                        value: 1,
                     })
                 }
             }
@@ -128,8 +125,7 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
         }
         //if already liked.
         //else if to not trigger both ifs.
-        else if (homeTweets[tweetId].isLiked === true) {
-            console.log('INSIDE REMOVE LIKE')
+        else if (allTweets[tweetId].isLiked === true) {
             try {
                 let response = await fetch(`/api/tweet/${tweetId}/like`, {
                     method: 'PUT',
@@ -147,12 +143,9 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
                     handleUserLikes({
                         id: tweetId,
                         liked: false,
+                        value: 0,
                     })
-                    // allTweets[tweetId].isLiked = false;
-                    // allTweets[tweetId].numLikes -= 1
-                    // updateLikes({
-                    //     liked: false
-                    // })
+
                 }
             }
             catch (error) {
@@ -162,26 +155,55 @@ const TweetLikeRetweetAction = ({ tweetId }) => {
     }
     return (
         <React.Fragment>
-            {homeTweets !== null && <Icons>
-                <div>
-                    {homeTweets[tweetId].isLiked ? <div onClick={handleLiking}><Heart width={30} isToggled={true}></Heart></div> : <div onClick={handleLiking}><Heart width={30}></Heart></div>}
-                </div>
-                {homeTweets[tweetId].isRetweeted ?
-                    <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'green'} /></div>
-                    :
-                    <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'black'} /></div>}
-            </Icons>}
+            <Icons>
+                <Wrap>
+                    {allTweets[tweetId].isLiked ? <Flex onClick={handleLiking}>
+                        <Heart width={30} isToggled={true}></Heart>
+                        <div style={{ position: 'relative', right: '40px', top: '5px' }}>
+                            {allTweets[tweetId].numLikes}
+                        </div>
+                    </Flex>
+                        :
+                        <div onClick={handleLiking}><Heart width={30}></Heart></div>}
+                </Wrap>
+                <Wrap>
+
+
+                    {allTweets[tweetId].isRetweeted ?
+                        <Flex onClick={handleRetweeting}>
+                            <TweetActionIcon size={30} color={'green'} />
+                            <div style={{ position: 'relative', right: '40px', top: '5px' }}>
+                                {allTweets[tweetId].numRetweets}</div>
+                        </Flex>
+                        :
+                        <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'black'} /></div>}
+                </Wrap>
+            </Icons>
         </React.Fragment>
     )
 }
 
 
 export default TweetLikeRetweetAction;
+
+
 const Icons = styled.div`
+border: solid 1px black;
+border-bottom: none;
 display: flex;
 justify-content: space-evenly;
 &:hover {
     cursor:pointer;
 }
+`
+
+const Wrap = styled.div`
+display: flex;
+
+
+`
+const Flex = styled.div`
+display: flex;
+
 
 `

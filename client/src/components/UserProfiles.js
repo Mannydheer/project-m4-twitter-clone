@@ -5,24 +5,14 @@ import UserFollowUnfollow from './UserFollowUnfollow';
 import Tweet from '../components/Tweet';
 import Error from './Error';
 
-
-
-
-
 const UserProfiles = () => {
-
-
     let history = useHistory();
-
     let location = useLocation().pathname.split('/')
     let path = location[2];
-
     const [selectedUser, setSelectedUser] = useState(null);
     //state for userTweet/Retweet fetch;
     const [userTweets, setUserTweets] = useState(null);
     const [error, setError] = useState(false);
-
-
 
     //handler for userprofile
     //on mount
@@ -30,11 +20,8 @@ const UserProfiles = () => {
     useEffect(() => {
         // handles the user profile informations.
         const handleClickedProfile = async () => {
-            // console.log('GIT TRIGGERED')
             const getUserProfile = await fetch(`/api/${path}/profile`);
             const returnedProfile = await getUserProfile.json();
-
-            console.log(returnedProfile)
             setSelectedUser(returnedProfile.profile)
             //get all tweets related to profile.
         }
@@ -67,11 +54,6 @@ const UserProfiles = () => {
 
 
     }, [path])
-
-    console.log(userTweets, 'THIS IS USER TWEETS')
-
-
-    //follow unfollow button: MaybeRefactor this to a reuse. 
     return (
         <React.Fragment>
             {selectedUser !== null && path !== null && userTweets !== null &&
@@ -95,20 +77,13 @@ const UserProfiles = () => {
                         {userTweets.tweetIds.map((eachId, index) => {
                             return (
                                 <Btn type='button' onClick={() => history.push(`/tweet/${eachId}`)}>
-                                    <Tweet allTweets={userTweets.tweetsById} tweetId={eachId}></Tweet>
-
+                                    <Tweet keys={`${eachId}${index}`} allTweets={userTweets.tweetsById} tweetId={eachId}></Tweet>
                                 </Btn>
                             )
                         })}
                     </div>}
-
-
-
                 </MainUserProfile>}
             {error && <Error></Error>}
-
-
-
         </React.Fragment >
     )
 
@@ -125,7 +100,6 @@ cursor: pointer;
 }
 
 `
-
 const MainUserProfile = styled.div`
 width: 80%;
 
@@ -134,14 +108,6 @@ margin: 0 auto;
 width: 100%;
 margin: 0;
 }
-
-`
-const StyledTweetDiv = styled.div`
-
-    border: solid 1px gray;
-padding: 10px;
-line-height: 1.5;
-display: flex;
 
 `
 const Profile = styled.div`
@@ -154,18 +120,7 @@ margin: 0;
 }
 
 `
-const TweetImage = styled.img`
-border-radius: 10%;
-width: 40%;
-height: 500px;
-`
 
-const ImageAuthor = styled.img`
-border-radius: 50%;
-width: 50px,;
-height: 50px;
-padding: 10px;
-`
 const Name = styled.div`
 font-weight: bold;
 font-size: 1.2em;
@@ -222,32 +177,14 @@ a{
     }
 }
 
-
-
 `
 const FlexFollow = styled.div`
-
-
-
 display: flex;
 justify-content: flex-end;
 padding-right: 20px;
-
 background-color: transparent;
-    border: solid 1px gray;
-
-
-
-
+border: solid 1px gray;
 `
-
-
-const StyledUserDiv = styled.div`
-font-weight: bold;
-
-
-`
-
 
 
 

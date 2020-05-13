@@ -7,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import styled from 'styled-components';
-import { COLORS } from '../constants';
 import { TweetHomeContext } from './TweetHomeContext';
 
 
@@ -72,7 +71,6 @@ export default function FormDialog() {
 
             <Btn onClick={handleClickOpen}>
                 Meow
-
       </Btn>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Meow Something</DialogTitle>

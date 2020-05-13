@@ -9,7 +9,6 @@ import Notifications from './components/Notifications';
 import GlobalStyles from './components/GlobalStyles';
 import styled from 'styled-components';
 import Icon from 'react-icons-kit';
-import { ReactComponent as Logo } from './assets/logo.svg'
 
 import { home } from 'react-icons-kit/icomoon/home';
 import { user } from 'react-icons-kit/fa/user';
@@ -21,7 +20,7 @@ import { TweetHomeContext } from './components/TweetHomeContext';
 import FollowHeader from './components/FollowHeader';
 import Followers from './components/Followers';
 import Following from './components/Following';
-import { COLORS } from './constants';
+
 import FormDialog from './components/FormDialog';
 import Search from './components/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';

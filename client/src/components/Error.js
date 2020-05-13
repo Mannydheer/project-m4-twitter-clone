@@ -1,14 +1,14 @@
 import React from 'react';
-import { bomb } from 'react-icons-kit/fa/bomb'
-
+import styled from 'styled-components';
 
 const Error = () => {
 
 
     return (
-        <React.Fragment>
+        <Wrapper>
+
             <div>
-                bomb
+                💣
             </div>
             <div>
                 An unknown error has occured.
@@ -16,10 +16,18 @@ const Error = () => {
             <div>
                 Please try refreshing the page, reloading the home page, or contact support if the problem persists.
         </div>
-        </React.Fragment>
+        </Wrapper>
 
     )
 
 }
 
 export default Error;
+
+const Wrapper = styled.div`
+text-align: center;
+font-size: 2rem;
+font-weight: bold;
+margin-top: 2rem;
+
+`

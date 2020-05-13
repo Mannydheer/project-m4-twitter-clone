@@ -2,12 +2,19 @@ import React, { useEffect, useState, } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import TweetLikeRetweetAction from './TweetLikeRetweetAction';
+import { TweetHomeContext } from './TweetHomeContext';
+
 
 
 
 
 
 const TweetDetails = () => {
+
+    const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
+
+    const [homeTweets, setHomeTweets] = useState(tweetHomeFeedState.homeFeedTweets.tweetsById)
+
 
     let location = useLocation();
     let splitpath = location.pathname.split('/')
@@ -33,7 +40,7 @@ const TweetDetails = () => {
         }
         getSingleTweet();
     }, [])
-    return (
+    return (<>
         <BigWrapper>
             {fetchCheck && <Text>
                 <ImageAuthor src={singleTweetState.author.avatarSrc} alt='author'></ImageAuthor>
@@ -43,12 +50,15 @@ const TweetDetails = () => {
                 {singleTweetState.media.length > 0 &&
                     <TweetImage src={singleTweetState.media[0].url}></TweetImage>}
                 {/* message */}
-                <StyledLikeRetweet>
-                    <TweetLikeRetweetAction tweetId={path}></TweetLikeRetweetAction>
-                </StyledLikeRetweet>
 
             </Text>}
+            <StyledLikeRetweet>
+                <TweetLikeRetweetAction tweetId={path} allTweets={homeTweets}></TweetLikeRetweetAction>
+            </StyledLikeRetweet>
+
         </BigWrapper>
+
+    </>
     )
 }
 
