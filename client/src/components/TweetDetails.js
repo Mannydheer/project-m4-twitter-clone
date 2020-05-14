@@ -1,5 +1,5 @@
 import React, { useEffect, useState, } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import TweetLikeRetweetAction from './TweetLikeRetweetAction';
 import { TweetHomeContext } from './TweetHomeContext';
@@ -17,7 +17,7 @@ const TweetDetails = () => {
 
     const [homeTweets, setHomeTweets] = useState(tweetHomeFeedState.homeFeedTweets.tweetsById)
 
-
+    let history = useHistory();
     let location = useLocation();
     let splitpath = location.pathname.split('/')
     let path = splitpath[2];
@@ -42,10 +42,16 @@ const TweetDetails = () => {
         }
         getSingleTweet();
     }, [])
+
+    const handler = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        history.push(`/user/${singleTweetState.author.handle}`)
+    }
     return (<>  <BigWrapper>
         {fetchCheck && <Text>
             <ImageAuthor src={singleTweetState.author.avatarSrc} alt='author'></ImageAuthor>
-            <StyledUserDiv>{singleTweetState.author.displayName} @{singleTweetState.author.handle}</StyledUserDiv>
+            <StyledUserDiv onClick={handler}>{singleTweetState.author.displayName} @{singleTweetState.author.handle}</StyledUserDiv>
             <div>{singleTweetState.status}</div>
             <div>{dateConverter(singleTweetState.timestamp)}</div>
             {singleTweetState.media.length > 0 &&
@@ -96,6 +102,10 @@ color: white;
 const StyledUserDiv = styled.div`
 font-weight: bold;
 padding: 10px 0 10px 0;
+&:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 `
 const StyledLikeRetweet = styled.div`
 width: 50vw;

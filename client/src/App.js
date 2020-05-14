@@ -101,11 +101,9 @@ function App() {
                 </Route>
               </Switch>
             </Main>
-
-
           </StyledSide>
         </StyledBody>
-        : <StyledCircle><CircularProgress></CircularProgress></StyledCircle>
+        : <StyledCircle><CircularProgress size={100} primary="inherit"></CircularProgress></StyledCircle>
       }
     </BrowserRouter >
 

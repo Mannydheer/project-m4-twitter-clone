@@ -1,6 +1,7 @@
 
 ### Twitter Clone Project
 Twitter clone but a cat theme! Users can meow(tweet) , see other users profiles, like, retweet and follow other profiles!
+User logged in as: Gladstone - treasurymog
 ### Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 

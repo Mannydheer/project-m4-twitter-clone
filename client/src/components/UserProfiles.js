@@ -4,12 +4,16 @@ import styled from 'styled-components';
 import UserFollowUnfollow from './UserFollowUnfollow';
 import Tweet from '../components/Tweet';
 import Error from './Error';
+import { TweetHomeContext } from './TweetHomeContext';
+
 
 const UserProfiles = () => {
     let history = useHistory();
 
     let location = useLocation().pathname.split('/')
     let path = location[2];
+    const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
+
 
     const [selectedUser, setSelectedUser] = useState(null);
     //state for userTweet/Retweet fetch;
@@ -73,7 +77,7 @@ const UserProfiles = () => {
             }
         }
         handleClickedProfile()
-    }, [path])
+    }, [path, tweetHomeFeedState])
 
     return (
         <React.Fragment>
@@ -123,13 +127,11 @@ cursor: pointer;
 `
 const MainUserProfile = styled.div`
 width: 100%;
+height: 100%;
 margin: 0;
 @media screen and (max-width: 768px) {
-
 border-top: 1px solid white;
 }
-
-
 `
 const Profile = styled.div`
 width: 80%;
