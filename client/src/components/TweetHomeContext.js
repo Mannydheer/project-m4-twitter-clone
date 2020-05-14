@@ -54,7 +54,9 @@ const reducer = (state, action) => {
                 homeFeedTweets: action.allTweets
             }
         }
-
+        default: {
+            return state;
+        }
     }
 }
 const TweetHomeProvider = ({ children }) => {

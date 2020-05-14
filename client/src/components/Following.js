@@ -27,7 +27,7 @@ const Following = () => {
             }
         }
         handleGetFollowing();
-    }, [])
+    }, [path])
 
 
     return (

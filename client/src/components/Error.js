@@ -7,9 +7,9 @@ const Error = () => {
     return (
         <Wrapper>
 
-            <div>
+            <span role='img'>
                 💣
-            </div>
+            </span>
             <div>
                 An unknown error has occured.
         </div>

@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import UserProfiles from './UserProfiles';
-import { CurrentUserContext } from './CurrentUserContext';
-
 import DisplayFollowers from './DisplayFollowers';
-
-
-
-
-
 
 const Followers = () => {
 
@@ -37,29 +29,19 @@ const Followers = () => {
         }
         getFollowers();
 
-    }, [])
-
-
-
-
+    }, [path])
 
     return (
-
         <React.Fragment>
             {storeFollowers !== null &&
-
                 storeFollowers.map(eachUser => {
                     return <DisplayFollowers
                         key={`${eachUser.joined}${eachUser.avatarSrc}`}
                         eachUser={eachUser} />
-
                 }
                 )}
-
         </React.Fragment>
     )
-
-
 }
 
 export default Followers;

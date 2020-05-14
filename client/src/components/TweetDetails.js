@@ -34,7 +34,7 @@ const TweetDetails = () => {
             setFetchCheck(true)
         }
         getSingleTweet();
-    }, [])
+    }, [path])
 
     const handler = (event) => {
         event.preventDefault();

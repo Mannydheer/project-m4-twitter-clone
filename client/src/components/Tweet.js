@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom'
-import { TweetHomeContext } from './TweetHomeContext';
 import TweetActionIcon from './TweetActionIcon';
 import TweetLikeRetweetAction from './TweetLikeRetweetAction';
 

@@ -6,7 +6,6 @@ import { bookmark } from 'react-icons-kit/fa/bookmark'
 import FormDialog from './FormDialog';
 import Icon from 'react-icons-kit';
 import styled from 'styled-components';
-import { COLORS } from '/Users/maniderdheer/Documents/GitHub/project-m4-twitter-clone/client/src/constants.js'
 import { NavLink } from 'react-router-dom';
 import { CurrentUserContext } from './CurrentUserContext';
 import { ReactComponent as Logo } from '../assets/logo.svg'
@@ -19,7 +18,6 @@ import { ReactComponent as Logo } from '../assets/logo.svg'
 
 
 const NavBar = () => {
-  const { state } = React.useContext(CurrentUserContext)
 
   return (
     <StyledNav>
