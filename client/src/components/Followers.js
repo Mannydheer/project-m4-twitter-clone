@@ -17,7 +17,6 @@ const Followers = () => {
     let path = location[1];
     //states for storing followers and render in return
     const [storeFollowers, setStoreFollowers] = useState(null)
-    console.log(storeFollowers, 'STORE FOLLOWERS')
     //on component mount
     useEffect(() => {
         const getFollowers = async () => {
@@ -51,13 +50,11 @@ const Followers = () => {
 
                 storeFollowers.map(eachUser => {
                     return <div>
-                        
-                        <DisplayFollowers eachUser={eachUser}></DisplayFollowers>
+                        <DisplayFollowers
+                            key={`${eachUser.joined}${eachUser.avatarSrc}`}
+                            eachUser={eachUser} />
                     </div>
                 }
-
-
-
                 )}
 
         </React.Fragment>

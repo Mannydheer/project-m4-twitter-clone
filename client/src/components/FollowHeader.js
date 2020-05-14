@@ -8,7 +8,6 @@ import { COLORS } from '../constants';
 const FollowHeader = () => {
 
     let path = useParams().user;
-    console.log(path)
 
     return (
         <Header>
@@ -30,6 +29,7 @@ font-size: 2rem;
 font-weight: bold;
 `
 const Header = styled.div`
+z-index: 1002;
 margin-top: 2rem;
 width: 80%;
 margin: 0 auto;
@@ -37,14 +37,13 @@ a{
 text-decoration: none;
 width: 50%;
 border: solid 1px gray;
+color: white;
 }
 @media screen and (max-width: 768px) {
 width: 100%;
 margin: 0;
 }
-
 `
-
 const NavigationLink = styled(NavLink)`
 text-align: center;
 padding: 10px;
@@ -56,8 +55,6 @@ padding: 10px;
 &:hover {
     border: solid gray 0.5px;
     color: ${COLORS.buttons};
-
-    
 }
 `
 const FollowNav = styled.div`

@@ -30,7 +30,7 @@ const Tweet = ({ allTweets, tweetId }) => {
                     {/* if retweet exists */}
                     <ImageAuthor src={allTweets[tweetId].author.avatarSrc} alt='author'></ImageAuthor>
                     <div>
-                        {allTweets[tweetId].retweetFrom !== undefined ? <div><TweetActionIcon size={15} color={'black'} /> {allTweets[tweetId].retweetFrom.displayName} Remeowed</div> : <span></span>}
+                        {allTweets[tweetId].retweetFrom !== undefined ? <div><TweetActionIcon size={15} color={'white'} /> {allTweets[tweetId].retweetFrom.displayName} Remeowed</div> : <span></span>}
                         <StyledUserDiv onClick={handler}>{allTweets[tweetId].author.displayName} @{allTweets[tweetId].author.handle}</StyledUserDiv>
                         <span>{dateConverter(allTweets[tweetId].timestamp)}</span>
                         <div>{allTweets[tweetId].status}</div>
@@ -42,8 +42,10 @@ const Tweet = ({ allTweets, tweetId }) => {
                 </StyledTweetDiv>
                 <TweetLikeRetweetAction allTweets={allTweets} tweetId={tweetId} />
             </Wrapper>
+
         </React.Fragment >
     )
+
 }
 
 export default Tweet;

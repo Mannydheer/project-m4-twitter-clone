@@ -72,12 +72,10 @@ export default function FormDialog() {
             <Btn onClick={handleClickOpen}>
                 Meow
       </Btn>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            <StyledDialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Meow Something</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Whats happening...?
-          </DialogContentText>
+                <DialogContent >
+                    Whats happening...?
                     <TextField
                         autoFocus
                         margin="dense"
@@ -95,28 +93,36 @@ export default function FormDialog() {
                         Meow
           </MyButton>
                 </DialogActions>
-            </Dialog>
+            </StyledDialog>
         </div>
+
+
     );
 }
 
-const MyButton = styled(Button)({
-    backgroundColor: 'white',
-    border: 0,
-    borderRadius: 3,
-    height: 48,
-    padding: '0 30px',
-});
+const MyButton = styled(Button)`
+    
+    font-size: 5rem;
+    border: 0;
+    border-radius: 3;
+    height: 48;
+    padding: '0 30px';
+    outline: none;
+
+
+    &:hover {
+        cursor: pointer;
+    }
+`;
 
 const Btn = styled.button`
-
+color: white;
 font-size: 24px;
 outline: none;
 border-radius: 25px;
 padding: 10px;
 margin: 10px;
-background-color: rgb(53,161,241);
-color: white;
+background-color: rgb(53,161,242);
 
 
 &:hover {
@@ -126,3 +132,9 @@ color: white;
 
 }
 `
+
+const StyledDialog = styled(Dialog)`
+color: black;
+
+
+` 

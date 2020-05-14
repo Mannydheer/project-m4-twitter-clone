@@ -4,7 +4,7 @@ import { CurrentUserContext } from './CurrentUserContext';
 import { TweetHomeContext } from './TweetHomeContext';
 import Error from './Error';
 
-const TweetText = ({ setTweets }) => {
+const TweetText = ({ }) => {
 
     const [tweet, setTweet] = useState('')
     const { state } = React.useContext(CurrentUserContext)
@@ -31,7 +31,6 @@ const TweetText = ({ setTweets }) => {
                 try {
                     let fetchTweets = await fetch('api/me/home-feed')
                     let allTweets = await fetchTweets.json()
-                    console.log(allTweets, 'TWEETS AFTER POST')
                     handlePost(allTweets)
                 }
                 catch (err) {
@@ -97,7 +96,6 @@ width: 100%;
 
 @media screen and (max-width: 768px) {
 }
-/* width: 50%; */
 
 `
 const StyledTweeting = styled.div`
@@ -122,9 +120,6 @@ font-size: 1.1rem;
 ::placeholder {
     font-size: 1.7rem;
 }
-
-
-
 
 `
 

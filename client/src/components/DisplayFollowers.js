@@ -32,6 +32,7 @@ border: solid 1px gray;
 @media screen and (max-width: 768px) {
 display: block;
 width: 100%;
+text-align: center;
 }
 `
 const StyledHandle = styled.div`

@@ -10,12 +10,11 @@ const HomeFeed = () => {
 
     //history
     let history = useHistory();
-    const [tweets, setTweets] = useState(null);
     const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
     return (
         <BigWrapper>
             <StyledHome>Home</StyledHome>
-            <TweetText setTweets={setTweets}></TweetText>
+            <TweetText></TweetText>
             {/* {tweetIds !== null && allTweets !== null && */}
             {tweetHomeFeedState.homeFeedTweets !== null &&
                 tweetHomeFeedState.homeFeedTweets.tweetIds.map((tweetId) => {
@@ -31,8 +30,7 @@ const HomeFeed = () => {
 export default HomeFeed;
 
 const BigWrapper = styled.div`
-width: 80%;
-margin: 0 auto;
+
 @media screen and (max-width: 768px) {
 width: 100%;
 margin: 0;

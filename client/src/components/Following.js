@@ -6,13 +6,9 @@ import DisplayFollowers from './DisplayFollowers';
 
 const Following = () => {
 
-
     let path = useParams().user;
 
     const [following, setFollowing] = useState(null);
-
-    //on componenet mount
-
     useEffect(() => {
 
         const handleGetFollowing = async () => {
@@ -33,28 +29,21 @@ const Following = () => {
         handleGetFollowing();
     }, [])
 
-    console.log(following)
-
-
 
     return (
         <React.Fragment>
             {following !== null &&
                 following.map(eachUser => {
-                    return (
-                        // reuse componenet
 
-                        <DisplayFollowers eachUser={eachUser}></DisplayFollowers>
+                    return (
+                        <DisplayFollowers
+                            key={`${eachUser.joined}${eachUser.avatarSrc}`}
+                            eachUser={eachUser} />
                     )
                 })
             }
-
-
         </React.Fragment>
     )
-
-
-
 }
 
 

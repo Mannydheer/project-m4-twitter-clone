@@ -23,19 +23,7 @@ const reducer = (state, action) => {
                 currentUser: action.profile
             }
         }
-        case 'update-likes': {
-            if (action.liked) {
-                state.currentUser.numLikes += 1;
-            }
-            else if (action.liked === false) {
-                state.currentUser.numLikes -= 1;
-            }
-            return {
-                ...state,
-            }
-        }
         case 'update-follow': {
-            console.log(action, 'INSIDE UPDAT FOLOW')
             if (action.isBeingFollowedByYou) {
                 state.currentUser.numFollowing += 1;
             }
@@ -60,15 +48,9 @@ const CurrentUserProvider = ({ children }) => {
             ...userInfo, // double check copy here. 
         })
     }
-    const updateLikes = (liked) => {
-        // dispatch({
-        //     type: 'update-likes',
-        //     ...liked
-        // })
-    }
+
     const updateFollow = (follow) => {
 
-        console.log(follow, 'FOLLOW')
         dispatch({
             type: 'update-follow',
             ...follow
@@ -98,21 +80,14 @@ const CurrentUserProvider = ({ children }) => {
         getUserData();
         //on component MOUNT only. One render. 
     }, [])
-
     //compoment on Load...Fetch with React.useEffect. 
     //onLoad can call a function that will dispatch to the updated State.
     //compoenent can be called in the Useeffect.
 
-
-
-
-
     return (
         <CurrentUserContext.Provider value={{
             state,
-            updateLikes,
             updateFollow
-
         }}>
             {children}
             {error && <Error></Error>}

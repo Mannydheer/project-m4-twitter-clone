@@ -3,23 +3,30 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
 
   html {
-    font-size: 16px;
+    font-size: 15px;
     font-family: 'Poppins', sans-serif;  
     @media screen and (max-width: 1200px) {
-      font-size: 15px
+      font-size: 14px
     }
 
     @media screen and (max-width: 1000px) {
-      font-size: 14px
+      font-size: 13px
     }
 
     @media screen and (max-width: 800px) {
       font-size: 13px
     }
 
-    @media screen and (max-width: 600px) {
-      font-size: 12px
-    }
+
+
+  }
+
+  body {
+    background-color: rgb(21,32,44);
+    color: white;
+  }
+  nav {
+    color: white;
 
   }
 
@@ -31,6 +38,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     border: 0;
     vertical-align: baseline;
+
     
   }
   table {
@@ -41,6 +49,10 @@ const GlobalStyles = createGlobalStyle`
   ul{
     padding: 0; 
     margin: 0; 
+  }
+
+  textarea {
+    background-color: rgb(21,32,44);
   }
 
   
@@ -70,10 +82,6 @@ const GlobalStyles = createGlobalStyle`
 
   body {
  
-    color: var(--color-dark);
-    background: var(--color-white);
-
-    /* overflow-x: hidden; */
   }
 
   a:focus {

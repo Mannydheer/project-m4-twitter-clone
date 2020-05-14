@@ -16,7 +16,7 @@ const Heart = ({ width, isToggled }) => (
   >
     <path
       d={isToggled ? fillPath : strokePath}
-      fill={isToggled ? 'rgb(224, 36, 94)' : 'black'}
+      fill={isToggled ? 'rgb(224, 36, 94)' : 'white'}
     />
   </Svg>
 );

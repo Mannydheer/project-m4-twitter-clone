@@ -42,23 +42,23 @@ const TweetDetails = () => {
         }
         getSingleTweet();
     }, [])
-    return (<>
-        <BigWrapper>
-            {fetchCheck && <Text>
-                <ImageAuthor src={singleTweetState.author.avatarSrc} alt='author'></ImageAuthor>
-                <StyledUserDiv>{singleTweetState.author.displayName} @{singleTweetState.author.handle}</StyledUserDiv>
-                <div>{singleTweetState.status}</div>
-                <div>{dateConverter(singleTweetState.timestamp)}</div>
-                {singleTweetState.media.length > 0 &&
-                    <TweetImage src={singleTweetState.media[0].url}></TweetImage>}
-                {/* message */}
+    return (<>  <BigWrapper>
+        {fetchCheck && <Text>
+            <ImageAuthor src={singleTweetState.author.avatarSrc} alt='author'></ImageAuthor>
+            <StyledUserDiv>{singleTweetState.author.displayName} @{singleTweetState.author.handle}</StyledUserDiv>
+            <div>{singleTweetState.status}</div>
+            <div>{dateConverter(singleTweetState.timestamp)}</div>
+            {singleTweetState.media.length > 0 &&
+                <TweetImage src={singleTweetState.media[0].url}></TweetImage>}
+            {/* message */}
 
-            </Text>}
-            {fetchCheck ? <StyledLikeRetweet>
-                <TweetLikeRetweetAction tweetId={path} allTweets={homeTweets}></TweetLikeRetweetAction>
-            </StyledLikeRetweet> : <StyledCircle><CircularProgress></CircularProgress></StyledCircle>}
+        </Text>}
+        {fetchCheck ? <StyledLikeRetweet>
+            <TweetLikeRetweetAction tweetId={path} allTweets={homeTweets}></TweetLikeRetweetAction>
+        </StyledLikeRetweet> : <StyledCircle><CircularProgress></CircularProgress></StyledCircle>}
 
-        </BigWrapper>
+    </BigWrapper>
+
 
     </>
     )
@@ -71,10 +71,11 @@ top: 0%;
 right: 50%;
 `
 
-const BigWrapper = styled.div`
-width: 70%;
 
+const BigWrapper = styled.div`
+width: 50%;
 margin: 0 auto;
+
 @media screen and (max-width: 768px) {
 width: 100%;
 height: 100%;
@@ -97,11 +98,14 @@ font-weight: bold;
 padding: 10px 0 10px 0;
 `
 const StyledLikeRetweet = styled.div`
+width: 50vw;
+
 border: solid gray 1px;
 `
 const Text = styled.div`
+width: 50vw;
 border: gray 1px solid;
-width: 100%;
+
 
 text-align: center;
 

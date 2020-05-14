@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { createContext } from 'react';
 
 
@@ -11,7 +11,6 @@ const InitialState = {
     post: false,
 }
 const reducer = (state, action) => {
-    console.log(action, 'ACTION')
     switch (action.type) {
         case 'load-all-tweets': {
             return {
@@ -24,7 +23,6 @@ const reducer = (state, action) => {
             if (action.liked) {
                 state.homeFeedTweets.tweetsById[action.id].isLiked = true;
                 state.homeFeedTweets.tweetsById[action.id].numLikes = action.value
-
             }
             else if (action.liked === false) {
                 state.homeFeedTweets.tweetsById[action.id].isLiked = false;
@@ -56,33 +54,12 @@ const reducer = (state, action) => {
                 homeFeedTweets: action.allTweets
             }
         }
-        // case 'update-follow': {
-        //     (Object.values(state.homeFeedTweets.tweetsById).forEach(element => {
-        //         //if follow
-        //         if (action.follow) {
-        //             //find the matched user
-        //             if (element.author === action.user) {
-        //                 element.author.isBeingFollowedByYou = true;
-        //             }
-        //         }
-        //         //if unfollow
-        //         else if (action.follow === false) {
-        //             //find the matched user
-        //             if (element.author === action.user) {
-        //                 element.author.isBeingFollowedByYou = false;
-        //             }
-        //         }
-        //     }))
-        //     return {
-        //         ...state,
-        //     }
-        // }
+
     }
 }
 const TweetHomeProvider = ({ children }) => {
 
     const [tweetHomeFeedState, dispatch] = React.useReducer(reducer, InitialState)
-    console.log(tweetHomeFeedState, 'HOME FEED STATE')
 
     //on componeent mount, get all tweets of home
     useEffect(() => {
@@ -100,7 +77,6 @@ const TweetHomeProvider = ({ children }) => {
 
 
     const handleHomeTweet = (data) => {
-        console.log(data)
         dispatch({
             type: 'load-all-tweets',
             allTweets: data,
@@ -114,7 +90,6 @@ const TweetHomeProvider = ({ children }) => {
     }
 
     const handleUserRetweets = (data) => {
-        console.log(data, 'INSIDE RETWEET')
         dispatch({
             type: 'change-retweets',
             ...data

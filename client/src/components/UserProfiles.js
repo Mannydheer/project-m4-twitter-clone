@@ -7,8 +7,10 @@ import Error from './Error';
 
 const UserProfiles = () => {
     let history = useHistory();
+
     let location = useLocation().pathname.split('/')
     let path = location[2];
+
     const [selectedUser, setSelectedUser] = useState(null);
     //state for userTweet/Retweet fetch;
     const [userTweets, setUserTweets] = useState(null);
@@ -20,40 +22,60 @@ const UserProfiles = () => {
     useEffect(() => {
         // handles the user profile informations.
         const handleClickedProfile = async () => {
-            const getUserProfile = await fetch(`/api/${path}/profile`);
-            const returnedProfile = await getUserProfile.json();
-            setSelectedUser(returnedProfile.profile)
-            //get all tweets related to profile.
+            if (path === "treasurymog") {
+                const getUserProfile = await fetch(`/api/me/profile`);
+                const returnedProfile = await getUserProfile.json();
+                setSelectedUser(returnedProfile.profile)
+                try {
+
+                    const response = await fetch(`/api/me/home-feed`);
+                    console.log(response)
+                    if (response.status === 200) {
+                        const userTweets = await response.json();
+                        setUserTweets(userTweets);
+                        // setImageState(userTweets.tweetsById.media[0])
+                    }
+                    else {
+                        //better error handling
+                        setError(true)
+                        throw Error('Response was not 200/success')
+                    }
+                }
+                catch (err) {
+                    setError(true)
+                    throw Error("Error Occured getting users Tweets")
+                }
+
+
+            }
+            else {
+                const getUserProfile = await fetch(`/api/${path}/profile`);
+                const returnedProfile = await getUserProfile.json();
+                setSelectedUser(returnedProfile.profile)
+
+                try {
+                    const response = await fetch(`/api/${path}/feed`);
+                    if (response.status === 200) {
+
+                        const userTweets = await response.json();
+                        setUserTweets(userTweets);
+                        // setImageState(userTweets.tweetsById.media[0])
+                    }
+                    else {
+                        //better error handling
+                        setError(true)
+                        throw Error('Response was not 200/success')
+                    }
+                }
+                catch (err) {
+                    setError(true)
+                    throw Error("Error Occured getting users Tweets")
+                }
+            }
         }
-        //function call.
-        //if its null, then followers was not clicked.Not undefined if I dont click on followers
         handleClickedProfile()
     }, [path])
 
-    useEffect(() => {
-        const getUserTweets = async () => {
-            try {
-                const response = await fetch(`/api/${path}/feed`);
-                console.log(response, 'RESPONSE OF USER PROFILE')
-                if (response.status === 200) {
-                    const userTweets = await response.json();
-                    setUserTweets(userTweets);
-                    // setImageState(userTweets.tweetsById.media[0])
-                }
-                else {
-                    //better error handling
-                    throw Error('Response was not 200/success')
-                }
-            }
-            catch (err) {
-                setError(true)
-                throw Error("Error Occured getting users Tweets")
-            }
-        }
-        getUserTweets();
-
-
-    }, [path])
     return (
         <React.Fragment>
             {selectedUser !== null && path !== null && userTweets !== null &&
@@ -101,14 +123,9 @@ cursor: pointer;
 
 `
 const MainUserProfile = styled.div`
-width: 80%;
-border-top: solid 1px black;
-
-margin: 0 auto;
-@media screen and (max-width: 768px) {
 width: 100%;
 margin: 0;
-}
+
 
 `
 const Profile = styled.div`
@@ -132,12 +149,13 @@ const Bio = styled.div`
 padding: 10px 0 10px 0;
 `
 const Handle = styled.div`
-color: black;
+color: white;
 `
 const FollowsYou = styled.span`
 background-color: lightgray;
 border-radius: 10px;
 padding: 5px;
+color: black;
 `
 const Banner = styled.img`
 width: 100%;
@@ -159,8 +177,8 @@ const UserInfo = styled.div`
 width: 100%;
 font-size: 1.1em;
 padding-bottom: 1rem;
-border-left: solid 1px black;
-border-right: solid 1px black;
+border-left: solid 1px white;
+border-right: solid 1px white;
 a{
     text-decoration: none;
     padding-right: 20px;

@@ -25,19 +25,19 @@ const NavBar = () => {
     <StyledNav>
       <Logo></Logo>
       <Nav><NavigationLink to='/'>
-        <Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={home}></Icon>
+        <Icon style={{ color: 'white', backgroundColor: 'transparent', paddingRight: '15px' }} icon={home}></Icon>
         <NavText>Home</NavText></NavigationLink>
       </Nav>
       <Nav><NavigationLink to={`/user/${state.currentUser.handle}`}>
-        <Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={user}></Icon>
+        <Icon style={{ color: 'white', backgroundColor: 'transparent', paddingRight: '15px' }} icon={user}></Icon>
         <NavText>Profile</NavText></NavigationLink>
       </Nav>
       <Nav><NavigationLink to='/notifications'>
-        <Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={bell}></Icon>
+        <Icon style={{ color: 'white', backgroundColor: 'transparent', paddingRight: '15px' }} icon={bell}></Icon>
         <NavText>Notifications</NavText></NavigationLink>
       </Nav>
       <Nav><NavigationLink to='/bookmarks'>
-        <Icon style={{ backgroundColor: 'transparent', paddingRight: '15px' }} icon={bookmark}></Icon>
+        <Icon style={{ color: 'white', backgroundColor: 'transparent', paddingRight: '15px' }} icon={bookmark}></Icon>
         <NavText>Bookmarks</NavText></NavigationLink>
       </Nav>
       <Nav>
@@ -58,7 +58,7 @@ padding: 50px;
 display:flex;
 flex-direction: column;
 position: fixed;
-left: 15px;
+left: 0;
 @media screen and (max-width: 768px) {
 display: none;
 padding: 0;
@@ -68,12 +68,9 @@ padding: 0;
 `
 
 const NavigationLink = styled(NavLink)`
-padding: 20px;
+padding: 5px;
 color: black;
-/* &.active {
-    color: ${COLORS.primary};
-
-  } */
+outline: none;
 text-decoration: none;
 display: flex;
 border-radius: 25px;
@@ -87,8 +84,8 @@ border-radius: 25px;
 
 const NavText = styled.div`
 font-size: 1.4rem;
+color: white;
 background-color: transparent;
-  font-size: 1.1rem;
 `
 const Nav = styled.div`
 padding: 10px;

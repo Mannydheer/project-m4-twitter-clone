@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { CurrentUserContext } from './CurrentUserContext';
-import { Link, useHistory } from 'react-router-dom'
 import { TweetHomeContext } from './TweetHomeContext';
-
 import TweetActionIcon from './TweetActionIcon';
 import Heart from './Heart';
-import TweetAction from './TweetLikeRetweetAction';
+import { FiDownload } from 'react-icons/fi';
+import { BsChat } from 'react-icons/bs';
+
+
 
 
 
 
 const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
-
-
     //dont pass allTweets since we want to reuse compoenent so we can get homefeed state form context
     const { tweetHomeFeedState, handleUserLikes, handleUserRetweets } = React.useContext(TweetHomeContext)
-
-    // const [homeTweets, setHomeTweets] = useState(tweetHomeFeedState.homeFeedTweets.tweetsById)
 
     const handleLiking = (event) => {
         //double check these two. Stop reloading.. and onclick on PARENT. 
@@ -167,8 +163,6 @@ const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
                         <div onClick={handleLiking}><Heart width={30}></Heart></div>}
                 </Wrap>
                 <Wrap>
-
-
                     {allTweets[tweetId].isRetweeted ?
                         <Flex onClick={handleRetweeting}>
                             <TweetActionIcon size={30} color={'green'} />
@@ -176,7 +170,13 @@ const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
                                 {allTweets[tweetId].numRetweets}</div>
                         </Flex>
                         :
-                        <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'black'} /></div>}
+                        <div onClick={handleRetweeting}><TweetActionIcon size={30} color={'white'} /></div>}
+                </Wrap>
+                <Wrap>
+                    <FiDownload size={30} color={'white'} />
+                </Wrap>
+                <Wrap>
+                    <BsChat size={30} color={'white'} />
                 </Wrap>
             </Icons>
         </React.Fragment>
@@ -188,8 +188,6 @@ export default TweetLikeRetweetAction;
 
 
 const Icons = styled.div`
-border: solid 1px black;
-border-bottom: none;
 display: flex;
 justify-content: space-evenly;
 &:hover {
@@ -199,6 +197,7 @@ justify-content: space-evenly;
 
 const Wrap = styled.div`
 display: flex;
+padding: 5px;
 
 
 `

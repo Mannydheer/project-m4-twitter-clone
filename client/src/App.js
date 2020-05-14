@@ -117,8 +117,6 @@ export default App;
 
 const FollowWrapper = styled.div`
 `
-
-
 const StyledNavi = styled.div`
 `
 const NavUl = styled.ul`
@@ -136,7 +134,8 @@ padding: 10px;
 `
 
 const Main = styled.main`
-width: 100%;
+width: 80%;
+margin: 0 auto;
 
 `
 
