@@ -69,7 +69,7 @@ padding: 0;
 
 const NavigationLink = styled(NavLink)`
 padding: 5px;
-color: black;
+
 outline: none;
 text-decoration: none;
 display: flex;

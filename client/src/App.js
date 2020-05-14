@@ -54,7 +54,7 @@ function App() {
             </BurgerMenu>
             <BurgerNav>
               {burgerBool && <NavUl>
-                <li><Link to='/'>        <Icon size={30} style={{ backgroundColor: 'transparent' }} icon={home}></Icon>
+                <li><Link to='/'><Icon size={30} style={{ backgroundColor: 'transparent' }} icon={home}></Icon>
                 </Link></li>
                 <li><Link to={`/user/${state.currentUser.handle}`}><Icon size={30} style={{ backgroundColor: 'transparent' }} icon={user}></Icon>
                 </Link></li>
@@ -136,6 +136,10 @@ padding: 10px;
 const Main = styled.main`
 width: 80%;
 margin: 0 auto;
+@media screen and (max-width: 768px) {
+width: 100%;
+margin: 0 0;
+}
 
 `
 
@@ -162,6 +166,9 @@ const StyledBody = styled.div`
 display: flex;
 width: 80%;
 margin: 0 auto;
+@media screen and (max-width: 768px) {
+width: 100%;
+}
 `
 
 const BurgerMenu = styled.div`
@@ -174,12 +181,11 @@ display: block;
 `
 
 const BurgerNav = styled.div`
-color: black;
 text-align: center;
 display: none;
 
 a {
-  color: black;
+  color: white;
 }
 @media screen and (max-width: 768px) {
 display: block;

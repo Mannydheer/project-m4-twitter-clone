@@ -49,11 +49,10 @@ const Followers = () => {
             {storeFollowers !== null &&
 
                 storeFollowers.map(eachUser => {
-                    return <div>
-                        <DisplayFollowers
-                            key={`${eachUser.joined}${eachUser.avatarSrc}`}
-                            eachUser={eachUser} />
-                    </div>
+                    return <DisplayFollowers
+                        key={`${eachUser.joined}${eachUser.avatarSrc}`}
+                        eachUser={eachUser} />
+
                 }
                 )}
 

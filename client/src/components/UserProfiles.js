@@ -29,7 +29,6 @@ const UserProfiles = () => {
                 try {
 
                     const response = await fetch(`/api/me/home-feed`);
-                    console.log(response)
                     if (response.status === 200) {
                         const userTweets = await response.json();
                         setUserTweets(userTweets);
@@ -125,6 +124,10 @@ cursor: pointer;
 const MainUserProfile = styled.div`
 width: 100%;
 margin: 0;
+@media screen and (max-width: 768px) {
+
+border-top: 1px solid white;
+}
 
 
 `

@@ -109,14 +109,13 @@ width: 100%;
 `
 
 const TextTweet = styled.textarea`
-height: 10vh;
+color: white;
+height: 100%;
 width: 100%;
 border: none;
 outline: none;
 resize: none;
-font-size: 1.1rem;
-
-
+font-size: 1.5rem;
 ::placeholder {
     font-size: 1.7rem;
 }
