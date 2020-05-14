@@ -35,7 +35,7 @@ width: 80%;
 margin: 0 auto;
 a{
 text-decoration: none;
-width: 50%;
+width: 100%;
 border: solid 1px gray;
 color: white;
 }

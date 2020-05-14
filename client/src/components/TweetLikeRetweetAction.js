@@ -93,7 +93,6 @@ const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
         //if false or NOT CURRENTLY LIKED
         if (allTweets[tweetId].isLiked === false) {
             try {
-                console.log('INSIDE LIKED')
                 let response = await fetch(`/api/tweet/${tweetId}/like`, {
                     method: 'PUT',
                     headers: {
@@ -141,7 +140,6 @@ const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
                         liked: false,
                         value: 0,
                     })
-
                 }
             }
             catch (error) {

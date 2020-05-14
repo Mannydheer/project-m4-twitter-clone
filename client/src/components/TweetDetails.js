@@ -5,12 +5,6 @@ import TweetLikeRetweetAction from './TweetLikeRetweetAction';
 import { TweetHomeContext } from './TweetHomeContext';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
-
-
-
-
-
 const TweetDetails = () => {
 
     const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
@@ -36,7 +30,6 @@ const TweetDetails = () => {
         const getSingleTweet = async () => {
             let getselectedTweet = await fetch(`/api/tweet/${path}`)
             let singleTweet = await getselectedTweet.json()
-            console.log(singleTweet, 'SINGLE TWEET INSIDE TWEET DETIALS')
             setsingleTweetState(singleTweet.tweet)
             setFetchCheck(true)
         }

@@ -73,6 +73,9 @@ padding: 5px;
 font-size: 1.1rem;
 outline: none;
 width: 13vw;
+@media screen and (max-width: 768px) {
+    width: 50vw;
+}
 `
 const StyledSearchContainer = styled.div`
 @media screen and (max-width: 768px) {
@@ -104,6 +107,9 @@ flex-wrap: wrap;
 width: 15vw;
 background-color: white;
 box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+@media screen and (max-width: 768px) {
+    width: 50vw;
+}
 `
 
 const StyledStrong = styled.strong`

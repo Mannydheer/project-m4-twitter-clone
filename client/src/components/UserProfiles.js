@@ -48,8 +48,6 @@ const UserProfiles = () => {
                     setError(true)
                     throw Error("Error Occured getting users Tweets")
                 }
-
-
             }
             else {
                 const getUserProfile = await fetch(`/api/${path}/profile`);
