@@ -11,6 +11,8 @@ const HomeFeed = () => {
     //history
     let history = useHistory();
     const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
+
+    console.log(tweetHomeFeedState, 'TWEEET HOME FFEED STATE')
     return (
         <BigWrapper>
             <StyledHome>Home</StyledHome>

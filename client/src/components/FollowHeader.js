@@ -33,6 +33,7 @@ z-index: 1002;
 margin-top: 2rem;
 width: 80%;
 margin: 0 auto;
+position: relative; left: 5rem;
 a{
 text-decoration: none;
 width: 100%;
@@ -42,6 +43,7 @@ color: white;
 @media screen and (max-width: 768px) {
 width: 100%;
 margin: 0;
+position: static;
 }
 `
 const NavigationLink = styled(NavLink)`

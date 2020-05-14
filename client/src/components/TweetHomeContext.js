@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { createContext } from 'react';
+import { CurrentUserContext } from './CurrentUserContext';
 
 
 
@@ -19,7 +20,16 @@ const reducer = (state, action) => {
                 homeFeedTweets: action.allTweets
             }
         }
+        // case 'update-feed': {
+        //     return {
+        //         ...state,
+        //         isRetrieved: true,
+        //         homeFeedTweets: action.allTweets
+        //     }
+        // }
         case 'change-likes': {
+            console.log(action, 'INSIDE CHAGE ;lIKE')
+
             if (action.liked) {
                 state.homeFeedTweets.tweetsById[action.id].isLiked = true;
                 state.homeFeedTweets.tweetsById[action.id].numLikes = action.value
@@ -54,29 +64,15 @@ const reducer = (state, action) => {
                 homeFeedTweets: action.allTweets
             }
         }
+
         default: {
             return state;
         }
     }
 }
 const TweetHomeProvider = ({ children }) => {
-
+    const { state } = React.useContext(CurrentUserContext)
     const [tweetHomeFeedState, dispatch] = React.useReducer(reducer, InitialState)
-
-    //on componeent mount, get all tweets of home
-    useEffect(() => {
-        //only fetch the first time, after getting the data.
-        // if (tweetHomeFeedState.isRetrieved === false) {
-        const getAllTweets = async () => {
-            let fetchTweets = await fetch('api/me/home-feed')
-            let allTweets = await fetchTweets.json()
-            //dispatch to reducer to load all homefeed tweets
-            handleHomeTweet(allTweets)
-        }
-        getAllTweets();
-        // }
-    }, [])
-
 
     const handleHomeTweet = (data) => {
         dispatch({
@@ -90,7 +86,6 @@ const TweetHomeProvider = ({ children }) => {
             ...data
         })
     }
-
     const handleUserRetweets = (data) => {
         dispatch({
             type: 'change-retweets',
@@ -98,20 +93,31 @@ const TweetHomeProvider = ({ children }) => {
         })
     }
     const handlePost = (allTweets) => {
-
         dispatch({
             type: 'force-post',
             allTweets: allTweets
         })
     }
-
-    // const handleFollow = (data) => {
+    // const handleUpdateFeed = (data) => {
     //     dispatch({
-    //         type: 'update-follow',
-    //         ...data
+    //         type: "update-feed",
+    //         allTweets: data
     //     })
     // }
-
+    //on componeent mount, get all tweets of home
+    useEffect(() => {
+        console.log('INSIDE USEEFFECT')
+        //only fetch the first time, after getting the data.
+        // if (tweetHomeFeedState.isRetrieved === false) {
+        const getAllTweets = async () => {
+            let fetchTweets = await fetch('api/me/home-feed')
+            let allTweets = await fetchTweets.json()
+            //dispatch to reducer to load all homefeed tweets
+            handleHomeTweet(allTweets)
+        }
+        getAllTweets();
+        // }
+    }, [])
 
     return (
         <TweetHomeContext.Provider
@@ -120,6 +126,7 @@ const TweetHomeProvider = ({ children }) => {
                 handleUserLikes,
                 handleUserRetweets,
                 handlePost,
+                // handleUpdateFeed
                 // handleFollow
             }}>
             {children}

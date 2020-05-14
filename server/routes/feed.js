@@ -35,18 +35,13 @@ const formatTweetResponse = tweets => {
 router.get('/api/me/home-feed', (req, res) => {
   const relevantTweets = getTweetsForUser(CURRENT_USER_HANDLE);
   const { tweetsById, tweetIds } = formatTweetResponse(relevantTweets);
-  res.json({
+
+  return simulateProblems(res, {
     tweetsById,
     tweetIds,
-  })
-
-  // return simulateProblems(res, {
-  //   tweetsById,
-  //   tweetIds,
-  // });
+  });
 });
 router.get('/api/:handle/feed', (req, res) => {
-  console.log(req.params, 'INSIDE HANDLE FEED')
   const { handle } = req.params;
   const tweets = getTweetsFromUser(handle);
   const { tweetsById, tweetIds } = formatTweetResponse(tweets);

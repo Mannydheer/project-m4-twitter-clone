@@ -48,7 +48,6 @@ const Profile = () => {
         handleProfile();
     }, [tweetHomeFeedState])
 
-    console.log(selectedUser, 'INSIDE PROFIEL')
 
 
 
@@ -58,6 +57,7 @@ const Profile = () => {
                 {selectedUser !== null && userTweets !== null &&
                     < MainUserProfile >
                         {/* USER INFO DIV. */}
+                        {/* COMPONEENT */}
                         <ProfileDetails selectedUser={selectedUser} path={selectedUser.handle} />
                         {/* all tweets and retweets related to user.  */}
                         {userTweets !== null && <div>

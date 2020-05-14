@@ -25,6 +25,9 @@ const DisplayFollowers = ({ eachUser }) => {
 
 export default DisplayFollowers;
 const DisplayBody = styled.div`
+position: relative;
+left: 5rem;
+padding: 10px;
 width: 80%;
 display: flex;
 margin: 0 auto;
@@ -41,7 +44,6 @@ color: gray;
 const StyledText = styled.div`
 padding: 10px;
 width: 100%;
-
 `
 
 const ImageAuthor = styled.img`

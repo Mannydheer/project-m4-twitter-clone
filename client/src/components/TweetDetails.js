@@ -102,14 +102,18 @@ padding: 10px 0 10px 0;
 `
 const StyledLikeRetweet = styled.div`
 width: 50vw;
-
 border: solid gray 1px;
+@media screen and (max-width: 768px) {
+width: 100vw;
+}
 `
 const Text = styled.div`
 width: 50vw;
 border: gray 1px solid;
 
-
 text-align: center;
+@media screen and (max-width: 768px) {
+width: 100vw;
+}
 
 `
