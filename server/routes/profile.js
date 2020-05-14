@@ -69,7 +69,6 @@ router.put('/api/:handle/follow', (req, res) => {
 router.put('/api/:handle/unfollow', (req, res) => {
   const user = getUser(req.params.handle);
   const currentUser = getUser(CURRENT_USER_HANDLE);
-
   if (!user.followerIds.includes(CURRENT_USER_HANDLE)) {
     res.status(409).json({
       error: 'You do not follow the user you are trying to unfollow.',

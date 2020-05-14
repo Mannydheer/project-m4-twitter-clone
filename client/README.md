@@ -43,8 +43,6 @@ Go to the client directory. Run npm install/yarn install followed by npm start/y
 ## Responsive Design
 <img src="Screenshots/Responsive.png" alt="Responsive">
 
-### Known Error:
--A known issue is after unfollowing a user, then trying to retweet something that user said, and then clicking on the profile page. There will be an error on the profile page because, that user no longer exists in state. 
 
 ### Prerequisites
 -node.js, npm/yarn

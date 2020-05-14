@@ -4,7 +4,7 @@ const data = require('../data');
 const CURRENT_USER_HANDLE = 'treasurymog';
 
 const MAX_DELAY = 2000;
-const FAILURE_ODDS = 0.05;
+const FAILURE_ODDS = 0;
 
 // Our server is very lean and quick, given that it doens't actually connect
 // to a database or deal with any sort of scale!
@@ -14,15 +14,12 @@ const FAILURE_ODDS = 0.05;
 // - Add a 5% chance of a 500 error
 const simulateProblems = (res, data) => {
   const delay = Math.random() * MAX_DELAY;
-
   setTimeout(() => {
     const shouldError = Math.random() <= FAILURE_ODDS;
-
     if (shouldError) {
       res.sendStatus(500);
       return;
     }
-
     res.json(data);
   }, delay);
 };
@@ -36,15 +33,11 @@ const getUserProfile = handle => {
   if (!user) {
     throw new Error('user-not-found');
   }
-
   const currentUser = data.users[CURRENT_USER_HANDLE];
-
   const mutableUser = { ...user };
-
   delete mutableUser.followingIds;
   delete mutableUser.followerIds;
   delete mutableUser.likeIds;
-
   mutableUser.numFollowing = user.followingIds.length;
   mutableUser.numFollowers = user.followerIds.length;
   mutableUser.numLikes = user.likeIds.length;
@@ -52,7 +45,6 @@ const getUserProfile = handle => {
   mutableUser.isBeingFollowedByYou = currentUser.followingIds.includes(
     user.handle
   );
-
   return mutableUser;
 };
 
@@ -62,6 +54,10 @@ const resolveRetweet = tweet => {
   }
 
   const originalTweet = data.tweets[tweet.retweetOf];
+
+  console.log(tweet, 'PASSED IN TWEET')
+  console.log(originalTweet, 'ORIGINAL TWEET')
+
 
   return {
     ...originalTweet,
@@ -74,6 +70,8 @@ const resolveRetweet = tweet => {
 };
 
 const denormalizeTweet = tweet => {
+  console.log(tweet, 'denormalize tweet')
+
   const tweetCopy = { ...tweet };
 
   delete tweetCopy.authorHandle;
