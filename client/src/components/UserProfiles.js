@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import UserFollowUnfollow from './UserFollowUnfollow';
 import Tweet from '../components/Tweet';
 import Error from './Error';
 import { TweetHomeContext } from './TweetHomeContext';
+import ProfileDetails from './ProfileDetails';
 
 
 const UserProfiles = () => {
@@ -13,7 +13,6 @@ const UserProfiles = () => {
     let location = useLocation().pathname.split('/')
     let path = location[2];
     const { tweetHomeFeedState } = React.useContext(TweetHomeContext)
-
 
     const [selectedUser, setSelectedUser] = useState(null);
     //state for userTweet/Retweet fetch;
@@ -26,52 +25,28 @@ const UserProfiles = () => {
     useEffect(() => {
         // handles the user profile informations.
         const handleClickedProfile = async () => {
-            if (path === "treasurymog") {
-                const getUserProfile = await fetch(`/api/me/profile`);
-                const returnedProfile = await getUserProfile.json();
-                setSelectedUser(returnedProfile.profile)
-                try {
 
-                    const response = await fetch(`/api/me/home-feed`);
-                    if (response.status === 200) {
-                        const userTweets = await response.json();
-                        setUserTweets(userTweets);
-                        // setImageState(userTweets.tweetsById.media[0])
-                    }
-                    else {
-                        //better error handling
-                        setError(true)
-                        throw Error('Response was not 200/success')
-                    }
+            const getUserProfile = await fetch(`/api/${path}/profile`);
+            const returnedProfile = await getUserProfile.json();
+            setSelectedUser(returnedProfile.profile)
+
+            try {
+                const response = await fetch(`/api/${path}/feed`);
+                if (response.status === 200) {
+
+                    const userTweets = await response.json();
+                    setUserTweets(userTweets);
+                    // setImageState(userTweets.tweetsById.media[0])
                 }
-                catch (err) {
+                else {
+                    //better error handling
                     setError(true)
-                    throw Error("Error Occured getting users Tweets")
+                    throw Error('Response was not 200/success')
                 }
             }
-            else {
-                const getUserProfile = await fetch(`/api/${path}/profile`);
-                const returnedProfile = await getUserProfile.json();
-                setSelectedUser(returnedProfile.profile)
-
-                try {
-                    const response = await fetch(`/api/${path}/feed`);
-                    if (response.status === 200) {
-
-                        const userTweets = await response.json();
-                        setUserTweets(userTweets);
-                        // setImageState(userTweets.tweetsById.media[0])
-                    }
-                    else {
-                        //better error handling
-                        setError(true)
-                        throw Error('Response was not 200/success')
-                    }
-                }
-                catch (err) {
-                    setError(true)
-                    throw Error("Error Occured getting users Tweets")
-                }
+            catch (err) {
+                setError(true)
+                throw Error("Error Occured getting users Tweets")
             }
         }
         handleClickedProfile()
@@ -81,20 +56,8 @@ const UserProfiles = () => {
         <React.Fragment>
             {selectedUser !== null && path !== null && userTweets !== null &&
                 < MainUserProfile >
-
-                    <Profile>
-                        {/* USER INFO DIV. */}
-                        <UserInfo>
-                            <Banner src={selectedUser.bannerSrc} />
-                            <UserImg src={selectedUser.avatarSrc} />
-                            <FlexFollow><UserFollowUnfollow selectedUser={selectedUser}></UserFollowUnfollow></FlexFollow>
-                            <Name>{selectedUser.displayName}</Name>
-                            <Handle>@{selectedUser.handle} - {selectedUser.isFollowingYou && <FollowsYou> Follows you</FollowsYou>}</Handle>
-                            <Bio>{selectedUser.bio}</Bio>
-                            <Link to={`/${path}/followers`}>{selectedUser.numFollowers} <strong> Followers</strong></Link>
-                            <Link to={`/${path}/following`}>{selectedUser.numFollowing} <strong>Following </strong></Link>
-                        </UserInfo>
-                    </Profile>
+                    {/* component for all profile details. */}
+                    <ProfileDetails selectedUser={selectedUser} path={path} />
                     {/* all tweets and retweets related to user.  */}
                     {userTweets !== null && <div>
                         {userTweets.tweetIds.map((eachId, index) => {
@@ -131,82 +94,7 @@ margin: 0;
 border-top: 1px solid white;
 }
 `
-const Profile = styled.div`
-width: 80%;
-margin: 0 auto;
-font-size:1.1rem;
-@media screen and (max-width: 768px) {
-width: 100%;
-margin: 0;
-}
 
-`
-
-const Name = styled.div`
-font-weight: bold;
-font-size: 1.2em;
-padding: 10px 0 10px 0;
-`
-const Bio = styled.div`
-
-padding: 10px 0 10px 0;
-`
-const Handle = styled.div`
-color: white;
-`
-const FollowsYou = styled.span`
-background-color: lightgray;
-border-radius: 10px;
-padding: 5px;
-color: black;
-`
-const Banner = styled.img`
-width: 100%;
-`
-const UserImg = styled.img`
-
-width: 10vw;
-height: 20vh;
-border-radius: 50%;
-@media screen and (max-width: 768px) {
-width: 30vw;
-}
-
-
-
-`
-
-const UserInfo = styled.div`
-width: 100%;
-font-size: 1.1em;
-padding-bottom: 1rem;
-border-left: solid 1px white;
-border-right: solid 1px white;
-a{
-    text-decoration: none;
-    padding-right: 20px;
-    color: black;
-    background-color: lightgray;
-    border-radius: 10px;
-    padding: 5px;
-    margin: 10px;
-
-    :hover {
-        color: black;
-        transition: 0.5s all ease;
-        opacity: 0.7;
-        cursor: pointer;
-    }
-}
-
-`
-const FlexFollow = styled.div`
-display: flex;
-justify-content: flex-end;
-padding-right: 20px;
-background-color: transparent;
-border: solid 1px gray;
-`
 
 
 

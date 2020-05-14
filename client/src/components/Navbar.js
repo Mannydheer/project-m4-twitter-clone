@@ -28,7 +28,7 @@ const NavBar = () => {
         <Icon style={{ color: 'white', backgroundColor: 'transparent', paddingRight: '15px' }} icon={home}></Icon>
         <NavText>Home</NavText></NavigationLink>
       </Nav>
-      <Nav><NavigationLink to={`/user/${state.currentUser.handle}`}>
+      <Nav><NavigationLink to={`/profilePage`}>
         <Icon style={{ color: 'white', backgroundColor: 'transparent', paddingRight: '15px' }} icon={user}></Icon>
         <NavText>Profile</NavText></NavigationLink>
       </Nav>

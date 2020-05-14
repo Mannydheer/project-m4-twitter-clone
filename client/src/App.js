@@ -25,6 +25,7 @@ import FormDialog from './components/FormDialog';
 import Search from './components/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import NavBar from './components/Navbar';
+import Profile from './components/Profile'
 
 
 function App() {
@@ -85,6 +86,9 @@ function App() {
                 </Route>
                 <Route exact path='/user/:selectedUser'>
                   <UserProfiles></UserProfiles>
+                </Route>
+                <Route exact path='/profilePage'>
+                  <Profile />
                 </Route>
 
                 <Route exact path='/:user/followers'>
