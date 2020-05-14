@@ -105,7 +105,8 @@ const TweetHomeProvider = ({ children }) => {
         //only fetch the first time, after getting the data.
         // if (tweetHomeFeedState.isRetrieved === false) {
         const getAllTweets = async () => {
-            let fetchTweets = await fetch('api/me/home-feed')
+            let fetchTweets = await fetch('https://twitter-clone-bootcamp.herokuapp.com/api/me/home-feed')
+            console.log(fetchTweets)
             let allTweets = await fetchTweets.json()
             //dispatch to reducer to load all homefeed tweets
             handleHomeTweet(allTweets)

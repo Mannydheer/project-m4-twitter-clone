@@ -25,7 +25,7 @@ const UserFollowUnfollow = ({ selectedUser }) => {
     const handleUpdateFollow = async () => {
 
         //fetch to check for follows.
-        let followResponse = await fetch(`/api/${selectedUserState.handle}/follow`, {
+        let followResponse = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/${selectedUserState.handle}/follow`, {
             method: 'PUT',
         })
         if (followResponse.status === 200) {
@@ -46,7 +46,7 @@ const UserFollowUnfollow = ({ selectedUser }) => {
         }
         //if you are already following
         if (followResponse.status === 409) {
-            await fetch(`/api/${selectedUserState.handle}/unfollow`, {
+            await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/${selectedUserState.handle}/unfollow`, {
                 method: 'PUT',
             })
             // let fetchTweets = await fetch('/api/me/home-feed')

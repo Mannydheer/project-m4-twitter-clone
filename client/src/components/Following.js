@@ -14,7 +14,7 @@ const Following = () => {
         const handleGetFollowing = async () => {
 
             try {
-                let response = await fetch(`/api/${path}/following`)
+                let response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/${path}/following`)
                 if (response.status !== 200) {
                     throw Error('Error Occured Followers')
                 }

@@ -8,6 +8,13 @@ const router = require('express').Router();
 
 const data = require('../data');
 
+const cors = require('cors');
+
+var corsOptions = {
+  origin: 'https://twitter-clone-aa5b7.firebaseapp.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 const {
   CURRENT_USER_HANDLE,
   resolveRetweet,
@@ -45,7 +52,7 @@ const createTweet = (status, { isRetweet }) => {
 /**
  * Get the specified tweet
  */
-router.get('/api/tweet/:tweetId', (req, res) => {
+router.get('/api/tweet/:tweetId', cors(corsOptions), (req, res) => {
   let tweet = data.tweets[req.params.tweetId];
 
   tweet = resolveRetweet(tweet);
@@ -57,7 +64,7 @@ router.get('/api/tweet/:tweetId', (req, res) => {
 /**
  * Post a new tweet
  */
-router.post('/api/tweet', (req, res) => {
+router.post('/api/tweet', cors(corsOptions), (req, res) => {
   const newTweet = createTweet(req.body.status, { isRetweet: false });
   data.tweets[newTweet.id] = newTweet;
 
@@ -67,7 +74,7 @@ router.post('/api/tweet', (req, res) => {
 /**
  * Like a tweet
  */
-router.put('/api/tweet/:tweetId/like', (req, res) => {
+router.put('/api/tweet/:tweetId/like', cors(corsOptions), (req, res) => {
   const { like } = req.body;
 
   const tweet = data.tweets[req.params.tweetId];
@@ -103,14 +110,13 @@ router.put('/api/tweet/:tweetId/like', (req, res) => {
       handle => handle !== CURRENT_USER_HANDLE
     );
   }
-  console.log(tweet);
 
   return res.json({ success: true });
 });
 
 // NOTE: this is super not-dry, but a good abstraction escapes me.
 // Probably not ideal, but also not as bad as a leaky abstraction.
-router.put('/api/tweet/:tweetId/retweet', (req, res) => {
+router.put('/api/tweet/:tweetId/retweet', cors(corsOptions), (req, res) => {
   const { retweet } = req.body;
 
   const tweet = data.tweets[req.params.tweetId];

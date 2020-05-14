@@ -26,12 +26,12 @@ const UserProfiles = () => {
         // handles the user profile informations.
         const handleClickedProfile = async () => {
 
-            const getUserProfile = await fetch(`/api/${path}/profile`);
+            const getUserProfile = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/${path}/profile`);
             const returnedProfile = await getUserProfile.json();
             setSelectedUser(returnedProfile.profile)
 
             try {
-                const response = await fetch(`/api/${path}/feed`);
+                const response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/${path}/feed`);
                 if (response.status === 200) {
 
                     const userTweets = await response.json();
@@ -72,8 +72,6 @@ const UserProfiles = () => {
             {error && <Error></Error>}
         </React.Fragment >
     )
-
-
 }
 
 export default UserProfiles

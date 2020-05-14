@@ -16,7 +16,7 @@ const TweetText = ({ }) => {
         }
         //do a post to the database
         try {
-            let response = await fetch(`/api/tweet`, {
+            let response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/tweet`, {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
@@ -29,7 +29,7 @@ const TweetText = ({ }) => {
             if (response.status === 200 && post) {
                 //get all the feed again after the post and send it back to the context to update and state and re-render the feed. 
                 try {
-                    let fetchTweets = await fetch('api/me/home-feed')
+                    let fetchTweets = await fetch('https://twitter-clone-bootcamp.herokuapp.com/api/me/home-feed')
                     let allTweets = await fetchTweets.json()
                     handlePost(allTweets)
                 }

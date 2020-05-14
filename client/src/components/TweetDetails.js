@@ -28,7 +28,7 @@ const TweetDetails = () => {
     //component mount
     useEffect(() => {
         const getSingleTweet = async () => {
-            let getselectedTweet = await fetch(`/api/tweet/${path}`)
+            let getselectedTweet = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/tweet/${path}`)
             let singleTweet = await getselectedTweet.json()
             setsingleTweetState(singleTweet.tweet)
             setFetchCheck(true)

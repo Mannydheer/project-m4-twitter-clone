@@ -2,8 +2,8 @@ const users = {
   diplomog: {
     handle: 'diplomog',
     displayName: 'Palmerston',
-    avatarSrc: '/assets/diplomog-avatar.jpg',
-    bannerSrc: '/assets/diplomog-banner.jpeg',
+    avatarSrc: 'https://placekitten.com/g/200/300',
+    bannerSrc: 'https://i.picsum.photos/id/1021/1500/500.jpg',
     location: 'Whitehall',
     url: 'http://fco.gov.uk',
     joined: '2016-02-02T12:00',
@@ -15,8 +15,9 @@ const users = {
   treasurymog: {
     handle: 'treasurymog',
     displayName: 'Gladstone, Esq.',
-    avatarSrc: '/assets/treasurymog-avatar.jpg',
-    bannerSrc: '/assets/treasurymog-banner.jpeg',
+    avatarSrc: 'https://i.picsum.photos/id/40/640/425.jpg',
+    bannerSrc: 'https://i.picsum.photos/id/301/1500/500.jpg',
+
     location: 'Whitehall, London',
     url: undefined,
     joined: '2016-10-12T12:00',
@@ -32,7 +33,7 @@ const users = {
     avatarSrc:
       'https://pbs.twimg.com/profile_images/1203323662591504384/GwxdsfNA_400x400.jpg',
     bannerSrc:
-      'https://i.picsum.photos/id/737/1500/500.jpg',
+      'https://i.picsum.photos/id/603/1500/500.jpg',
     location: undefined,
     url: undefined,
     joined: '2019-09-01T18:00',
@@ -67,7 +68,7 @@ const tweets = {
     media: [
       {
         type: 'img',
-        url: '/assets/ENRXDPKWwAEJqFu.jpeg',
+        url: 'https://unsplash.it/340/200?random',
       },
     ],
   },
@@ -108,7 +109,7 @@ Maybe a more diplomatic approach will work 🤔`,
     media: [
       {
         type: 'img',
-        url: '/assets/diplomog-yarn.png',
+        url: 'https://unsplash.it/340/200?random',
       },
     ],
   },
@@ -144,7 +145,7 @@ My highlight has been coming back to work with my very own Palmy HQ 🤩`,
     media: [
       {
         type: 'img',
-        url: '/assets/ENH2rRrWwAARmsZ.jpeg',
+        url: 'https://unsplash.it/340/200?random',
       },
       // {
       //   type: 'img',
