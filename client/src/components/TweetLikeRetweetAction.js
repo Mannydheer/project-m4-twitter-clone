@@ -33,7 +33,7 @@ const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
         //if false or NOT CURRENTLY LIKED
         if (allTweets[tweetId].isRetweeted === false) {
             try {
-                let response = await fetch(`/api/tweet/${tweetId}/retweet`, {
+                let response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/tweet/${tweetId}/retweet`, {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',
@@ -63,7 +63,7 @@ const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
         //else if to not trigger both ifs.
         else if (allTweets[tweetId].isRetweeted === true) {
             try {
-                let response = await fetch(`/api/tweet/${tweetId}/retweet`, {
+                let response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/tweet/${tweetId}/retweet`, {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',
@@ -93,7 +93,7 @@ const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
         //if false or NOT CURRENTLY LIKED
         if (allTweets[tweetId].isLiked === false) {
             try {
-                let response = await fetch(`/api/tweet/${tweetId}/like`, {
+                let response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/tweet/${tweetId}/like`, {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',
@@ -122,7 +122,7 @@ const TweetLikeRetweetAction = ({ allTweets, tweetId }) => {
         //else if to not trigger both ifs.
         else if (allTweets[tweetId].isLiked === true) {
             try {
-                let response = await fetch(`/api/tweet/${tweetId}/like`, {
+                let response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/tweet/${tweetId}/like`, {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',

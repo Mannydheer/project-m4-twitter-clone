@@ -2,6 +2,7 @@
   "name": "twitter-clone",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@material-ui/core": "^4.9.9",
     "@testing-library/jest-dom": "^4.2.4",
@@ -22,7 +23,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:31415",
   "eslintConfig": {
     "extends": "react-app"
   },

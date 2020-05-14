@@ -59,7 +59,7 @@ const CurrentUserProvider = ({ children }) => {
     //on Component Mount
     useEffect(() => {
         const getUserData = async () => {
-            let userResponse = await fetch('/api/me/profile',
+            let userResponse = await fetch('https://twitter-clone-bootcamp.herokuapp.com/api/me/profile',
                 {
                     method: "get",
                     headers: {

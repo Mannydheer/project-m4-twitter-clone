@@ -3,6 +3,8 @@ const data = require('../data');
 // HARDCODED CURRENT USER.
 const CURRENT_USER_HANDLE = 'treasurymog';
 
+console.log(data)
+
 const MAX_DELAY = 2000;
 const FAILURE_ODDS = 0;
 
@@ -55,9 +57,6 @@ const resolveRetweet = tweet => {
 
   const originalTweet = data.tweets[tweet.retweetOf];
 
-  console.log(tweet, 'PASSED IN TWEET')
-  console.log(originalTweet, 'ORIGINAL TWEET')
-
 
   return {
     ...originalTweet,
@@ -70,7 +69,6 @@ const resolveRetweet = tweet => {
 };
 
 const denormalizeTweet = tweet => {
-  console.log(tweet, 'denormalize tweet')
 
   const tweetCopy = { ...tweet };
 

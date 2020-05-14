@@ -24,11 +24,11 @@ const Profile = () => {
     useEffect(() => {
 
         const handleProfile = async () => {
-            const getUserProfile = await fetch(`/api/me/profile`);
+            const getUserProfile = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/me/profile`);
             const returnedProfile = await getUserProfile.json();
             setSelectedUser(returnedProfile.profile)
             try {
-                const response = await fetch(`/api/me/home-feed`);
+                const response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/me/home-feed`);
                 if (response.status === 200) {
                     const userTweets = await response.json();
                     setUserTweets(userTweets);

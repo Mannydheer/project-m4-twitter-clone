@@ -13,7 +13,7 @@ const Followers = () => {
     useEffect(() => {
         const getFollowers = async () => {
             try {
-                let response = await fetch(`/api/${path}/followers`)
+                let response = await fetch(`https://twitter-clone-bootcamp.herokuapp.com/api/${path}/followers`)
                 if (response.status !== 200) {
                     throw Error('Error Occured Followers')
                 }
