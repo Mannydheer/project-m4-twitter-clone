@@ -28,8 +28,6 @@ const reducer = (state, action) => {
         //     }
         // }
         case 'change-likes': {
-            console.log(action, 'INSIDE CHAGE ;lIKE')
-
             if (action.liked) {
                 state.homeFeedTweets.tweetsById[action.id].isLiked = true;
                 state.homeFeedTweets.tweetsById[action.id].numLikes = action.value
@@ -37,7 +35,6 @@ const reducer = (state, action) => {
             else if (action.liked === false) {
                 state.homeFeedTweets.tweetsById[action.id].isLiked = false;
                 state.homeFeedTweets.tweetsById[action.id].numLikes = action.value
-
             }
             return {
                 ...state,
@@ -64,7 +61,6 @@ const reducer = (state, action) => {
                 homeFeedTweets: action.allTweets
             }
         }
-
         default: {
             return state;
         }
@@ -106,7 +102,6 @@ const TweetHomeProvider = ({ children }) => {
     // }
     //on componeent mount, get all tweets of home
     useEffect(() => {
-        console.log('INSIDE USEEFFECT')
         //only fetch the first time, after getting the data.
         // if (tweetHomeFeedState.isRetrieved === false) {
         const getAllTweets = async () => {

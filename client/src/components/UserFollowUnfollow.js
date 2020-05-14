@@ -28,7 +28,6 @@ const UserFollowUnfollow = ({ selectedUser }) => {
         let followResponse = await fetch(`/api/${selectedUserState.handle}/follow`, {
             method: 'PUT',
         })
-        console.log(followResponse)
         if (followResponse.status === 200) {
             // let fetchTweets = await fetch('/api/me/home-feed')
             // console.log(fetchTweets)
